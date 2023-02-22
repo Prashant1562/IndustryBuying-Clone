@@ -1,0 +1,9 @@
+
+.prod_visible{
+    display: block;
+   border: 1px solid red;
+}
+.prod_hide{
+    display: none;
+
+}
