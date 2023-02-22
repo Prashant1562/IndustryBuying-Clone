@@ -7,9 +7,9 @@ import "./TopSection.css"
 const TopSection = () => {
   return (
     <Flex
-      borderTop="1px solid grey"
+      borderTop="1px solid rgba(185, 182, 182,0.5)"
       boxSizing="border-box"
-      borderBottom="1px solid grey"
+      borderBottom="1px solid rgba(185, 182, 182,0.5)"
       width={{ base: "100%", sm: "100%", md: "93%" }}
       margin="auto"
       marginTop="3rem"
@@ -32,8 +32,8 @@ const TopSection = () => {
         margin="auto"
         alignItems="center"
         gap={Breakpoints("0.2rem", "0.7rem", "1.3rem")}
-        borderLeft="1px solid grey"
-        borderRight="1px solid grey"
+        borderLeft="1px solid rgba(185, 182, 182,0.5)"
+        borderRight="1px solid rgba(185, 182, 182,0.5)"
       >
         <Box>
           <BsChevronLeft size={"1.1rem"} />
