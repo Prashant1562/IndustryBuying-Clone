@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
     age:Number,
     gender: "male" | "female" | "other"
 },{
-    versionKey:false
+    versionKey:false,
+    timestamps:true
 })
 
 const UserModel=mongoose.model("user",userSchema)
@@ -22,3 +23,5 @@ module.exports={
     // "avtar":"",
     // "age":"",
     // "gender":""
+
+
