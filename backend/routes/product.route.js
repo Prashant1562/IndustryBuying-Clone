@@ -24,7 +24,7 @@ ProductRouter.post("/create", async (req, res) => {
   let data = req.body
   const Product = new ProductModel(data)
   await Product.save()
-  res.send({ massege: "New Product has been created" });
+  res.send({ massege: "New Product has been created",data });
 
 });
 

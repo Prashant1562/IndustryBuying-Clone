@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", UserRouter);
-app.use("/products", UsreAuthMiddleware , ProductRouter);
+app.use("/products" , ProductRouter);
 app.use("/admin" , AdminUserRouter );
 
 //get
