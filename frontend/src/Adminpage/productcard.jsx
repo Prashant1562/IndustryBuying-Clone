@@ -3,19 +3,19 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 
-const ProductCard = () => {
- 
+const ProductCard = (props) => {
+  const { id, brand, qty, images, count, categories, color, gender, price, deleteaction, getdata, addamount, reduceamount } = props
   const [value, setValue] = useState()
 
 
   return (<Stack className='card' fontSize={["80%","90%","90%","90%","90%"]} >
-    <Image  />
-    <h3></h3>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+    <Image src={images} />
+    <h3>{brand}</h3>
+    <p>{color}</p>
+    <p>{price}</p>
+    <p>{categories}</p>
+    <p>{count}</p>
+    <p>{qty}</p>
     <Flex className='qty' width="100%" >
       <Tabs>
         <TabList >
