@@ -32,7 +32,7 @@ const handlChange =(e)=>{
 
 
   return (<Stack>
-    <form>
+    <form >
       <FormControl>
         <FormLabel>Enter Product Name</FormLabel>
         <Input name="title" type="text" onChange={(e) => handleChange(e)} value={prod.title} />
@@ -58,7 +58,7 @@ const handlChange =(e)=>{
       <FormLabel>Enter Image4</FormLabel>
       <Input onChange={(e)=>handlChange(e)} name="image4" type="text" value={img.image4} />
       </FormControl>
-      <Button type="submit">Submit</Button>
+      <Button type="submit" margin="auto" display="block">Submit</Button>
     </form>
   </Stack >
   )

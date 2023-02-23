@@ -1,10 +1,20 @@
 
-
 import { Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Stack, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getdataaction } from '../Redux/Products/getdata.action'
 import AddProd from './addproduct'
 import ProductCard from './productcard'
 const ProductPage = () => {
+
+    const dispatch = useDispatch()
+    
+    const product = useSelector(store=>store.getdatareducer.products)
+    console.log(product)
+    useEffect(()=>{
+         dispatch(getdataaction())
+    },[])
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <Stack>
@@ -23,8 +33,11 @@ const ProductPage = () => {
                 </Modal>
 
             </Flex>
-            <SimpleGrid columns={[2, 3, 5, 6]} width="100%" gap={5}>
-                <ProductCard />
+            <SimpleGrid columns={[2, 3, 4, 4]} width="100%" gap={5}>
+                {
+                    product && product.map(ele=><ProductCard key={ele.id} {...ele}/>)
+                }
+                
             </SimpleGrid>
         </Stack>
     )

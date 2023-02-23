@@ -17,19 +17,19 @@ const handlFalse = ()=>{
 }
 console.log(state)
 
-    return (<Stack>
-        <Stack width="30%" className="stack">
-            <Button onClick={handlTrue}>User Managment</Button>
-            <Button onClick={handlFalse}>Product Managment</Button>
-        </Stack >
-        <Stack display= {state ? "block" :"none"}>
+    return (<Flex display="flex" justifyContent="space-between" alignItems="center" border="1px solid black" >
+        <Stack width="29%" className="stack" border="1px solid red">
+            <Button onClick={handlTrue}>Product Managment</Button>
+            <Button onClick={handlFalse}>User Managment</Button>
+        </Stack>
+        <Stack display= {state ? "block" :"none"} width="69%" border="1px solid black" height="100vh" overflow="scroll">
         <ProductPage/>
         </Stack>
-        <Stack display={state ? "none" : "block"}>
+        <Stack display={state ? "none" : "block"} width="69%" border="1px solid orange" height="100vh" overflowY="scroll">
         <Userlist/>
         </Stack>
        
-    </Stack>
+    </Flex>
     )
 }
 
