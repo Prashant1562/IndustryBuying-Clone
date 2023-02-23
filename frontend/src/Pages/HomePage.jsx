@@ -1,4 +1,4 @@
-import { Box , Image, ListItem, Popover,  PopoverBody, PopoverContent, PopoverTrigger, SimpleGrid, Text, UnorderedList } from '@chakra-ui/react'
+import { Box, Center, Container, Flex, HStack, Image, ListItem, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, SimpleGrid, Text, UnorderedList, VStack } from '@chakra-ui/react'
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
@@ -7,9 +7,10 @@ import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
 
 
-const HomePage = () => {
-  const API = "URL/product"
 
+const HomePage = () => {
+  const API = "http://localhost:8080/products"
+  
   const [products,setProducts]=useState([])
   const [isVisible,setIsVisible] = useState(false);
   const navigate=useNavigate()
@@ -37,11 +38,19 @@ useEffect(()=>{
     
   }, []);
 
+
+  
+  
+  
+  
   return (
     <>
-      
     <Navbar />
-    <Box bg="gray.100" pb="100px" zIndex={999} pt="90px" display={"flex"} >
+
+    <Box bg="gray.100"
+     pb="100px" zIndex={999} 
+     pt="90px" 
+     display={"flex"} >
     {!isVisible && (
       <Box bg="white" display={["none","none","flex"]} py="40px" position={"fixed"} w="20%" >
       <UnorderedList listStyleType="none"  spacing={5} >
@@ -50,7 +59,7 @@ useEffect(()=>{
           {({ isOpen, onClose }) => (
           <>
             <PopoverTrigger>
-               <Box w="100%" style={{ cursor: 'pointer' }} _hover={{color:"white" , backgroundColor:"gray.600" }} >Agriculture Garden & Landscape</Box>
+               <Box w="100%" style={{ cursor: 'pointer' }} _hover={{color:"white" , backgroundColor:"gray.600" }}>Agriculture Garden & Landscape</Box>
             </PopoverTrigger>
             
             <PopoverContent ml="93.5%" mt="-10.2%" border="1px solid gray.600" bg="gray.600" color="white"  borderRadius="0px">
@@ -90,8 +99,6 @@ useEffect(()=>{
         </Popover>
       </Box>
 
-
-
       <Box >
                   <Popover trigger="hover">
                     {({ isOpen, onClose }) => (
@@ -125,10 +132,6 @@ useEffect(()=>{
           )}
         </Popover>
       </Box>
-
-
-
-
 
       <Box >
                   <Popover trigger="hover">
@@ -164,8 +167,6 @@ useEffect(()=>{
         </Popover>
       </Box>
 
-
-
       <Box >
                   <Popover trigger="hover">
                     {({ isOpen, onClose }) => (
@@ -200,10 +201,8 @@ useEffect(()=>{
         </Popover>
       </Box>
                   
-                  
-                </UnorderedList>
+                 </UnorderedList>
              
-              
             </PopoverBody>
             </PopoverContent>
           </>
@@ -227,8 +226,8 @@ useEffect(()=>{
       )}
       <Box w={["100%","100%","80%"]} ml={["5%","7%","20.5%"]} >
       <Image w={["95%"]} mt="30px" src="https://static3.industrybuying.com/homepage/1663932735Vacuum-Cleaner.jpg"/>
-      {/* FURNITURE, HOSPITALITY AND FOOD SERVICE */}
       <Box mt="40px"  >
+{/* slider  */}
       <Text  as="b"fontSize={["14px","16px","18px"]} >
         FURNITURE, HOSPITALITY AND FOOD SERVICE
       </Text>
@@ -254,10 +253,9 @@ useEffect(()=>{
         <Text textAlign={"center"} fontSize={"15px"}>
           {item.sub_category}
         </Text>
-        <Text textAlign={"center"} color={"blue"} fontSize={"15px"}>
-        Price: {item.price}
+        <Text textAlign={"center"} color={'#e9611e'} fontSize={"17px"} fontWeight={'bold'} >
+        Rs: {item.price}
         </Text>
-        
         
         </Box>
       ))}
@@ -296,7 +294,7 @@ useEffect(()=>{
         <Text textAlign={"center"} fontSize={"15px"}>
           {item.sub_category}
         </Text>
-        <Text textAlign={"center"} color={"blue"} fontSize={"15px"}>
+        <Text ttextAlign={"center"} color={'#e9611e'} fontSize={"17px"} fontWeight={'bold'}>
         Price: {item.price}
         </Text>
         
@@ -311,49 +309,6 @@ useEffect(()=>{
       </Box>
 
       <Image w={["95%"]} mt="30px" src="https://static3.industrybuying.com/homepage/1652437509PowerHouse-Strip-Banner%20(1).png"/>
-
-       {/* Agriculture Garden & Landscaping */}
-       <Box mt="40px"  >
-      <Text  as="b"fontSize={["14px","16px","18px"]} >
-      AGRICULTURE GARDEN & LANDSCAPING
-      </Text>
-      <Box w="95%"  display={"flex"} >
-      <SimpleGrid w={["100%","100%","80%"]} columns={[2, 3, 4]} spacing='1px'>
-      {products.filter(ele=>ele.category==="Agriculture Garden & Landscaping").slice(0, 8).map(item=>(
-        
-        <Box 
-        
-        onClick={()=>{navigate(`/product/${item._id}`)}} 
-         bg="white"
-         key={item._id}
-         style={{ cursor: 'pointer' }}
-         _hover={{
-          boxShadow:'2xl',
-          transitionDuration:"100ms",
-        }} 
-          
-         >
-        <Box boxSize={["80px","90px","140px"]} ml="25%" mt="15%" >
-          <Image h="100%" src={item.images[0].image_url}/>
-        </Box>
-        <Text textAlign={"center"} fontSize={"15px"}>
-          {item.sub_category}
-        </Text>
-        <Text textAlign={"center"} color={"blue"} fontSize={"15px"}>
-        Price: {item.price}
-        </Text>
-        
-        
-        </Box>
-      ))}
-       </SimpleGrid>
-       <Box display={["none","none","flex"]} >
-        <Image h="100%" src="https://static3.industrybuying.com/homepage/16620097331647327590Agriculture%20and%20garden-min.jpg"/>
-       </Box>
-      </Box>
-      </Box>
-
-
 
 
 
@@ -384,7 +339,7 @@ useEffect(()=>{
         <Text textAlign={"center"} fontSize={"15px"}>
           {item.sub_category}
         </Text>
-        <Text textAlign={"center"} color={"blue"} fontSize={"15px"}>
+        <Text textAlign={"center"} color={'#e9611e'} fontSize={"17px"} fontWeight={'bold'}>
         Price: {item.price}
         </Text>
         
@@ -401,11 +356,8 @@ useEffect(()=>{
 
 
 
-
-
-
        {/* IT & Electronics */}
-      <Box mt="40px"  >
+       <Box mt="40px"  >
       <Text  as="b"fontSize={["14px","16px","18px"]} >
       IT & ELECTRONICS
       </Text>
@@ -431,7 +383,7 @@ useEffect(()=>{
         <Text textAlign={"center"} fontSize={"15px"}>
           {item.sub_category}
         </Text>
-        <Text textAlign={"center"} color={"blue"} fontSize={"15px"}>
+        <Text textAlign={"center"} color={'#e9611e'} fontSize={"17px"} fontWeight={'bold'}>
         Price: {item.price}
         </Text>
         
@@ -446,14 +398,60 @@ useEffect(()=>{
       </Box>
 
 
+       {/* Agriculture Garden & Landscaping */}
+       <Box mt="40px" background={'red'}  >
+      <Text as="b"fontSize={["14px","16px","18px"]} >
+      AGRICULTURE GARDEN & LANDSCAPING
+      </Text>
+      <Box w="95%"  display={"flex"} >
+      <SimpleGrid w={["100%","100%","80%"]} columns={[2, 3, 4]} spacing='1px'>
+      {products.filter(ele=>ele.category==="Agriculture Garden & Landscaping").slice(0, 8).map(item=>(
+        
+        <Box 
+        
+        onClick={()=>{navigate(`/product/${item._id}`)}} 
+         bg="white"
+         key={item._id}
+         style={{ cursor: 'pointer' }}
+         _hover={{
+          boxShadow:'2xl',
+          transitionDuration:"100ms",
+        }} 
+          
+         >
+        <Box boxSize={["80px","90px","140px"]} ml="25%" mt="15%" >
+          <Image h="100%" src={item.images[0].image_url}/>
+        </Box>
+        <Text textAlign={"center"} fontSize={"15px"}>
+          {item.sub_category}
+        </Text>
+        <Text textAlign={"center"} color={'#e9611e'} fontSize={"17px"} fontWeight={'bold'}>
+        Price: {item.price}
+        </Text>
+        
+        
+        </Box>
+      ))}
+       </SimpleGrid>
+       <Box display={["none","none","flex"]} >
+        <Image h="100%" src="https://static3.industrybuying.com/homepage/16620097331647327590Agriculture%20and%20garden-min.jpg"/>
+       </Box>
       </Box>
-      
+      </Box>
 
 
+
+
+
+
+
+
+      </Box>
+    
     </Box>
     <Footer/>
     </>
   )
 }
 
-export default HomePage
+export default HomePage;
