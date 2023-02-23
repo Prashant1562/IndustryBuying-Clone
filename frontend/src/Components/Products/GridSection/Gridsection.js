@@ -55,7 +55,7 @@ const Gridsection = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Link to="">Home</Link>{" "}
+        <Link to="/">Home</Link>{" "}
         <Box>
           {" "}
           <ChevronRightIcon fontSize={16} />
