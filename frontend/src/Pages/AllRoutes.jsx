@@ -10,6 +10,7 @@ import Signup from './Signup'
 
 const AllRoutes = () => {
   return (
+   
         <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path='/signup' element={<Signup/>}/>
