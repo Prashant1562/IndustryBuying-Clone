@@ -4,6 +4,7 @@ import HomePage from './HomePage'
 
 const AllRoutes = () => {
   return (
+   
         <Routes>
             <Route path="/" element={<HomePage/>} />
         </Routes>
