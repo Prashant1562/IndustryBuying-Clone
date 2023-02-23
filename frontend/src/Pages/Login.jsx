@@ -22,6 +22,82 @@ import { useToast } from "@chakra-ui/react";
 
 
 const Login = () => {
+   const toast=useToast()
+   const navigate=useNavigate()
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+
+    const payload={
+      email,
+      password
+    }
+    if(!payload.email){
+
+      toast({
+        position:"top",
+        title: "Please fill your Email",
+        description: "Your email is missing",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return
+    }
+    else if(!payload.password){
+
+      toast({
+        position:"top",
+        title: "Please fill your Password",
+        description: "Your password is missing",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return
+    }
+
+    try{
+            let res=await fetch("http://localhost:4444/users/login",{
+              method:"POST",
+              body:JSON.stringify(payload),
+              headers:{
+                "Content-type":'application/json'
+              }
+              
+            })
+            let response=await res.json()
+              console.log(response)
+            localStorage.setItem("token",response.token)
+            if(response.token){
+              toast({
+                position:"top",
+                title: "Your are successfully logged in",
+                description: "Taking you to homepage",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              })
+              
+              setTimeout (() => {
+                navigate('/')
+              },3000)
+            }else{
+              toast({
+                position:"top",
+                title: "Invalid email/password",
+                description: "Please write correct email / password",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              });
+            }
+    }catch(error){
+      console.log(error)
+    }
+  }
   
   const [open, setOpen] = useState(false);
   const toggle = () => {
@@ -74,7 +150,8 @@ const Login = () => {
                 placeholder="Enter Email"
                 _placeholder={{ color: "inherit" }}
                 name="email"
-  
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 required
               />
               <InputGroup>
@@ -82,6 +159,8 @@ const Login = () => {
                   type={open === false ? "password" : "text"}
                   paddingLeft={"10px"}
                   variant="flushed"
+                  value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                   placeholder="Password"
                   _placeholder={{ color: "inherit" }}
                   name="password"
@@ -99,7 +178,7 @@ const Login = () => {
               </InputGroup>
             </Stack>
             <Box mt={"20px"}>
-              <Button>
+              <Button onClick={handleSubmit}>
                   SIGN IN
                 </Button>
             </Box>
