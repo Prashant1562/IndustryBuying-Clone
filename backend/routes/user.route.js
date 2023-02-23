@@ -9,28 +9,45 @@ const UserRouter = express.Router();
 
 
 UserRouter.get("/", async (req, res) => {
-  const notes = await UserModel.find();
+
+  const notes = await UserModel.find()
   res.send(notes);
 });
 
 //register
 
 UserRouter.post("/register", async (req, res) => {
-  const { name, email, pass, avatar,age,gender } = req.body;
+  const { name, email, pass, avatar, age, gender } = req.body;
+  let logindata = await UserModel.find({ email: email })
   try {
-    bcrypt.hash(pass, 5, async (err, hash) => {
-      // Store hash in your password DB.
-      if (err) {
-        res.send({ massege: "something went wrong", error: err.message });
-      } else {
-        const user = new UserModel({ name, email, pass: hash,avatar,age,gender });
-        await user.save();
-        res.send({ massege: "New user register" });
-      }
-    });
+    if (logindata) {
+      res.send({ massege: " Register Already Exist" });
+    } else {
+
+
+
+
+      bcrypt.hash(pass, 5, async (err, hash) => {
+        // Store hash in your password DB.
+        if (err) {
+          res.send({ massege: "something went wrong", error: err.message });
+        }
+
+        else {
+          const user = new UserModel({ name, email, pass: hash, avatar, age, gender });
+          await user.save();
+          res.send({ massege: "New user register" });
+        }
+      });
+    }
+
+
+
   } catch (error) {
     res.send({ massege: "something went wrong" });
   }
+
+
 });
 
 //login

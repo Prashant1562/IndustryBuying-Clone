@@ -17,7 +17,15 @@ AdminUserRouter.get("/", async (req, res) => {
 
 AdminUserRouter.post("/register", async (req, res) => {
   const { name, email, pass, avatar,age,gender } = req.body;
+
+  let addminlogindata = await AdminUserModel.find({ email: email })
+
   try {
+    if (addminlogindata) {
+      res.send({ massege: " Register Already Exist" });
+    } else {
+
+
     bcrypt.hash(pass, 5, async (err, hash) => {
       // Store hash in your password DB.
       if (err) {
@@ -28,6 +36,9 @@ AdminUserRouter.post("/register", async (req, res) => {
         res.send({ massege: "New user register" });
       }
     });
+
+  }
+
   } catch (error) {
     res.send({ massege: "something went wrong" });
   }
