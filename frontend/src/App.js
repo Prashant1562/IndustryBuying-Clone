@@ -1,13 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import MainProduct from './Products/MainProduct';
-import Leftside from './Products/Leftside/Leftside';
-
+import AllRoutes from './Pages/AllRoutes';
 function App() {
+  
   return (
     <div className="App">
-        {/* <MainProduct/> */}
-        <Leftside/>
+    <AllRoutes/>
     </div>
   );
 }
