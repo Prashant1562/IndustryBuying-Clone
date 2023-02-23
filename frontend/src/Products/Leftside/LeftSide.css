@@ -1,0 +1,38 @@
+.PriceRangeMin{
+    padding:0px 3px !important;
+}
+.PriceRangeMax{
+    padding:0px 3px !important;
+}
+.SearchInFilter{
+    border-radius: none !important;
+}
+
+ /* width */
+.SearchInFilter::-webkit-scrollbar{
+    width:5px;
+    height: 10px;
+    position: absolute;
+    right:0px;
+    /* z-index: 1; */
+    border:none;
+   }
+   
+   /* Track */
+  .SearchInFilter::-webkit-scrollbar-track{
+     display: none;
+     height: 90%;
+   }
+   
+    /* Handle */
+   .SearchInFilter::-webkit-scrollbar-thumb{
+      height: 90%;
+      background: #eed6be;
+      border-radius: 10px;
+    }
+   
+    /* Handle on hover */
+   .SearchInFilter::-webkit-scrollbar-thumb:hover{
+     background-color:#9fcb9c ;
+    }
+   
