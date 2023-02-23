@@ -59,7 +59,7 @@ function CheckoutPage() {
   const Get_All_Cart_Data = async () => {
     // console.log("data")
     let res = await axios.get(
-      `https://doubtful-wasp-cowboy-boots.cyclic.app/products/cart`
+      `http://localhost:8080/products/products/cart`
     ).then((res)=>{
    set_Cart_Data(res.data)
       console.log(res);

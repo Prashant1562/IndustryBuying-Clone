@@ -43,7 +43,7 @@ const CartPage = () => {
   const Get_All_Cart_Data = async () => {
     // console.log("data")
     let res = await axios
-      .get(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/cart`)
+      .get(`http://localhost:8080/products/cart`)
       .then((res) => {
         set_Cart_Data(res.data);
         console.log(res);
@@ -77,7 +77,7 @@ const CartPage = () => {
       });
       axios
       .patch(
-        `https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${item.id}`,
+        `http://localhost:8080/products/quantity/${item.id}`,
         item,
         {
           headers: {
@@ -116,7 +116,7 @@ const CartPage = () => {
       });
       axios
         .patch(
-          `https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${item.id}`,
+          `http://localhost:8080/products/quantity/${item.id}`,
           item,
           {
             headers: {
@@ -157,7 +157,7 @@ const CartPage = () => {
     set_Cart_Data(removedata);
     axios
       .delete(
-        `https://doubtful-wasp-cowboy-boots.cyclic.app/products/delete/${item.id}`,
+        `http://localhost:8080/products/delete/${item.id}`,
         {
           headers: {
             Authorization: "Bearer" + " " + token,
