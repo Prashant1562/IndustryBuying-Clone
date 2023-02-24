@@ -1,6 +1,6 @@
 # soft-dogs-2567
 
-# API End Points 
+# API End Points & Request
     Users
         Get = users/                    Request = GET
         Register = users/register       Request = POST
