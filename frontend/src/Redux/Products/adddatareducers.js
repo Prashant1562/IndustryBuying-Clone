@@ -1,21 +1,22 @@
-import { GETDATAREQUEST,GETDATAFAILURE,GETDATASUCCESS } from "./getdata.actiontype";
+
+import { ADDDATAREQUEST,ADDDATAFAILURE,ADDDATASUCCESS } from "./adddata.actiontype";
 
 const init = {
      isLoading:false,
      products:[],
      isError:false
 }
-export const getdatareducer = (state=init,action)=>{
+export const adddatareducer = (state=init,action)=>{
         
         switch(action.type) {
     
-            case GETDATAREQUEST:
+            case ADDDATAREQUEST:
                 return{...state,isLoading: true}
     
-            case GETDATASUCCESS:
+            case ADDDATASUCCESS:
                 return {...state,isLoading:false,products: action.payload,isError:false}
                 
-            case GETDATAFAILURE:
+            case ADDDATAFAILURE:
                 return {...state,isLoading:false,isError:true}    
     
              default:

@@ -4,9 +4,14 @@ import { DELETEDATAFAILURE,DELETEDATAREQUEST,DELETEDATASUCCESS } from "./deleted
 
 
 
-export const deletedataaction = ()=>(dispatch)=>{
+export const deletedataaction = (id,token)=>(dispatch)=>{
      dispatch({type:DELETEDATAREQUEST})
-     return axios.delete("DELETEDATAFAILURE")
+     return axios.delete(`https://exuberant-slippers-slug.cyclic.app/products/${id}`,{
+          headers:{
+               "Content-type":"application/json",
+               "Authorization":token
+        }
+     })
      .then(res=>dispatch({type:DELETEDATASUCCESS,payload:res.data}))
      .catch(err=>dispatch({type:DELETEDATAFAILURE}))
 }
