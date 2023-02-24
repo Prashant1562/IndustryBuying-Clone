@@ -18,35 +18,33 @@ import React, { useEffect, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { CgPlayPauseR } from "react-icons/cg";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import {
-  AgriDataArray,
-  BrandNames,
-  DiscountInFilter,
-  MinAndMax,
-} from "../AgriData";
+import { DiscountInFilter, } from "../RawData";
 import "./LeftSide.css";
+import { useDispatch, useSelector } from "react-redux";
+import { GetProductData } from "../../../Redux/MainProduct/MainProduct.action";
+
 
 let small;
 let big;
-const GetSmallAndBig = () => {
-  [small, big] = MinAndMax(AgriDataArray());
+const GetSmallAndBig = (data) => {
+
   return [small, big];
 };
 
-const GetBrandNames = () => {
-  let data = BrandNames(AgriDataArray());
+const GetBrandNames = (array) => {
+  // let data = BrandNames(array);
   // console.log(data);
-  return data;
+  // return data;
 };
 
 const GetDiscount = () => {
   let data = DiscountInFilter();
-  console.log(data, "hello");
+  // console.log(data, "hello");
   return data;
 };
 
 GetSmallAndBig();
-console.log(small, big);
+// console.log(small, big);
 
 const Leftside = () => {
   const [min, setMin] = useState(300);
@@ -55,14 +53,16 @@ const Leftside = () => {
   const [defaultmax] = useState(60000);
   const [brands, setBrands] = useState([]);
   const [discount, setDiscount] = useState([]);
+  const dispatch = useDispatch();
+  const data = useSelector((store)=>store.ProductManager.Data.data)
 
   useEffect(() => {
-    console.log("Hii");
-    setMin(GetSmallAndBig()[0]);
-    setMax(GetSmallAndBig()[1]);
-    setBrands(GetBrandNames);
+    dispatch(GetProductData());
+    setMin(GetSmallAndBig(data)[0]);
+    setMax(GetSmallAndBig(data)[1]);
     setDiscount(GetDiscount());
-  }, []);
+    setBrands(data);
+  }, [dispatch]);
 
   const handlePriceRangle = (val) => {
     const [mn, mx] = val;
@@ -78,6 +78,18 @@ const Leftside = () => {
   const handlemaxValue = (e) => {
     console.log(e.target.value);
   };
+
+  const handleBrandChange = (e)=>{
+   if(e.target.checked)
+   {
+       console.log(e.target.name)
+      //  dispatch(GetDataByBrands(e.target.name));
+   }
+   else{
+      dispatch(GetProductData())
+   }
+    
+  }
 
   return (
     <Flex
@@ -193,7 +205,7 @@ const Leftside = () => {
             {brands &&
               brands?.map((brand, i) => (
                 <Flex key={i} gap="0.7rem" m="0.3rem 0rem">
-                  <Checkbox colorScheme="green"></Checkbox>
+                  <Checkbox colorScheme="green" name={`${brand[0]}`} onChange={handleBrandChange}></Checkbox>
                   <Flex gap="0.2rem" fontSize={15}>
                     <Text fontWeight="500">{brand[0]}</Text>
                     <Text fontWeight="400">({brand[1]})</Text>
@@ -230,7 +242,7 @@ const Leftside = () => {
                   </Flex>
                 </Flex>
               ))}
-            {discount && console.log(discount)}
+            {/* {discount && console.log(discount)} */}
           </Box>
         </Box>
 
