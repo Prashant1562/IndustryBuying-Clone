@@ -1,4 +1,4 @@
-import * as types from "./actionType";
+import * as types from "./auth.actionType";
 const initData = {
   isLoading: false,
   isError: false,

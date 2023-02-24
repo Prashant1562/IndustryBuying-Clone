@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as types from "./actionType";
+import * as types from "./auth.actionType";
 
 const postUserSignupRequest = () => {
   return { type: types.POST_USER_SIGNUP_REQUEST };
