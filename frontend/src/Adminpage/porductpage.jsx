@@ -9,7 +9,7 @@ const ProductPage = () => {
 
     const dispatch = useDispatch()
     
-    const product = useSelector(store=>store.getdatareducer.products)
+    const product = useSelector(store=>store)
     console.log(product)
     useEffect(()=>{
          dispatch(getdataaction())
@@ -35,7 +35,7 @@ const ProductPage = () => {
             </Flex>
             <SimpleGrid columns={[2, 3, 4, 4]} width="100%" gap={5}>
                 {
-                    product && product.map(ele=><ProductCard key={ele.id} {...ele}/>)
+                    //product && product.map(ele=><ProductCard key={ele.id} {...ele}/>)
                 }
                 
             </SimpleGrid>

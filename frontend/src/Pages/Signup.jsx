@@ -106,7 +106,7 @@ const Signup = () => {
     }
     try{
        
-        let res=await fetch("http://localhost:4444/users/register",{
+        let res=await fetch("http://localhost:4446/users/register",{
         method:"POST",
         body:JSON.stringify(payload),
         headers:{
@@ -117,7 +117,7 @@ const Signup = () => {
      
        toast({
         position:"top",
-        title: `${res.message}`,
+        title: "Welcome",
         description: "We've created your account for you.",
         status: "success",
         duration: 3000,
