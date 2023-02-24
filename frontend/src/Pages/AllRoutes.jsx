@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
@@ -8,19 +9,18 @@ import Singleproductpage from "../Components/SingleProductPage/singleproductpage
 
 
 
+
+
 const AllRoutes = () => {
   return (
-   
-        <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/product" element={<MainProduct/>}/>
-            <Route path="/product/:id" element={<Singleproductpage/>}/>
-            <Route path='/signup' element={<Signup/>}/>
-            <Route path='/login' element={<Login/>}/>
-        </Routes>
-      
-   
-  )
-}
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/product" element={<MainProduct/>} />
+      <Route path="/product/:id" element={<Singleproductpage/>} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
+  );
+};
 
-export default AllRoutes
+export default AllRoutes;

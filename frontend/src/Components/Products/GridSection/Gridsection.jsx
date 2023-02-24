@@ -18,8 +18,8 @@ import {
   Image,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AgriDataArray } from "../AgriData";
 
 const Popularity = () => {
   return [
@@ -32,20 +32,24 @@ const Popularity = () => {
   ];
 };
 
-const Gridsection = () => {
+const Gridsection = ({data,handleGrid}) => {
+  console.log(data,"Hello Grid")
   const [popularity, setPopularity] = useState([]);
+  const [prodData,setProdData] = useState(data || []);
   const [flag, setFlag] = useState(true);
+
+  useEffect(() => {
+    setPopularity(Popularity());
+    console.log(prodData,"In useEffect")
+  }, [flag,prodData]);
 
   const handlePopularity = () => {
     setFlag(!flag);
   };
-  const handlePopularityFilter = (data) => {
-    console.log(data);
+  const handlePopularityFilter = (data1) => {
+      
   };
 
-  useEffect(() => {
-    setPopularity(Popularity());
-  }, [popularity]);
 
   return (
     <Flex direction="column" borderLeft="1px solid rgba(185, 182, 182,0.5)" flex="6">
@@ -154,8 +158,8 @@ const Gridsection = () => {
         </Flex>
       </Flex>
       <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-        {AgriDataArray() &&
-          AgriDataArray()?.map((data,i) => (
+        {prodData &&
+          prodData?.map((data,i) => (
             <Flex
                key={i}
               _hover={{
@@ -172,6 +176,7 @@ const Gridsection = () => {
               <Text>{data.brand}</Text>
             </Flex>
           ))}
+          
       </Grid>
     </Flex>
   );
