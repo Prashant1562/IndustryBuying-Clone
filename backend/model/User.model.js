@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
     email:String,
     avatar:String,
     age:Number,
+    number:Number,
     gender: "male" | "female" | "other"
 },{
     versionKey:false,

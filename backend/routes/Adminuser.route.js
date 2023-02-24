@@ -8,6 +8,74 @@ const AdminUserRouter = express.Router();
 //all users
 
 
+/**
+* @swagger
+* components:
+*   schemas:
+*       adminUser:
+*           type: object
+*           properties:
+*               name:
+*                   type: string
+*                   description: The user name
+*               pass:
+*                    type: string
+*                    description: The user email
+*               email:
+*                     type: string
+*                     description: The user email
+*               avatar:
+*                     type: string
+*                     description: The user avatar
+*               age:
+*                     type: number
+*                     description: The user age
+*               number:
+*                     type: number
+*                     description: The user number
+*               gender:
+*                     type: string
+*                     description: The user gender
+*/
+
+
+/**
+ * @swagger
+ * /admin:
+ *  get:
+ *      summary: This will get all the user data from the database
+ *      tags: [adminUser]
+ *      responses:
+ *          200:
+ *              description: The list of all the users
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          item:
+ *                              $ref: "#/components/schemas/adminUser"
+ *
+ */
+
+/**
+ * @swagger
+ * /admin/register:
+ *  post:
+ *      summary: This is to post a new user to the database.
+ *      tags: [adminUser]
+ *
+ */
+
+/**
+ * @swagger
+ * /admin/delete/:id:
+ *  delete:
+ *      summary: This is to post a new user to the database.
+ *      tags: [adminUser]
+ *
+ */
+
+
 AdminUserRouter.get("/", async (req, res) => {
   const notes = await AdminUserModel.find();
   res.send(notes);
@@ -21,8 +89,8 @@ AdminUserRouter.post("/register", async (req, res) => {
   let addminlogindata = await AdminUserModel.find({ email: email })
 
   try {
-    if (addminlogindata) {
-      res.send({ massege: " Register Already Exist" });
+    if (addminlogindata.length !== 0) {
+      return res.send({ massege: " Register Already Exist" });
     } else {
 
 
@@ -70,6 +138,12 @@ AdminUserRouter.post("/login", async (req, res) => {
   }
 });
 
+AdminUserRouter.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id
+  await AdminUserModel.findByIdAndDelete({_id:id})
+  res.send({ massege: `Product ${id} has been deleted` });
+
+});
 module.exports = {
   AdminUserRouter,
 };
