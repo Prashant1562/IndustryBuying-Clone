@@ -1,65 +1,39 @@
-import { Stack, Image, Box, Card, Button, Flex, Tabs, TabList, Tab, TabPanel, TabPanels, Input,Skeleton,SkeletonText,SkeletonCircle } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { deletedataaction } from '../Redux/Products/deletedata.action'
-import { updatedataaction } from '../Redux/Products/updatedata.action'
 
+import React, { useEffect } from 'react'
+import { Box, Button,Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay,  Stack, useDisclosure, Td,Tr,Image } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
+import {useNavigate} from "react-router-dom"
+import { getdataaction } from '../Redux/Products/getdata.action'
+import ProductDetails from './productdetails'
 
 const ProductCard = (props) => {
-  const { id, brand, quantity, images, category, price,} = props
-  const init ={
-     quantity:""
-  }
-  const [value, setValue] = useState(init)
-  const dispatch = useDispatch()
+  const {images,id,brand,price,category,quantity} = props
+    const dispatch = useDispatch()
+const navigate = useNavigate()
+    useEffect(()=>{
+        dispatch(getdataaction())
+    },[])
+    const {products,isLoading,isError} = useSelector(store=>store.getdatareducer)
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const handleDelete = (e)=>{
-    const token =JSON.parse(localStorage.getItem("token"))
-    e.preventDefault()
-    dispatch(deletedataaction(id,token))
-  }
-  const handleupdate = (e)=>{
-     e.preventDefault()
-     const token =JSON.parse(localStorage.getItem("token"))
-     dispatch(updatedataaction(value,id,token))
-     setValue(init)
-  }
-
-  return (<Stack className='card' fontSize={["80%","90%","90%","90%","90%"]} border="1px solid red">
-   
-    <Image src={images[0]} />
-    <h3>{brand}</h3>
-    <p>{price}</p>
-    <p>{category}</p>
-    <p>{quantity}</p>
-
-    <Flex className='qty' width="100%" >
-      <Tabs>
-        <TabList >
-          <Tab fontSize={["80%","80%","80%","80%","80%"]} className='tab'>Qty Increase</Tab>
-          <Tab  fontSize={["80%","80%","80%","80%","80%"]} className='tab'>Qty Decrease</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <form onSubmit={(e)=>handleupdate}>
-              <Input type="number" placeholder='Enter the amount' onChange={(e) => setValue({...value,quantity:e.target.value})}  value={value.quantity}/>
-              <Button type="submit" >+</Button>
-            </form>
-   
-          </TabPanel>
-          <TabPanel>
-            <form onSubmit={(e)=>handleupdate}>
-              <Input type="number" placeholder='Enter the amount' onChange={(e) => setValue({...value,quantity:e.target.value})} value={value.quantity}/>
-              <Button type="submit" >-</Button>
-            </form>
-
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Flex>
-    <Button onClick={handleDelete}>Delete</Button>
-  </Stack>
-  )
-}
+    return (<Tr  color="orange" backgroundColor={'teal'} >
+    <Td width={["10%","50%","80%","100%"]} textAlign="center"><Image src={images[0]}/></Td>
+    <Td width={["10%","50%","80%","100%"]} textAlign="center">{brand}</Td>
+    <Td width={["10%","50%","80%","100%"]} textAlign="center">{category}</Td>
+    <Td width={["10%","50%","80%","100%"]} textAlign="center">{price}</Td>
+    <Td width={["10%","50%","80%","100%"]} textAlign="center"> <Button onClick={onOpen}>Edit</Button>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Enter the Details</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <ProductDetails brand={brand} images={images} category={category} id={id} price={price} quantity={quantity} onClose={onClose}/>
+                        </ModalBody>
+                    </ModalContent>
+                </Modal></Td>
+    <Td width={["20%","50%","80%","100%"]} textAlign="center"><Button color="red">Del</Button></Td>
+</Tr>
+    )}
 
 export default ProductCard
