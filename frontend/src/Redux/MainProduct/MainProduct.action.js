@@ -40,13 +40,19 @@ const BrandNames = (Array=[]) => {
  };
 
 
-export const GetProductData = () => async(dispatch)=>{
+export const GetProductData = (id) => async(dispatch)=>{
    dispatch({type:GET_PRODUCT_LOADING});
    try{
-      let data = await getDataByAPI();
-      let [min,max] = MinAndMax(data);
-      let data1 = BrandNames(data);
+     let data
+    if(id){
+     data = await getDataByAPI(id);
+     dispatch({type:GET_PRODUCT_SUCCESS,payload:data});
+    }
+    else{
+      let [min,max] = MinAndMax(data.data);
+      let data1 = BrandNames(data.data);
       dispatch({type:GET_PRODUCT_SUCCESS,payload:data1,min:min,max:max});
+    }
    }
    catch(err){
       dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
