@@ -3,6 +3,26 @@ const { ProductModel } = require("../model/Product.model");
 
 const ProductRouter = express.Router();
 
+ProductRouter.get("/price/filter", async (req,res)=>{
+     const query= req.query;
+     let val1 = query.price[0];
+     let val2 = query.price[1];
+     console.log(val1,val2,"hello")
+    try{
+        if(val1>val2){
+          let data = await ProductModel.find({$and:[{price:{$gte:val2}},{price:{$lte:val1}}]});
+          res.send(data);
+        }
+        else{
+          let data = await ProductModel.find({$and:[{price:{$gte:val1}},{price:{$lte:val2}}]});
+          res.send(data);
+        }
+          
+    }
+    catch(err){
+      res.send({"msg":"Something went wrong","Error":err});
+    }
+})
 
 
       // http://localhost:4441/products/filter?des=dse            sorting
@@ -81,6 +101,14 @@ ProductRouter.get("/filter", async (req, res) => {
           products = await ProductModel.find({ category: query.category }).skip(query.skip).limit(query.limit).sort({ price: 1 });
         }
 
+        else if (query.price) {
+          products = await ProductModel.find().sort({ price: 1 });
+        }
+
+        else if (query.discount) {
+          products = await ProductModel.find().sort({ discount : 1 });
+        }
+
 
         else {
           products = await ProductModel.find().skip(query.skip).limit(query.limit).sort({ price: 1 });
@@ -98,9 +126,16 @@ ProductRouter.get("/filter", async (req, res) => {
         else if (query.category) {
           products = await ProductModel.find({ category: query.category }).skip(query.skip).limit(query.limit).sort({ price: -1 });
         }
+        else if (query.price) {
+          products = await ProductModel.find().sort({ price: -1 });
+        }
+        else if (query.discount) {
+          products = await ProductModel.find().sort({ discount : -1 });
+        }
         else {
           products = await ProductModel.find().skip(query.skip).limit(query.limit).sort({ price: -1 });
         }
+        
       } else {
         if (query.brand && query.category) {
           products = await ProductModel.find({ $and: [{ brand: query.brand }, { category: query.category }] }).skip(query.skip).limit(query.limit);

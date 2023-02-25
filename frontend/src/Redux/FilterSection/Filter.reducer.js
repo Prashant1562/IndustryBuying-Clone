@@ -1,4 +1,4 @@
-import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "./Filter.types"
+import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_FILTER_RANGE_PRICE, GET_PRODUCT_FILTER_SORT, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS_FILTER } from "./Filter.types"
 
 let initialData = { 
     loading:false,
@@ -17,7 +17,7 @@ export const FilterReducer = (state=initialData,{type,payload}) => {
             }
         }
 
-        case GET_PRODUCT_SUCCESS : {
+        case GET_PRODUCT_SUCCESS_FILTER : {
             return{
                 ...state,
                 loading:false,
@@ -43,9 +43,26 @@ export const FilterReducer = (state=initialData,{type,payload}) => {
                 FData:payload
               }
            }
+           case GET_PRODUCT_FILTER_RANGE_PRICE : {
+            return{
+                ...state,
+                loading:false,
+                error:false,
+                FData:payload
+              }
+           }
+           case GET_PRODUCT_FILTER_SORT : {
+            return{
+                ...state,
+                loading:false,
+                error:false,
+                FData:payload
+              }
+           }
 
       default:{
         return state
       }
     }
 }
+
