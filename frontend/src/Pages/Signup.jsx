@@ -18,127 +18,77 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-
-
+const initState = {
+  firstname: "",
+  lastname: "",
+  email: "",
+  number:"",
+  gender: "",
+  password: "",
+};
 
 const Signup = () => {
-  const [firstname,setFirstname]=useState("")
-  const [lastname,setLastname]=useState("")
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const [number,setNumber]=useState("")
-  const [gender,setGender]=useState("")
-  const navigate=useNavigate()
-  const toast=useToast()
- 
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    const payload={
-      firstname,
-      lastname,
-      email,
-      number,
-      gender,
-      password
-    }
-
-    if(!payload.firstname){
-      toast({
-        position:"top",
-        title: "Please fill your Name",
-        description: "Your name is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }else if(!payload.lastname){
-      toast({
-        position:"top",
-        title: "Please fill your Last name",
-        description: "Your last name is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }else if(!payload.email){
-      toast({
-        position:"top",
-        title: "Please fill your Email",
-        description: "Your email is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }else if(!payload.number){
-      toast({
-        position:"top",
-        title: "Please fill your Contact",
-        description: "Your Contact is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }else if(!payload.gender){
-      toast({
-        position:"top",
-        title: "Please select you gender",
-        description: "Your gender is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }else if(!payload.password){
-      toast({
-        position:"top",
-        title: "Please fill your Password",
-        description: "Your Password is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
-    try{
-       
-        let res=await fetch("http://localhost:4444/users/register",{
-        method:"POST",
-        body:JSON.stringify(payload),
-        headers:{
-          'Content-type':'application/json'
-        }
-       })
-       let response=await res.json()
-     
-       toast({
-        position:"top",
-        title: `${res.message}`,
-        description: "We've created your account for you.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-      setTimeout (() => {
-        navigate("/login")
-      },3000)
-       console.log(response)
-       
-      
-        
-       
-       
-    }catch(error){
-      console.log(error)
-    }
-  }
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initState);
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const toggle = () => {
     setOpen(!open);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let res = await fetch('https://exuberant-slippers-slug.cyclic.app/users/register',
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      let resData = await res.json();
+      setLoading(false);
+      if (res.status >= 400) {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "error",
+          duration: 2000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:"Welcome",
+          description: resData.message,
+          status: "success",
+          duration: 2000,
+          isClosable: false,
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast({
+        position: "top",
+        description: error.message,
+        status: "error",
+        duration: 2000,
+        isClosable: false,
+      });
+    }
+    
   };
   return (
     <Box
@@ -175,15 +125,15 @@ const Signup = () => {
           <Text color={"white"}>Create Your Account</Text>
           <form>
             <Stack color="white" p={"0px 25px"} mt="20px">
-              <Input
+            <Input
                 paddingLeft={"10px"}
                 variant="flushed"
-                value={firstname}
                 type="text"
-                placeholder="Enter First Name"
+                placeholder="First Name"
                 _placeholder={{ color: "inherit" }}
-                name=" firstname"
-                onChange={(e)=>setFirstname(e.target.value)}
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
                 required
               />
               <Text
@@ -197,12 +147,12 @@ const Signup = () => {
               <Input
                 paddingLeft={"10px"}
                 variant="flushed"
-                value={lastname}
+                value={formData.lastname}
                 type="text"
                 placeholder="Enter Last Name"
                 _placeholder={{ color: "inherit" }}
                 name="lastname"
-                onChange={(e)=>setLastname(e.target.value)}
+                onChange={handleChange}
                 required
               />
               <Text
@@ -216,12 +166,12 @@ const Signup = () => {
               <Input
                 paddingLeft={"10px"}
                 variant="flushed"
-                value={email}
+                value={formData.email}
                 type="email"
                 placeholder="Enter Email"
                 _placeholder={{ color: "inherit" }}
                 name="email"
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={handleChange}
                 required
               />
               <Text
@@ -236,12 +186,12 @@ const Signup = () => {
               <Input
                 paddingLeft={"10px"}
                 variant="flushed"
-                value={number}
+                value={formData.number}
                 type="Number"
                 placeholder="Enter your number"
                 _placeholder={{ color: "inherit" }}
                 name="number"
-                onChange={(e)=>setNumber(e.target.value)}
+                onChange={handleChange}
                 required
               />
               <Text
@@ -255,13 +205,13 @@ const Signup = () => {
               <Select
                 colorScheme={"blackAlpha"}
                 color="black"
-                value={gender}
+                value={formData.gender}
                 variant="filled"
                 placeholder="Gender"
                 ml={"10px"}
                 fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
                 name="gender"
-                onChange={(e)=>setGender(e.target.value)}
+                onChange={handleChange}
                 required
               >
                 <option value="male">MALE</option>
@@ -280,11 +230,11 @@ const Signup = () => {
                  type={open === false ? "password" : "text"}
                   paddingLeft={"10px"}
                   variant="flushed"
-                  value={password}
+                  value={formData.password}
                   placeholder="Password"
                   _placeholder={{ color: "inherit" }}
                   name="password"
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={handleChange}
                   required
                 />
                 <InputRightElement>

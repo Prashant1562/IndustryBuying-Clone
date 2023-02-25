@@ -20,84 +20,80 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useToast } from "@chakra-ui/react";
 
+const initState = {
+  email: "",
+  password: "",
+};
+const UserLogin = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initState);
+  const toast = useToast();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-const Login = () => {
-   const toast=useToast()
-   const navigate=useNavigate()
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let res = await fetch(
+        "https://exuberant-slippers-slug.cyclic.app/users/login",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
 
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-
-    const payload={
-      email,
-      password
-    }
-    if(!payload.email){
-
+      let resData = await res.json();
+      localStorage.setItem("token",resData.token)
+      setLoading(false);
+      if (res.status >= 400) {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "error",
+          duration: 2000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          position: "top",
+          title:"You are Successfully logged in",
+          description: resData.message,
+          status: "success",
+          duration: 2000,
+          isClosable: false,
+        });
+        localStorage.setItem(
+          "toolers",
+          JSON.stringify({
+            token: resData.token,
+            firstName: resData.firstname,
+            email: resData.email,
+            
+          })
+        );
+        navigate("/");
+      }
+    } catch (error) {
+      setLoading(false);
       toast({
-        position:"top",
-        title: "Please fill your Email",
-        description: "Your email is missing",
+        position: "top",
+        description: error.message,
         status: "error",
-        duration: 3000,
-        isClosable: true,
+        duration: 2000,
+        isClosable: false,
       });
-      return
     }
-    else if(!payload.password){
-
-      toast({
-        position:"top",
-        title: "Please fill your Password",
-        description: "Your password is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
-
-    try{
-            let res=await fetch("http://localhost:4444/users/login",{
-              method:"POST",
-              body:JSON.stringify(payload),
-              headers:{
-                "Content-type":'application/json'
-              }
-              
-            })
-            let response=await res.json()
-              console.log(response)
-            localStorage.setItem("token",response.token)
-            if(response.token){
-              toast({
-                position:"top",
-                title: "Your are successfully logged in",
-                description: "Taking you to homepage",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              })
-              
-              setTimeout (() => {
-                navigate('/')
-              },3000)
-            }else{
-              toast({
-                position:"top",
-                title: "Invalid email/password",
-                description: "Please write correct email / password",
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-              });
-            }
-    }catch(error){
-      console.log(error)
-    }
-  }
+  };
+  
+        
   
   const [open, setOpen] = useState(false);
   const toggle = () => {
@@ -150,8 +146,8 @@ const Login = () => {
                 placeholder="Enter Email"
                 _placeholder={{ color: "inherit" }}
                 name="email"
-                value={email}
-                onChange={(e)=>setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
               <InputGroup>
@@ -159,8 +155,8 @@ const Login = () => {
                   type={open === false ? "password" : "text"}
                   paddingLeft={"10px"}
                   variant="flushed"
-                  value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                  value={formData.password}
+                onChange={handleChange}
                   placeholder="Password"
                   _placeholder={{ color: "inherit" }}
                   name="password"
@@ -240,4 +236,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default UserLogin;

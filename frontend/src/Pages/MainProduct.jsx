@@ -13,8 +13,8 @@ const MainProduct = () => {
         <TopSection />
       </Box>
       <Flex width={{ base: "100%", sm: "100%", md: "93%" }} margin="auto">
-        <Leftside />
-        <Gridsection />
+         <Box width="25%"> <Leftside /></Box>
+        <Box width="70%"> <Gridsection /> </Box>
       </Flex>
     </Flex>
   );
