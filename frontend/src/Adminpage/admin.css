@@ -1,2 +1,28 @@
 
 
+.drawer{
+    display: none;
+}
+
+.sidebar{
+    display: block;
+    width:"25%"
+}
+
+.stack{
+   overflow-y:"scroll";
+   overflow-x: hidden;
+   width: 75%;
+}
+
+@media screen and (min-width: 300px) and (max-width:576px) {
+     .drawer{
+        display: block;
+     }
+     .sidebar{
+        display: none;
+     }
+     .stack{
+        width: 100%;
+     }
+}
