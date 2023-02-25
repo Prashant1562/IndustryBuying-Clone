@@ -106,7 +106,7 @@ const Signup = () => {
     }
     try{
        
-        let res=await fetch("http://localhost:4446/users/register",{
+        let res=await fetch("https://exuberant-slippers-slug.cyclic.app/users/register",{
         method:"POST",
         body:JSON.stringify(payload),
         headers:{
