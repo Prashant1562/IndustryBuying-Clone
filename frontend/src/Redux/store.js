@@ -6,7 +6,7 @@ import { getdatareducer } from "./Products/getdata.reducer";
 import { deletedatareducer } from "./Products/deletedatareducer";
 import { updatedatareducer } from "./Products/updatedata.reducer";
 import { getuserreducer } from "./Users/getusersreducer";
-//const rootReducer = combineReducers({AppReducer,getdatareducer,deletedatareducer,updatedatareducer,getuserreducer});
+const rootReducer = combineReducers({AppReducer,getdatareducer,deletedatareducer,updatedatareducer,getuserreducer});
 
 import { FilterReducer } from "./FilterSection/Filter.reducer";
 import { ProductReducer } from "./MainProduct/MainProduct.reducer";
