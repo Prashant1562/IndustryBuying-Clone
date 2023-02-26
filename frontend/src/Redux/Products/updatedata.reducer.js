@@ -7,6 +7,7 @@ const init = {
 }
 
 export const updatedatareducer = (state=init,{type,payload})=>{
+    console.log(payload)
       switch (type){
          case UPDATEDATAREQUEST:{
             return{

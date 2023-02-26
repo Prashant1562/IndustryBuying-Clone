@@ -40,7 +40,7 @@ const UserLogin = () => {
     setLoading(true);
     try {
       let res = await fetch(
-        "https://exuberant-slippers-slug.cyclic.app/users/login",
+        "https://exuberant-slippers-slug.cyclic.app/login",
         {
           method: "POST",
           body: JSON.stringify(formData),

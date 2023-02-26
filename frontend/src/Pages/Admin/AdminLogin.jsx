@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Box,
+  Image,
   Flex,
   Heading,
   Input,
@@ -14,6 +16,10 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Link, Navigate, useNavigate} from "react-router-dom"
+import "../../style/admin.css";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import logo from '../../assets/image/tooler logo 1.png';
 
 const Login = () => {
 
@@ -23,9 +29,9 @@ const Login = () => {
 
   const toast = useToast()
   const { toggleColorMode } = useColorMode();
-  const formBackground = useColorModeValue('gray.100', 'gray.700');
+  const formBackground = useColorModeValue('gray.400', 'gray.700');
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [pass, setPassword] = React.useState("");
   const [value, setValue] = React.useState(false)
 
 
@@ -35,7 +41,7 @@ const Login = () => {
 
     const payload = {
       email,
-      password,
+      pass,
     };
 
     if (!payload.email) {
@@ -50,7 +56,7 @@ const Login = () => {
       });
      
     }
-    else if (!payload.password) {
+    else if (!payload.pass) {
 
       toast({
         position:"top",
@@ -70,10 +76,10 @@ const Login = () => {
       axios.post("https://exuberant-slippers-slug.cyclic.app/admin/login",payload)
       .then(res=>{
         localStorage.setItem("adminToken",JSON.stringify(res.data.token))
-        console.log(res.data.token)
+
         localStorage.setItem("GSTIN", JSON.stringify(res.data.GSTIN))
         console.log(res.data,"token in login");
-        if(res){
+        if(res.data.token){
           toast({
             position:"top",
             title: "Your are successfully logged in",
@@ -84,7 +90,7 @@ const Login = () => {
           });
 
           setTimeout(() => {
-            navigate("/admin/page")
+            navigate("/admin/dashboard")
           },3000)
         }
         else{
@@ -105,8 +111,8 @@ const Login = () => {
 
   };
   return (
-    <Flex h="100vh" alignItems="center" justifyContent="center" bgGradient="radial(gray.100, purple.100, blue.200)" >
-      <Flex
+    <Flex h="100vh" alignItems="center" justifyContent="center">
+      <Flex className='login_container'
         flexDirection="column"
         bg={formBackground}
         p={12}
@@ -127,21 +133,70 @@ const Login = () => {
           type="password"
           variant="filled"
           mb={6}
-          value={password}
+          value={pass}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button colorScheme="teal" mb={8} onClick={handleSubmit} >
+        <Button colorScheme="orange" mb={8} onClick={handleSubmit} >
           Log In
         </Button>
 
 
         <Flex gap={"8px"} mb="12px">
           <Text>Signup Here</Text>
-          <Text color={"blue"}><Link to={"/admin/signup"}>Signup</Link></Text>
+          <Text color={"skyblue"}><Link to={"/admin/signup"}>Signup</Link></Text>
         </Flex>
-        
+        <FormControl display="flex" alignItems="center">
+          <FormLabel htmlFor="dark_mode" mb="0">
+            Enable Dark Mode?
+          </FormLabel>
+          <Switch
+            id="dark_mode"
+            colorScheme="teal"
+            size="lg"
+            onChange={toggleColorMode}
+          />
+        </FormControl>
+        <Box
+            mt={"20px"}
+            display="flex"
+            flexDirection={"column"}
+            justifyContent="center"
+            alignItems={"center"}
+            gap={"10px"}
+          >
+            <Button
+              bg="white"
+              border={"1px solid lightgrey"}
+              _hover={{ bg: "#e2e6eb", color: "black" }}
+              leftIcon={<FcGoogle fontSize={"20px"} />}
+              textColor={"black"}
+              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
+              w="80%"
+            >
+              Sign Up with Google
+            </Button>
+            <Button
+              bg="white"
+              border={"1px solid lightgrey"}
+              _hover={{ bg: "#e2e6eb" }}
+              leftIcon={<FaGithub fontSize={"20px"} />}
+              textColor={"#black"}
+              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
+              w="80%"
+            >
+              Sign Up with GitHub
+            </Button>
+          </Box>
       </Flex>
+      {/* <Flex flex={1}>
+        <Image h="40vh" v='40vh' marginLeft='50px' marginTop='25%'
+          alt={'Login Image'}
+          objectFit={'cover'}
+          src={logo}
+        />
+      </Flex> */}
     </Flex>
+    
   );
 };
 

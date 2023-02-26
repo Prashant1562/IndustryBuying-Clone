@@ -5,15 +5,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate} from "react-router-dom"
 import { getdataaction } from '../Redux/Products/getdata.action'
 import ProductDetails from './productdetails'
+import { deletedataaction } from '../Redux/Products/deletedata.action'
+
 
 const ProductCard = (props) => {
-  const {images,id,brand,price,category,quantity} = props
+  const {images,_id,brand,price,category,quantity} = props
+
     const dispatch = useDispatch()
 const navigate = useNavigate()
-    useEffect(()=>{
-        dispatch(getdataaction())
-    },[])
-    const {products,isLoading,isError} = useSelector(store=>store.getdatareducer)
+
+  const handleDelete = ()=>{
+      dispatch(deletedataaction(_id))
+      .then(res=>dispatch(getdataaction()))
+  }
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (<Tr  color="orange" backgroundColor={'teal'} >
@@ -28,11 +32,11 @@ const navigate = useNavigate()
                         <ModalHeader>Enter the Details</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
-                            <ProductDetails brand={brand} images={images} category={category} id={id} price={price} quantity={quantity} onClose={onClose}/>
+                            <ProductDetails brand={brand} images={images} category={category} id={_id} price={price} quantity={quantity} onClose={onClose}/>
                         </ModalBody>
                     </ModalContent>
                 </Modal></Td>
-    <Td width={["20%","50%","80%","100%"]} textAlign="center"><Button color="red">Del</Button></Td>
+    <Td width={["20%","50%","80%","100%"]} textAlign="center"><Button color="red" onClick={handleDelete}>Del</Button></Td>
 </Tr>
     )}
 

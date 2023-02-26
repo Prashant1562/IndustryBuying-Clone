@@ -1,3 +1,4 @@
+// suvam pages------------->
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
@@ -43,7 +44,7 @@ const CartPage = () => {
   const Get_All_Cart_Data = async () => {
     // console.log("data")
     let res = await axios
-      .get(`http://localhost:8080/products/cart`)
+      .get(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/cart`)
       .then((res) => {
         set_Cart_Data(res.data);
         console.log(res);
@@ -77,7 +78,7 @@ const CartPage = () => {
       });
       axios
       .patch(
-        `http://localhost:8080/products/quantity/${item.id}`,
+        `https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${item.id}`,
         item,
         {
           headers: {
@@ -116,7 +117,7 @@ const CartPage = () => {
       });
       axios
         .patch(
-          `http://localhost:8080/products/quantity/${item.id}`,
+          `https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${item.id}`,
           item,
           {
             headers: {
@@ -157,7 +158,7 @@ const CartPage = () => {
     set_Cart_Data(removedata);
     axios
       .delete(
-        `http://localhost:8080/products/delete/${item.id}`,
+        `https://doubtful-wasp-cowboy-boots.cyclic.app/products/delete/${item.id}`,
         {
           headers: {
             Authorization: "Bearer" + " " + token,
@@ -873,9 +874,6 @@ function OverlayModel({ isOpen, onClose }) {
           </ModalBody>
         </ModalContent>
       </Modal>
-
-
-    
     </>
   );
 }

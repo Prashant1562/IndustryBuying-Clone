@@ -4,12 +4,13 @@ import { DELETEDATAFAILURE,DELETEDATAREQUEST,DELETEDATASUCCESS } from "./deleted
 
 
 
-export const deletedataaction = (id,token)=>(dispatch)=>{
+export const deletedataaction = (id)=>(dispatch)=>{
+     console.log(id)
      dispatch({type:DELETEDATAREQUEST})
-     return axios.delete(`https://exuberant-slippers-slug.cyclic.app/products/${id}`,{
+     return axios.delete(`https://exuberant-slippers-slug.cyclic.app/products/delete/${id}`,{
           headers:{
                "Content-type":"application/json",
-               "Authorization":token
+               "Authorization":"token"
         }
      })
      .then(res=>dispatch({type:DELETEDATASUCCESS,payload:res.data}))

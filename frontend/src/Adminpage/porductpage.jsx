@@ -10,7 +10,7 @@ const ProductPage = () => {
     const dispatch = useDispatch()
 
     const { products, isError, isLoading } = useSelector(store => store.getdatareducer)
-    console.log(products)
+  
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem("token"))
         dispatch(getdataaction(token))
