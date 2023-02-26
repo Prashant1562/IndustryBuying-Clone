@@ -1,83 +1,88 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { AdminUserModel } = require("../model/AdminUser.model");
-
-const AdminUserRouter = express.Router();
-
-//all users
+const express=require("express")
+require("dotenv").config()
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { AdminModel } = require("../model/AdminUser.model");
 
 
+const adminRouter=express.Router()
 
 
-AdminUserRouter.get("/", async (req, res) => {
-  const notes = await AdminUserModel.find();
-  res.send(notes);
-});
+adminRouter.post("/register" , async(req,res)=>{
+    const {email,password,name,phoneNumber,GSTIN,storeName}=req.body
 
-//register
+    const adminEmail=await AdminModel.findOne({email})
+    const adminStoreName=await AdminModel.findOne({storeName})
 
-AdminUserRouter.post("/register", async (req, res) => {
-  const { name, email, pass, avatar,age,gender } = req.body;
-
-  let addminlogindata = await AdminUserModel.find({ email: email })
-
-  try {
-    if (addminlogindata.length !== 0) {
-      return res.send({ massege: " Register Already Exist" });
-    } else {
-
-
-    bcrypt.hash(pass, 5, async (err, hash) => {
-      // Store hash in your password DB.
-      if (err) {
-        res.send({ massege: "something went wrong", error: err.message });
-      } else {
-        const adminuser = new AdminUserModel({ name, email, pass: hash,avatar,age,gender });
-        await adminuser.save();
-        res.send({ massege: "New user register" });
-      }
-    });
-
-  }
-
-  } catch (error) {
-    res.send({ massege: "something went wrong" });
-  }
-});
-
-//login
-
-
-AdminUserRouter.post("/login", async (req, res) => {
-  const { email, pass } = req.body;
-  try {
-    const user = await AdminUserModel.find({ email });
-    if (user.length > 0) {
-      bcrypt.compare(pass, user[0].pass, (err, result) => {
-        // result == true
-        if (result) {
-          const token = jwt.sign({ userID: user[0]._id }, "masai");
-
-          res.send({ massege: "login successful", token: token });
-        } else {
-          res.send({ massege: "something went wrong" });
-        }
-      });
-    } else {
-      res.send({ massege: "wrong coredentials" });
+    if(adminEmail && adminStoreName){
+         res.send({"message":"This Email  and Store Name already exist"})
     }
-  } catch (error) {
-    res.send({ massege: "something went wrong" });
-  }
-});
 
-AdminUserRouter.delete("/delete/:id", async (req, res) => {
-  const id = req.params.id
-  await AdminUserModel.findByIdAndDelete({_id:id})
-  res.send({ massege: `Product ${id} has been deleted` });
+    else if(adminEmail){
+        res.send({"message":"This Email is already registered"})
+    }
+    else if(adminStoreName){
+        res.send({"message":"This Store Name already exist"})
+    }
+    else {
 
-});
-module.exports = {
-  AdminUserRouter,
-};
+        try{
+            bcrypt.hash(password, 5, async(err, secure_password)=> {
+                if(err){
+                    console.log(err)
+                }else{
+                        const admin = new AdminModel({email,password:secure_password,name,phoneNumber,GSTIN,storeName})
+                        await admin.save()
+                         console.log(admin)
+                            res.send({"message" :"Registered Successfully"})
+                 }
+        });
+           
+        }
+        catch(err){
+            console.log(err)
+            console.log({"message":"SignUp failed, please try again"})
+        }
+    }
+    
+
+})
+
+
+adminRouter.post("/login" , async(req,res)=>{
+    const {email,password}=req.body
+    try{
+
+    const admin=await AdminModel.find({email})
+    //    console.log(admin)
+    const GSTIN=admin[0].GSTIN
+       
+        if(admin.length>0){
+            bcrypt.compare(password, admin[0].password, (err, result) =>{
+               
+                if(result){
+                    const token=jwt.sign({adminID:admin[0]._id},process.env.key)
+                    res.send({"message" :"Login successuful","token":token,GSTIN})
+                }
+                else{
+                    res.send({"message" :"Wrong Credientials"})
+                }
+            });
+           
+        }
+        else{
+            res.send({"message" :"Wrong Credientials"})
+        }
+       
+        
+       
+    }
+    catch(err){
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+})
+
+
+
+module.exports={adminRouter}

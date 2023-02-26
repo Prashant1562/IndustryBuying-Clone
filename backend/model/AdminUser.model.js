@@ -1,24 +1,19 @@
-const mongoose = require("mongoose")
+const mongoose=require("mongoose")
 
-const AdminuserSchema = mongoose.Schema({
+const adminSchema=mongoose.Schema({
     name:String,
-    pass:String,
     email:String,
-    avatar:String,
-    age:Number,
-    gender: "male" | "female" | "other"
+    password:String,
+    phoneNumber:Number,
+    GSTIN:String,
+    storeName:String
 },{
     versionKey:false
-})
-
-const AdminUserModel=mongoose.model("Admin",AdminuserSchema)
-module.exports={
-    AdminUserModel
 }
+)
 
-    // "name":"",
-    // "pass":"",
-    // "email":"",
-    // "avtar":"",
-    // "age":"",
-    // "gender":""
+const AdminModel = mongoose.model("admin",adminSchema)
+
+module.exports={
+    AdminModel
+}
