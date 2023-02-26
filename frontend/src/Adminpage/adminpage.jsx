@@ -6,6 +6,7 @@ import Userlist from "./userlist"
 import "./admin.css"
 import DrawerJs from "./drawer"
 import Sidebar from "./sidebar"
+import BannedUserList from "./banneduserlist"
 const AdminPage = () => {
     const [state, setState] = useState(true)
     const initRef = useRef()
@@ -64,7 +65,7 @@ const AdminPage = () => {
                             <Userlist />
                         </TabPanel>
                         <TabPanel>
-                            <Userlist />
+                            <BannedUserList />
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
