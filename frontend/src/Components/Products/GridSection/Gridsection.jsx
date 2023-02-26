@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   GetDataBySort,
   GetDataFilter,
@@ -45,6 +45,7 @@ const Gridsection = () => {
   // const [prodData,setProdData] = useState([]);
   const [flag, setFlag] = useState(true);
   const toast = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(GetDataFilter());
@@ -241,13 +242,13 @@ const Gridsection = () => {
               border="0.5px solid #F54702"
               borderRadius="0.1rem"
               variant="outline"
-              onClick={()=>toast({
+              onClick={()=>{toast({
                 status: 'success',
                 title: "Congrats",
                 description:"Item Added successfully",
                 position: "top",
                 isClosable: true,
-              })}
+              });dispatch()}}
             >
               ADD TO CART
             </Button>
@@ -257,6 +258,7 @@ const Gridsection = () => {
               borderRadius="0.1rem"
               colorScheme="grey"
               variant="outline"
+              onClick={()=>navigate("/")}
             >
               BUY NOW
             </Button>
