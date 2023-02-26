@@ -3,8 +3,8 @@ import axios from "axios"
 export const getData = async()=>{
     let data ;
     
-        data= await axios.get(`https://exuberant-slippers-slug.cyclic.app/products`);
-        // data = await axios.get(`http://localhost:4441/products`)
+        // data= await axios.get(`https://exuberant-slippers-slug.cyclic.app/products`);
+        data = await axios.get(`http://localhost:4441/products`)
         // console.log(data)
         return data
 }
@@ -44,14 +44,25 @@ export const getByBrand = async(str)=>{
 }
 
 
-
 export const getByRangePrice = async(str,str1)=>{
    
        let data= await axios.get(`http://localhost:4441/products/price/filter?&price=${str}&price=${str1}`);
-    //    let data= await axios.get(`http://localhost:4441/products/filter?&price=${str1}`);
+    //    let data= await axios.get(`http://localhost:4441/products/filter?&price=${str1}&pric=${str}`);
         // console.log(data)
     return data
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const getByDiscount = async(str)=>{
     let data ;

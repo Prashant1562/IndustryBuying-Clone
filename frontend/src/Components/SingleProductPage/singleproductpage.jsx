@@ -98,7 +98,7 @@ const Singleproductpage = () => {
   }
   return (
     <>
-      {Data.data && console.log(Data.data.images[0])}
+    { console.log(Data.data)}
       {Data.data && (
         <Flex
           gap="1rem"

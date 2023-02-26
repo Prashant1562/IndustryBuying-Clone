@@ -10,7 +10,7 @@ const BannedUserList = () => {
     useEffect(()=>{
         dispatch(getbanuseraction())
     },[])
-    const products = useSelector(store=>store.getbanuserreducer)
+    const products = useSelector(store=>store.getbanuserreducer.products)
    console.log(products)
     return (
       <TableContainer>
