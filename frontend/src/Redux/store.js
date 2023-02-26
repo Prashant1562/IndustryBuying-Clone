@@ -10,8 +10,9 @@ import { getuserreducer } from "./Users/getusersreducer";
 
 import { FilterReducer } from "./FilterSection/Filter.reducer";
 import { ProductReducer } from "./MainProduct/MainProduct.reducer";
-
-const rootReducer = combineReducers({AppReducer,ProductManager:ProductReducer,FilterManger:FilterReducer,getdatareducer,deletedatareducer,updatedatareducer,getuserreducer});
+import { getbanuserreducer } from "./Users/getbanuserreducer";
+import { removebanreducer } from "./Users/removebanuserreducer";
+const rootReducer = combineReducers({AppReducer,ProductManager:ProductReducer,FilterManger:FilterReducer,getdatareducer,deletedatareducer,updatedatareducer,getuserreducer,getbanuserreducer,removebanreducer});
 
 
 const composeEnhancers = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
