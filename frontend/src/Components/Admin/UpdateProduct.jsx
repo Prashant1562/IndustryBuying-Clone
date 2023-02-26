@@ -24,8 +24,6 @@ function UpdateProduct(props) {
     setPrice(e.target.value);
 }
 
-
-
    const handleClick = () => {
       if(price){
         Number(price)
@@ -34,8 +32,6 @@ function UpdateProduct(props) {
           console.log(price)
           setPrice("")
       }
-
-    
 }
 
   return (
@@ -43,11 +39,11 @@ function UpdateProduct(props) {
       {({onClose }) => (
         <>
           <PopoverTrigger>
-            <Button colorScheme='teal' variant='solid' size='sm' margin="10px">Modify Task</Button>
+            <Button colorScheme='green' variant='solid' size='sm' margin="10px">Edit</Button>
           </PopoverTrigger>
           <Portal>
             <PopoverContent>
-              <PopoverHeader>Enter The New task</PopoverHeader>
+              <PopoverHeader>Enter The New Price</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
                 <Box>
@@ -55,11 +51,11 @@ function UpdateProduct(props) {
                 </Box>
                 <Button
                   mt={4}
-                  colorScheme="blue"
+                  colorScheme="orange"
                   onClick={() => {onClose(); handleClick()}}
                   ref={initRef}
                 >
-                  Change
+                  Update
                 </Button>
               </PopoverBody>
             </PopoverContent>

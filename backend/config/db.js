@@ -1,13 +1,9 @@
-
-
-const mongoose = require("mongoose")
+const mongoose=require("mongoose")
 
 require("dotenv").config()
 
+mongoose.set('strictQuery', false)
+
 const connection = mongoose.connect(process.env.mongoUrl)
 
-module.exports={
-    connection
-}
-
-// mongoUrl=mongodb+srv://NEM_Project:NEM_Project@nem.begxcje.mongodb.net/?retryWrites=true&w=majority
+module.exports={connection}

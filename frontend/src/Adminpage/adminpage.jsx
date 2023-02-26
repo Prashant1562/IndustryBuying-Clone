@@ -1,5 +1,8 @@
 
-import { Box, Button, Flex, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, } from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Portal, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, 
+
+
+} from "@chakra-ui/react"
 import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from "react"
 import ProductPage from "./porductpage"
@@ -8,6 +11,7 @@ import "./admin.css"
 import DrawerJs from "./drawer"
 import Sidebar from "./sidebar"
 import BannedUserList from "./banneduserlist"
+import { Popover } from "antd"
 const AdminPage = () => {
     const [state, setState] = useState(true)
     const initRef = useRef()
@@ -30,7 +34,7 @@ const AdminPage = () => {
     return (<Stack>
         <Flex justifyContent={"end"} className="nav">
             <div className="drawer">
-                <DrawerJs />
+                <DrawerJs handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
             </div>
             <Button onClick={handleClick}>Home Page</Button>
             <Popover closeOnBlur={false} placement='left' initialFocusRef={initRef}>
@@ -59,10 +63,10 @@ const AdminPage = () => {
               <Sidebar handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
             </div>
         
-            <Stack display={state ? "block" : "none"} className="stack" height="100vh" >
+            <Stack display={state ? "block" : "none"} className="stack" height="600px" >
                 <ProductPage />
             </Stack>
-            <Stack display={state ? "none" : "block"} className="stack"  height="100vh">
+            <Stack display={state ? "none" : "block"} className="stack"  height="600px">
                 <Tabs>
                     <TabList >
                         <Tab fontSize={["80%", "80%", "80%", "80%", "80%"]} className='tab'>Users List</Tab>

@@ -18,8 +18,22 @@ const ProductDetails = (props) => {
     }
  const handleSubmit = (e)=>{
        e.preventDefault()
-       dispatch(updatedataaction(id,value))
-       .then(res=>dispatch(getdataaction()))
+        // sending PUT request with fetch API in javascript
+        fetch(`https://exuberant-slippers-slug.cyclic.app/products/update/${id}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "PATCH",    
+          body: JSON.stringify(value)
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+             dispatch(getdataaction())
+          });
+      
    }
 
     return (<Stack className='card' fontSize={["80%","90%","90%","90%","90%"]} textAlign="center">

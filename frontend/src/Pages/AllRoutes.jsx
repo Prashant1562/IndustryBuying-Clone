@@ -1,8 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+
 import Singleproductpage from '../Components/SingleProductPage/singleproductpage'
 import AdminAllProducts from './Admin/AdminAllProducts'
 import AdminDashboard from './Admin/AdminDashboard'
+import AdminPage from '../Adminpage/adminpage'
 import AdminLogin from './Admin/AdminLogin'
 import AdminPrivateRoutes from './Admin/AdminPrivateRoute'
 import AdminSignup from './Admin/AdminSignup'
@@ -16,15 +18,15 @@ import PrivateRoutes from './PrivateRoutes'
 import SingleProductPage from './SingleProductPageDemo'
 import UserLogin from './User/UserLogin'
 import UserSignup from './User/UserSignup'
-
+import Singleproductpage from '../Components/SingleProductPage/singleproductpage'
 
 const AllRoutes = () => {
 
   return (
         <Routes>
             <Route path="/" element={<HomePage/>} />
+            <Route path="/product" element={<MainProduct/>} />
             <Route path="/allproducts" element={<DisplayAllProducts/>} />
-            <Route path="/product" element={<MainProduct/>}/>
             <Route path="/product/:id" element={<Singleproductpage/>} />
             <Route path="/cart" element={<PrivateRoutes><CartPage/></PrivateRoutes>} />
             <Route path="/cart/checkout" element={<PrivateRoutes><CheckoutPage/></PrivateRoutes>} />
@@ -33,9 +35,12 @@ const AllRoutes = () => {
             <Route path="/signup" element={<UserSignup/>} />
             <Route path="/admin/login" element={<AdminLogin/>} />
             <Route path="/admin/signup" element={<AdminSignup/>} />
+            {/* <Route path="/admin/dashboard" element={<AdminPrivateRoutes><AdminDashboard/></AdminPrivateRoutes>} /> */}
+           {/* <Route path="/admin/allproducts" element={<AdminPrivateRoutes><AdminAllProducts/></AdminPrivateRoutes>} /> */}
+           <Route path="admin/dashboard" element={<AdminPrivateRoutes><AdminPage/></AdminPrivateRoutes>} />
         </Routes>
+      
   )
-  
 }
 
 export default AllRoutes;

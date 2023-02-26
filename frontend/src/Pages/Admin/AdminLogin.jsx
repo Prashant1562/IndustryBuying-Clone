@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Box,
-  Image,
   Flex,
   Heading,
   Input,
@@ -16,10 +14,6 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Link, Navigate, useNavigate} from "react-router-dom"
-import "../../style/admin.css";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-import logo from '../../assets/image/tooler logo 1.png';
 
 const Login = () => {
 
@@ -31,7 +25,7 @@ const Login = () => {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.400', 'gray.700');
   const [email, setEmail] = React.useState("");
-  const [pass, setPassword] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [value, setValue] = React.useState(false)
 
 
@@ -41,7 +35,7 @@ const Login = () => {
 
     const payload = {
       email,
-      pass,
+      password,
     };
 
     if (!payload.email) {
@@ -56,7 +50,7 @@ const Login = () => {
       });
      
     }
-    else if (!payload.pass) {
+    else if (!payload.password) {
 
       toast({
         position:"top",
@@ -73,10 +67,9 @@ const Login = () => {
 {
 
    
-      axios.post("https://exuberant-slippers-slug.cyclic.app/admin/login",payload)
+      axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/admin/login",payload)
       .then(res=>{
         localStorage.setItem("adminToken",JSON.stringify(res.data.token))
-
         localStorage.setItem("GSTIN", JSON.stringify(res.data.GSTIN))
         console.log(res.data,"token in login");
         if(res.data.token){
@@ -112,7 +105,7 @@ const Login = () => {
   };
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
-      <Flex className='login_container'
+      <Flex
         flexDirection="column"
         bg={formBackground}
         p={12}
@@ -129,11 +122,11 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
-          placeholder="**********"
+          placeholder="Enter your Password"
           type="password"
           variant="filled"
           mb={6}
-          value={pass}
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button colorScheme="orange" mb={8} onClick={handleSubmit} >
@@ -143,7 +136,7 @@ const Login = () => {
 
         <Flex gap={"8px"} mb="12px">
           <Text>Signup Here</Text>
-          <Text color={"skyblue"}><Link to={"/admin/signup"}>Signup</Link></Text>
+          <Text color={"red"}><Link to={"/admin/signup"}>Signup</Link></Text>
         </Flex>
         <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="dark_mode" mb="0">
@@ -156,47 +149,8 @@ const Login = () => {
             onChange={toggleColorMode}
           />
         </FormControl>
-        <Box
-            mt={"20px"}
-            display="flex"
-            flexDirection={"column"}
-            justifyContent="center"
-            alignItems={"center"}
-            gap={"10px"}
-          >
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb", color: "black" }}
-              leftIcon={<FcGoogle fontSize={"20px"} />}
-              textColor={"black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="80%"
-            >
-              Sign Up with Google
-            </Button>
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb" }}
-              leftIcon={<FaGithub fontSize={"20px"} />}
-              textColor={"#black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="80%"
-            >
-              Sign Up with GitHub
-            </Button>
-          </Box>
       </Flex>
-      {/* <Flex flex={1}>
-        <Image h="40vh" v='40vh' marginLeft='50px' marginTop='25%'
-          alt={'Login Image'}
-          objectFit={'cover'}
-          src={logo}
-        />
-      </Flex> */}
     </Flex>
-    
   );
 };
 

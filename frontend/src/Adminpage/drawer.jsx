@@ -2,7 +2,7 @@ import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFoo
 import React, { useRef } from 'react'
 import Sidebar from './sidebar'
 
-const DrawerJs = () => {
+const DrawerJs = ({handlFalse,handlTrue,state}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
   return (<>
@@ -21,7 +21,7 @@ const DrawerJs = () => {
         <DrawerHeader>Create your account</DrawerHeader>
 
         <DrawerBody>
-           <Sidebar/>
+           <Sidebar handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
         </DrawerBody>
     </DrawerContent>
 </Drawer>
