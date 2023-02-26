@@ -2,11 +2,21 @@
 
 .drawer{
     display: none;
+    margin-right: 20px;
 }
-
+.nav{
+   background-color: teal;
+   height: 80px;
+   align-items: center;
+}
+.nav button{
+   margin: 5px;
+}
 .sidebar{
     display: block;
-    width:"25%"
+    width:"25%";
+    margin-left: 5%;
+ 
 }
 
 .stack{

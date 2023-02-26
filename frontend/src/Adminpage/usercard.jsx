@@ -8,6 +8,7 @@ const UserCard = ({id, email, gender, firstname, lastname }) => {
     const dispatch = useDispatch()
     const handleBan = () => {
          dispatch(banuseraction(email))
+         .then(res=>console.log(res))
     }
     return (<Tr  color="orange" backgroundColor={'teal'}>
         <Td textAlign="center">{firstname}</Td>
