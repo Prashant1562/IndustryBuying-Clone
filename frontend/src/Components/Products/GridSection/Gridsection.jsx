@@ -50,7 +50,7 @@ const Gridsection = () => {
   useEffect(() => {
     dispatch(GetDataFilter());
     setPopularity(Popularity());
-    // console.log(prodData,"In useEffect")
+    // console.log(prodData,"In useEffect
   }, [dispatch]);
 
   const handlePopularity = () => {
@@ -58,8 +58,10 @@ const Gridsection = () => {
   };
   const handlePopularityFilter = (str) => {
     dispatch(GetDataBySort(str));
-    setFlag(false)
+    setFlag((val)=>!val)
   };
+
+
 
   return (
     <Flex
@@ -146,7 +148,7 @@ const Gridsection = () => {
             <Text
               as="b"
               padding={0}
-              width="10rem"
+              width="7rem"
               colorScheme="red"
               fontSize={12}
             >

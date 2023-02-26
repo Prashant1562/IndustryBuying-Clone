@@ -75,7 +75,7 @@ useEffect(()=>{
                     {({ isOpen, onClose }) => (
                     <>
                     <PopoverTrigger>
-                      <ListItem style={{ cursor: 'pointer' }} _hover={{color:"gray.600" , backgroundColor:"white" }}>Grain Processing Machine</ListItem>
+                      <ListItem style={{ cursor: 'pointer' }} _hover={{color:"gray.600" , backgroundColor:"white" }} onClick={()=>navigate("/product")}>Grain Processing Machine</ListItem>
                     </PopoverTrigger>
             
                     <PopoverContent ml="93.5%" mt="-12.5%" color="black" borderRadius="0px">

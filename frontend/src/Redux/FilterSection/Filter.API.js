@@ -3,36 +3,56 @@ import axios from "axios"
 export const getData = async()=>{
     let data ;
     
-        // data= await axios.get(`https://exuberant-slippers-slug.cyclic.app/products`);
-        data = await axios.get(`http://localhost:4441/products`)
+        data= await axios.get(`https://exuberant-slippers-slug.cyclic.app/products`);
+        // data = await axios.get(`http://localhost:4441/products`)
         // console.log(data)
         return data
 }
 
 
 export const getDataPatch = async(value)=>{
+    let data = [];
     const token = JSON.parse(localStorage.getItem("token")) || "";
     const GSTIN = JSON.parse(localStorage.getItem("GSTIN")) || "";
-    let data = [];
-        data.push(await axios.patch(`https://exuberant-slippers-slug.cyclic.app/products/patch/${value.id}`,value,
-          {
-            headers: {
-              Authorization: "Bearer" + " " + token,
-              GSTIN: GSTIN,
-            },
-          }
-        ))
-        // data.push(await axios.patch(`http://localhost:4441/products/patch/${value.id}`,value,
-        //   {
-        //     headers: {
-        //       Authorization: "Bearer" + " " + token,
-        //       GSTIN: GSTIN,
-        //     },
-        //   }
-        // ))
-        // console.log(data)
+    // console.log(value)
+    try{
+        data.push(await axios.patch.patch(
+            `https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${value.id}`,
+            value,
+            {
+              headers: {
+                Authorization: "Bearer" + " " + token,
+                GSTIN: GSTIN,
+              },
+            }
+          ))
+
+        console.log(data)
         return data;
+
+    }
+    catch(err){
+        console.log("Error:",err)
+    }
+       
 }
+
+export const getDataPost = async(value)=>{
+    let data = [];
+    console.log(value)
+    try{
+        data.push(await axios.post(`https://exuberant-slippers-slug.cyclic.app/products/post/${value._id}`,value
+        ))
+        console.log(data)
+        return data;
+
+    }
+    catch(err){
+        console.log("Error:",err)
+    }
+        
+}
+
 
 
 export const getByBrand = async(str)=>{
@@ -45,10 +65,16 @@ export const getByBrand = async(str)=>{
 
 
 export const getByRangePrice = async(str,str1)=>{
-   
-       let data= await axios.get(`http://localhost:4441/products/price/filter?&price=${str}&price=${str1}`);
-    //    let data= await axios.get(`http://localhost:4441/products/filter?&price=${str1}&pric=${str}`);
+       console.log(str,str1)
+       let data
+       try{
+         data= await axios.get(`https://exuberant-slippers-slug.cyclic.app/products/price/filter?price=${str}&price=${str1}`);
         // console.log(data)
+       }
+       catch(err){
+        console.log("Error:",err)
+       }
+
     return data
 }
 
