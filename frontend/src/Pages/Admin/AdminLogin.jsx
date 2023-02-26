@@ -31,7 +31,7 @@ const Login = () => {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.400', 'gray.700');
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [pass, setPassword] = React.useState("");
   const [value, setValue] = React.useState(false)
 
 
@@ -41,7 +41,7 @@ const Login = () => {
 
     const payload = {
       email,
-      password,
+      pass,
     };
 
     if (!payload.email) {
@@ -56,7 +56,7 @@ const Login = () => {
       });
      
     }
-    else if (!payload.password) {
+    else if (!payload.pass) {
 
       toast({
         position:"top",
@@ -76,6 +76,7 @@ const Login = () => {
       axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/admin/login",payload)
       .then(res=>{
         localStorage.setItem("adminToken",JSON.stringify(res.data.token))
+
         localStorage.setItem("GSTIN", JSON.stringify(res.data.GSTIN))
         console.log(res.data,"token in login");
         if(res.data.token){
@@ -132,7 +133,7 @@ const Login = () => {
           type="password"
           variant="filled"
           mb={6}
-          value={password}
+          value={pass}
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button colorScheme="orange" mb={8} onClick={handleSubmit} >

@@ -1,11 +1,12 @@
 import axios from "axios"
 import { UPDATEDATASUCCESS,UPDATEDATAFAILURE,UPDATEDATAREQUEST } from "./updatedata.actiontype"
-export const updatedataaction = (value,id,token) => (dispatch)=>{
+export const updatedataaction = (id,value) => (dispatch)=>{
+       console.log(id,value)
        dispatch({type:UPDATEDATAREQUEST})
-       return axios.patch(`https://exuberant-slippers-slug.cyclic.app/products${id}`,{
+       return axios.patch(`https://exuberant-slippers-slug.cyclic.app/products/update/${id}`,{
               headers:{
                      "Content-type":"application/json",
-                     "Authorization":token
+                     "Authorization":"token"
               },
               body:JSON.stringify(value)
        })

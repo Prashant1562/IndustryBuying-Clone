@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { adddataaction } from '../Redux/Products/adddata.action'
+import { getdataaction } from '../Redux/Products/getdata.action'
 const AddProd = ({onClose}) => {
 
   const dispatch = useDispatch()
@@ -10,10 +11,9 @@ const AddProd = ({onClose}) => {
     title: "",
     brand: "",
     price: "",
-    count: "",
+    quantity:"",
     category: "",
     images: [],
-
   }
   const [prod, setProd] = useState(init)
   const handleChange = (e) => {
@@ -31,9 +31,10 @@ const handlChange =(e)=>{
 const handleSubmit = (e)=>{
      e.preventDefault()
      const newata = {...prod,images:img}
-     console.log(newata)
+     const token = JSON.parse(localStorage.getItem("token"))
+     dispatch(adddataaction(token,newata))
+     .then(res=>dispatch(getdataaction()))
      onClose()
-     dispatch(adddataaction())
 }
 
   return (<Stack>
@@ -49,10 +50,10 @@ const handleSubmit = (e)=>{
         <Input type="number" name="count" onChange={(e) => handleChange(e)} value={prod.count} />
         <FormLabel>Select Product Category</FormLabel>
         <Select placeholder='Select option' name="category" onChange={(e) => handleChange(e)}>
-          <option value='tshirt'>T-Shirt</option>
-          <option value='shirt'>Shirt</option>
-          <option value='kurta'>Kurta</option>
-          <option value='shoes'>Shoes</option>
+          <option value='Agriculture Garden & Landscaping'>Agriculture Garden & Landscaping</option>
+          <option value='Office Supplies'>Office Supplies</option>
+          <option value='Electrical'>Electrical</option>
+          <option value='Furniture,Hospitality and Food Services'>Furniture,Hospitality and Food Services</option>
         </Select>
         <FormLabel>Enter Image1</FormLabel>
       <Input onChange={(e)=>handlChange(e)} name="image1" type="text" value={img[0]} />
@@ -63,7 +64,7 @@ const handleSubmit = (e)=>{
       <FormLabel>Enter Image4</FormLabel>
       <Input onChange={(e)=>handlChange(e)} name="image4" type="text" value={img[3]} />
       </FormControl>
-      <Button type="submit" margin="auto" display="block">Submit</Button>
+      <Button type="submit" margin="auto" display="block" backgroundColor="teal">Submit</Button>
     </form>
   </Stack >
   )

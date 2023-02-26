@@ -1,2 +1,38 @@
 
 
+.drawer{
+    display: none;
+    margin-right: 20px;
+}
+.nav{
+   background-color: teal;
+   height: 80px;
+   align-items: center;
+}
+.nav button{
+   margin: 5px;
+}
+.sidebar{
+    display: block;
+    width:"25%";
+    margin-left: 5%;
+ 
+}
+
+.stack{
+   overflow-y:"scroll";
+   overflow-x: hidden;
+   width: 75%;
+}
+
+@media screen and (min-width: 300px) and (max-width:576px) {
+     .drawer{
+        display: block;
+     }
+     .sidebar{
+        display: none;
+     }
+     .stack{
+        width: 100%;
+     }
+}

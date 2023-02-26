@@ -3,12 +3,12 @@ import { GET_PRODUCT_ERROR, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "./M
 let initialData = { 
     loading:false,
     error:false,
-    min:300,
-    max:30000,
+    min:1,
+    max:4000,
     Data:[]
 } 
 
-export const ProductReducer = ( state=initialData,{ type, payload, min,max } ) => {
+export const ProductReducer = ( state=initialData, { type, payload, min,max } ) => {
     switch(type){
         case  GET_PRODUCT_LOADING :{
             return{
@@ -20,6 +20,7 @@ export const ProductReducer = ( state=initialData,{ type, payload, min,max } ) =
         }
 
         case GET_PRODUCT_SUCCESS : {
+          // console.log(min,max,payload)
             return{
                 ...state,
                 loading:false,

@@ -1,25 +1,54 @@
-import { getDataByAPI, getDataByAPIFilter } from "./Filter.API";
-import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_AVAILABILITY, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_FILTER_DISCOUNT, GET_PRODUCT_FILTER_OFFERS, GET_PRODUCT_FILTER_RANGE_PRICE, GET_PRODUCT_FILTER_SORT, GET_PRODUCT_LOADING  } from "./MainProduct.types"
+import { getByBrand,getByPrice,getByPrice_Discount,getByRangePrice,getData, getDataPatch } from "./Filter.API"
+import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_AVAILABILITY, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_FILTER_DISCOUNT, GET_PRODUCT_FILTER_OFFERS, GET_PRODUCT_FILTER_RANGE_PRICE, GET_PRODUCT_FILTER_SORT, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS_FILTER } from "./Filter.types";
 
 
 
-export const GetDataByBrands = (str) => async(dispatch)=>{
-   console.log(str)
+
+export const GetDataFilter = () => async(dispatch)=>{
    dispatch({type:GET_PRODUCT_LOADING});
    try{
-      let [data,data1] = await getDataByAPIFilter(str);
-      dispatch({type:GET_PRODUCT_FILTER_BRANDS,payload:data,payload1:data1})
+      let data = await getData()
+      dispatch({type:GET_PRODUCT_SUCCESS_FILTER,payload:data.data})
    }
    catch(err){
       dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
    }
 }
 
-export const GetDataByPriceRange = (str) => async(dispatch)=>{
+
+export const GetDataForPatch = (payload) => async(dispatch)=>{
+   dispatch({type:GET_PRODUCT_LOADING});
+   try{
+      let data = await getDataPatch(payload)
+      dispatch({type:GET_PRODUCT_SUCCESS_FILTER,payload:data.data})
+   }
+   catch(err){
+      dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
+   }
+}
+
+
+let val = "";
+export const GetDataByBrands = (str) => async(dispatch)=>{
+   // console.log(str)
+   dispatch({type:GET_PRODUCT_LOADING});
+   try{
+      let data = await getByBrand(str)
+      // console.log(data)
+      dispatch({type:GET_PRODUCT_FILTER_BRANDS,payload:data.data})
+   }
+   catch(err){
+      dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
+   }
+}
+
+export const GetDataByPriceRange = (str,str1) => async(dispatch)=>{
+   // console.log(str,str1,"Price")
      dispatch({type:GET_PRODUCT_LOADING});
      try{
-        let data = await getDataByAPI(str);
-        dispatch({type:GET_PRODUCT_FILTER_RANGE_PRICE,payload:data})
+        let data = await getByRangePrice(str,str1);
+        console.log(data.data,"helskdjflksjdlfkj")
+        dispatch({type:GET_PRODUCT_FILTER_RANGE_PRICE,payload:data.data})
      }
      catch(err){
         dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
@@ -31,7 +60,7 @@ export const GetDataByPriceRange = (str) => async(dispatch)=>{
 export const GetDataByDiscount = (str) => async(dispatch)=>{
     dispatch({type:GET_PRODUCT_LOADING});
     try{
-       let data = await getDataByAPI(str);
+       let data = await getByBrand(str);
        dispatch({type:GET_PRODUCT_FILTER_DISCOUNT,payload:data})
     }
     catch(err){
@@ -43,7 +72,7 @@ export const GetDataByDiscount = (str) => async(dispatch)=>{
 export const GetDataByOffers = (str) => async(dispatch)=>{
     dispatch({type:GET_PRODUCT_LOADING});
     try{
-       let data = await getDataByAPI(str);
+       let data = await getByBrand(str);
        dispatch({type:GET_PRODUCT_FILTER_OFFERS,payload:data})
     }
     catch(err){
@@ -54,7 +83,7 @@ export const GetDataByOffers = (str) => async(dispatch)=>{
 export const GetDataByAvailability = (str) => async(dispatch)=>{
     dispatch({type:GET_PRODUCT_LOADING});
     try{
-       let data = await getDataByAPI(str);
+       let data = await getByBrand(str);
        dispatch({type:GET_PRODUCT_FILTER_AVAILABILITY,payload:data})
     }
     catch(err){
@@ -63,10 +92,12 @@ export const GetDataByAvailability = (str) => async(dispatch)=>{
 }
 
 export const GetDataBySort = (str) => async(dispatch)=>{
+   // console.log(str,"Helloe")
     dispatch({type:GET_PRODUCT_LOADING});
     try{
-       let data = await getDataByAPI(str);
-       dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data})
+       let data = await getByPrice_Discount(str);
+       console.log(data);
+       dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data.data})
     }
     catch(err){
        dispatch({type:GET_PRODUCT_ERROR,payload:err.message});

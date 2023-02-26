@@ -8,14 +8,13 @@ const MainProduct = () => {
   
   
   return (
-    <Flex direction="column">
-      <Box>
-        {" "}
+    <Flex direction="column" mt="2.8rem" width="100%" boxSizing="border-box">
+      <Box boxSizing="border-box">
         <TopSection />
       </Box>
-      <Flex width={{ base: "100%", sm: "100%", md: "93%" }} margin="auto">
-        <Leftside />
-        <Gridsection />
+      <Flex boxSizing="border-box" width={{ base: "100%", sm: "71%", md: "93%" }} direction={{base:"column",sm:"row"}} >
+         <Box boxSizing="border-box" width={{base:"100%",sm:"25%"}}> <Leftside /></Box>
+        <Box boxSizing="border-box" width={{base:"100%",sm:"70%"}} > <Gridsection /> </Box>
       </Flex>
     </Flex>
   );
