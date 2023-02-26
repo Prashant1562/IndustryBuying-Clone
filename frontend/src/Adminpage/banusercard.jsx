@@ -4,13 +4,14 @@ import { Button, Td, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { getbanuseraction } from '../Redux/Users/getbanuseraction'
+import { removebanuseraction } from '../Redux/Users/removebanuseraction'
 import { removebanreducer } from '../Redux/Users/removebanuserreducer'
 
-const BanuserCard = ({email}) => {
-    
+const BanuserCard = ({email,_id}) => {
+    console.log(_id)
     const dispatch = useDispatch()
     const handleRemove = ()=>{
-             dispatch(removebanreducer(email))
+             dispatch(removebanuseraction(_id))
              .then(res=>getbanuseraction())
     }
     return (<Tr color="orange" backgroundColor={'teal'}>
