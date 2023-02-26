@@ -49,6 +49,7 @@ export const GetProductData = (id) => async(dispatch)=>{
      dispatch({type:GET_PRODUCT_SUCCESS,payload:data});
     }
     else{
+      data = await getDataByAPI(id);
       let [min,max] = MinAndMax(data.data);
       let data1 = BrandNames(data.data);
       dispatch({type:GET_PRODUCT_SUCCESS,payload:data1,min:min,max:max});

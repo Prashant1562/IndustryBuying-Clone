@@ -83,7 +83,7 @@ export const GetDataBySort = (str) => async(dispatch)=>{
     dispatch({type:GET_PRODUCT_LOADING});
     try{
        let data = await getByPrice_Discount(str);
-      //  console.log(data.data);
+       console.log(data);
        dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data.data})
     }
     catch(err){

@@ -7,9 +7,8 @@ import TopSection from "../Components/Products/TopSection/TopSection";
 const MainProduct = () => {
   
   return (
-    <Flex direction="column">
+    <Flex direction="column" mt="2.8rem">
       <Box>
-        {" "}
         <TopSection />
       </Box>
       <Flex width={{ base: "100%", sm: "100%", md: "93%" }} margin="auto">

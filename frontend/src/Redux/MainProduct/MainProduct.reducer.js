@@ -20,7 +20,7 @@ export const ProductReducer = ( state=initialData, { type, payload, min,max } ) 
         }
 
         case GET_PRODUCT_SUCCESS : {
-          console.log(min,max,payload)
+          // console.log(min,max,payload)
             return{
                 ...state,
                 loading:false,
