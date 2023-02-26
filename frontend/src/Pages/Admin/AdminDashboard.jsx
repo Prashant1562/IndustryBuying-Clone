@@ -7,13 +7,11 @@ import Footer from "../../Components/Footer";
 import Navbar from "../../Components/Navbar";
 
 
-const AdminDashboard = () => {
+  const AdminDashboard = () => {
   const [products, setproducts] = useState([]);
 
   const token = JSON.parse(localStorage.getItem("adminToken")) || ""
   const GSTIN = JSON.parse(localStorage.getItem("GSTIN")) || ""
-
-  // console.log(token , "token",GSTIN, "Gstin")
 
   const toast=useToast()
   const [data, setdata] = useState({
@@ -27,12 +25,14 @@ const AdminDashboard = () => {
   });
   const handleSubmit=()=>{
   
-    if( data.title && data.price && data.brand && data.category && data.sub_category && data.images.length>0){
+    if( data.title && 
+      data.price && 
+      data.brand && 
+      data.category && 
+      data.sub_category && 
+      data.images.length>0) {
 
-
-    console.log(data, "m")
-
-          axios.post(`https://exuberant-slippers-slug.cyclic.app/products/post`,data,{
+          axios.post(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/post`,data,{
          headers: {
            Authorization:'Bearer'+" "+token,
            gstin: GSTIN
@@ -40,7 +40,6 @@ const AdminDashboard = () => {
         })
           .then(res=>{
             console.log(res)
-            // navigate("/cart")
             
         toast({
           title: "Add the Product",
@@ -51,7 +50,7 @@ const AdminDashboard = () => {
           isClosable: true,
         });
 
-        Get_All_Cart_Data()
+        Get_Cart_Data()
       })
       }
       
@@ -80,20 +79,15 @@ const AdminDashboard = () => {
     }
     setdata({ ...data, [name]: val });
   };
-  // console.log(data);
-  const Get_All_Cart_Data = async () => {
-    // console.log("data")
+  const Get_Cart_Data = async () => {
     let res = await axios.get(
-      `https://exuberant-slippers-slug.cyclic.app/products`
+      `https://doubtful-wasp-cowboy-boots.cyclic.app/products`
     );
     setproducts(res.data);
-    // console.log(res.data.data.data);
+    
   };
   const handleDelete=(item)=>{
-//     const removedata = products.filter((ele) => ele._id !== item._id);
-// setproducts(removedata)
-  //  console.log(item)
-      axios.delete(`https://exuberant-slippers-slug.cyclic.app/products/delete/${item}`,{
+      axios.delete(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/delete/${item}`,{
      headers: {
        Authorization: 'Bearer'+" "+token,
        GSTIN: GSTIN
@@ -112,19 +106,18 @@ const AdminDashboard = () => {
             isClosable: true,
           });
 
-          Get_All_Cart_Data()
+          Get_Cart_Data()
       })
       .catch(err=>console.log(err))
 
   }
-
 
   const updateProducts = (id,new_price) => {
     console.log(new_price)
 
     let obj ={price:new_price}
 
-    axios.patch(`https://exuberant-slippers-slug.cyclic.app/products/update/${id}`,obj,{
+    axios.patch(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/update/${id}`,obj,{
       headers: {
         Authorization: 'Bearer'+" "+token,
         GSTIN:GSTIN
@@ -142,36 +135,33 @@ const AdminDashboard = () => {
           isClosable: true,
         });
 
-        Get_All_Cart_Data()
+        Get_Cart_Data()
 
        })
        .catch(err=>console.log(err))
   }
 
 
-
-
-
   const modifyTaskFunc = async (id,price)=>{
     await updateProducts(id,price)
-    Get_All_Cart_Data();
+    Get_Cart_Data();
   }
 
   
   useEffect(() => {
-    Get_All_Cart_Data();
+    Get_Cart_Data();
   }, []);
   return (
     <>
     <Navbar/>
 
-    <Box display={"flex"} mt="90px">
+    <Box display={"flex"} mt="90px" bg="orange" >
       <Box  w="30%"  m="10px"  boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" h="380px"p="20px" >
         <Input mb="10px"
           onChange={handleChange}
           name="brand"
           type="text"
-          placeholder="Enter Brand"
+          placeholder="Enter Brand Name"
         />
         <Input  mb="10px"
           onChange={handleChange}
@@ -194,43 +184,46 @@ const AdminDashboard = () => {
           onChange={handleChange}
           type="url"
           name="sub_category"
-          placeholder="Enter Subcategory"
+          placeholder="Enter Brand Subcategory"
         />
         
         <Input  mb="10px"
           onChange={handleChange}
           type="number"
           name="price"
-          placeholder="Enter Price"
+          placeholder="Enter product Price"
         />
         <Input  mb="10px"
           onChange={handleChange}
           type="url"
           name="images"
-          placeholder="Enter Url"
+          placeholder="Enter Image Url"
         />
 
         <Button m="auto" onClick={handleSubmit}>ADD</Button>
       </Box>
       <Box w="70%" style={{ height: "500px", overflowY: "scroll" }} m="10px">
-        {products.length>0&&products.map((item, index) => (
+        {products.length>0 && products.map((item) => (
           <Box boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" p="10px"
             key={item._id}
             display="flex"
-            borderLeft={"5px solid black"}
-            borderBottom={"5px solid black"}
             m="auto"
           >
             <Box w="30%">
               <Image src={item.images[0].image_url} w="150px" />
             </Box>
+           
+           
             <VStack w="40%">
+
               <Text>{item.title}</Text>
               <Text>{item.brand}</Text>
               <Text>{item.price}</Text>
+            
+            
             </VStack>
-            <HStack gap="15px" w="30%" m="auto">
-              <Button onClick={()=>handleDelete(item._id)}>DELETE</Button>
+            <HStack gap="15px" w="30%" m="auto" >
+              <Button colorScheme="red" onClick={()=>handleDelete(item._id)}>DELETE</Button>
               <UpdateProduct
                 id={item._id}
                 editFunc={modifyTaskFunc}

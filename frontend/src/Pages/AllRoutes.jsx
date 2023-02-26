@@ -9,7 +9,6 @@ import CartPage from './CartPage'
 import CheckoutPage from './CheckoutPage'
 import DisplayAllProducts from './DisplayAllProducts'
 import HomePage from './HomePage'
-import MainProduct from './MainProduct'
 import Payment from './Payment'
 import PrivateRoutes from './PrivateRoutes'
 import SingleProductPage from './SingleProductPage'
@@ -31,12 +30,12 @@ const AllRoutes = () => {
             <Route path="/signup" element={<UserSignup/>} />
             <Route path="/admin/login" element={<AdminLogin/>} />
             <Route path="/admin/signup" element={<AdminSignup/>} />
-           
-            
+            <Route path="/admin/dashboard" element={<AdminPrivateRoutes><AdminDashboard/></AdminPrivateRoutes>} />
+            <Route path="/admin/allproducts" element={<AdminPrivateRoutes><AdminAllProducts/></AdminPrivateRoutes>} />
         </Routes>
       
+   
   )
-  
 }
 
 export default AllRoutes;

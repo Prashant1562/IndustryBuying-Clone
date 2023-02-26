@@ -134,7 +134,7 @@ export default function AdminSignup() {
     // console.log(typeof(payload.phoneNumber))
     {
 
-       axios.post("https://exuberant-slippers-slug.cyclic.app/admin/register",payload)
+       axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/admin/register",payload)
       .then((res) =>{
         toast({
           position:"top",
