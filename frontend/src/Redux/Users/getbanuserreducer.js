@@ -1,22 +1,22 @@
-import { BANUSERREQUEST,BANUSERFAILURE,BANUSERSUCCESS } from "./banuseractiontype"
 
+import { GETBANUSERFAILURE, GETBANUSERREQUEST,GETBANUSERSUCCESS } from "./getbanuseractiontype"
 
 const init = {
     isLoading:false,
     products:[],
     isError:false
 }
-export const banuserreducer = (state=init,action)=>{
+export const getbanuserreducer = (state=init,action)=>{
        
        switch(action.type) {
    
-           case BANUSERREQUEST:
+           case GETBANUSERREQUEST:
                return{...state,isLoading: true}
    
-           case BANUSERSUCCESS:
+           case GETBANUSERSUCCESS:
                return {...state,isLoading:false,products: action.payload,isError:false}
                
-           case BANUSERFAILURE:
+           case GETBANUSERFAILURE:
                return {...state,isLoading:false,isError:true}    
    
             default:
@@ -24,3 +24,6 @@ export const banuserreducer = (state=init,action)=>{
        }
  
 }
+
+
+

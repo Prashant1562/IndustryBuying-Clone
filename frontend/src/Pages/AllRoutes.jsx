@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
 import UserLogin from './Login'
 import Signup from './Signup'
-
 import Singleproductpage from "../Components/SingleProductPage/singleproductpage"
 import AdminSignup from './Admin/AdminSignup'
 import Login from './Admin/AdminLogin'
@@ -25,7 +24,7 @@ const AllRoutes = () => {
       <Route path='/admin/signup' element={<AdminSignup/>}/>
       <Route path='/admin/login' element={<Login/>}/>
     </Routes>
-  );
+  )
 };
 
 export default AllRoutes;

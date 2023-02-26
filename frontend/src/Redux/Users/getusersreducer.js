@@ -17,7 +17,7 @@ export const getuserreducer = (state=init,action)=>{
                 return {...state,isLoading:false,products: action.payload,isError:false}
                 
             case GETUSERSFAILURE:
-                return {...state,isLoading:false,isError:true}    
+                return {...state,isLoading:false,isError:true,products:action.payload}    
     
              default:
                 return state;
