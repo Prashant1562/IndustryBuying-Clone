@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { GetProductData } from "../../Redux/MainProduct/MainProduct.action";
 import "./singleproductpage.css";
+import { GetDataForPatch } from "../../Redux/FilterSection/Filter.action";
 
 const Loader = () => {
   return <Box>Loading...</Box>;
@@ -81,8 +82,8 @@ const Singleproductpage = () => {
 //   };
 
   const handleonClick = (val) => {
-    console.log(val);
     setCount((value) => value+val);
+    dispatch(GetDataForPatch({id,price:val}))
   };
 
  const handleChangeImg = (Img)=>{
@@ -133,8 +134,10 @@ const Singleproductpage = () => {
               src={ img?img:Data.data[0]["images"][0].image_url }
             />
             <Flex gap="1rem">
-              {Data.data && Data.data[0].images.map((item)=>
-                <Image onClick={()=>handleChangeImg(item.image_url)} boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" width="30px" height="30px" src={`${item.image_url}`}/>
+              {Data.data && Data.data[0].images.map((item,i)=>
+                <Box key={i}>
+                <Image  onClick={()=>handleChangeImg(item.image_url)} boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" width="30px" height="30px" src={`${item.image_url}`}/>
+                </Box>
               )}
             </Flex>
           </Flex>
@@ -387,7 +390,7 @@ const Singleproductpage = () => {
             top={top?"6rem":"-1rem"}
             left={{base:"7%",sm:"12%",md:"7.5%"}}
             mt="-0.5rem"
-            width={{base:"63%",sm:"76.5%",md:"60.5%"}}
+            width={{base:"63%",sm:"76.5%",md:"60%"}}
             p="1rem 0rem"
           >
             <Box flex={{base:"10",sm:"7",md:"5"}}>

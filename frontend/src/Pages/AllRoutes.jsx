@@ -5,10 +5,10 @@ import HomePage from './HomePage'
 import UserLogin from './Login'
 import Signup from './Signup'
 
-import MainProduct from "../Components/Products/MainProduct"
 import Singleproductpage from "../Components/SingleProductPage/singleproductpage"
 import AdminSignup from './Admin/AdminSignup'
 import Login from './Admin/AdminLogin'
+import MainProduct from './MainProduct'
 
 
 
@@ -18,7 +18,8 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-n
+      <Route path="/product" element={<MainProduct/>}/>
+      <Route path="/product/:id" element={<Singleproductpage/>}/>
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<UserLogin />} />
       <Route path='/admin/signup' element={<AdminSignup/>}/>

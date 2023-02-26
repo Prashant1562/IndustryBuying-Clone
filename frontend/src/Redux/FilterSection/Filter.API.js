@@ -8,6 +8,23 @@ export const getData = async()=>{
 }
 
 
+export const getDataPatch = async(value)=>{
+    const token = JSON.parse(localStorage.getItem("token")) || "";
+    const GSTIN = JSON.parse(localStorage.getItem("GSTIN")) || "";
+    let data = [];
+        data.push(await axios.patch(`http://localhost:3000/data/patch/${value.id}`,value,
+          {
+            headers: {
+              Authorization: "Bearer" + " " + token,
+              GSTIN: GSTIN,
+            },
+          }
+        ))
+        // console.log(data)
+        return data;
+}
+
+
 let val = "";
 export const getByBrand = async(str)=>{
      val = val + `brand=${str}&`

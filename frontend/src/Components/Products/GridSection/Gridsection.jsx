@@ -86,8 +86,9 @@ const Gridsection = () => {
       </Flex>
 
       <Flex
-        justifyContent="space-between"
+        justifyContent={{base:"center",sm:"space-between"}}
         marginBottom="2rem"
+        direction={{base:"column",sm:"row"}}
         alignItems="center"
         gap="3rem"
         padding="0rem 0.5rem"
@@ -95,6 +96,7 @@ const Gridsection = () => {
         <Flex
           justifyContent="left"
           height="90%"
+          direction={{base:"column",sm:"row"}}
           alignItems="center"
           gap="0.5rem"
         >
@@ -194,12 +196,13 @@ const Gridsection = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Grid  boxSizing="border-box" templateColumns={{base:"repeat(1, 1fr)",sm:"repeat(2, 1fr)",md:"repeat(4, 1fr)"}} gap={{base:"2rem",sm:"0rem",md:"6rem"}}>
+      <Grid m="0px" p="0px"  boxSizing="border-box" templateColumns={{base:"repeat(1, 1fr)",sm:"repeat(2, 1fr)",md:"repeat(4, 1fr)"}} gap={{base:"2rem",sm:"0rem",md:"0rem"}}>
         {prodData &&
           prodData?.map((data, i) => (
             <Box
               key={i}
               height="100%"
+              boxSizing="border-box"
               padding="1rem"
               _hover={{
                 transition: "all 0.2s ease-out 0.2s",
@@ -208,7 +211,7 @@ const Gridsection = () => {
               }}
               direction="column"
             >
-           <Link to={`/product/${data.id}`} height="61%" flex="2"><Image height="61%"  src={data.images[0]["image_url"]} /></Link>
+           <Link to={`/product/${data.id}`} height="61%"  flex="2"><Image height="61%" width="100%"  src={data.images[0]["image_url"]} /></Link>
            <Flex height="15%">
             <Text  fontSize={14} textAlign="left">{data.title}</Text>
            </Flex>
@@ -227,7 +230,7 @@ const Gridsection = () => {
             </Text>
           </Flex>
           <Text height="7%" textAlign="left" color="#F54702">Rs. {data.price} / Piece</Text>
-          <Flex gap="1rem" height="8%" justifyContent="space-between">
+          <Flex gap={{base:"0.2rem",sm:"0.5rem",md:"1rem"}} height="8%" justifyContent="space-between" direction={{base:"column",sm:"column",md:"row"}}>
             <Button
               // padding="0.2rem 0.7rem"
               fontSize={12}

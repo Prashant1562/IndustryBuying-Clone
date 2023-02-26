@@ -1,4 +1,4 @@
-import { getByBrand,getByPrice,getByPrice_Discount,getByRangePrice,getData } from "./Filter.API"
+import { getByBrand,getByPrice,getByPrice_Discount,getByRangePrice,getData, getDataPatch } from "./Filter.API"
 import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_AVAILABILITY, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_FILTER_DISCOUNT, GET_PRODUCT_FILTER_OFFERS, GET_PRODUCT_FILTER_RANGE_PRICE, GET_PRODUCT_FILTER_SORT, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS_FILTER } from "./Filter.types";
 
 
@@ -14,6 +14,20 @@ export const GetDataFilter = () => async(dispatch)=>{
       dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
    }
 }
+
+
+export const GetDataForPatch = (payload) => async(dispatch)=>{
+   dispatch({type:GET_PRODUCT_LOADING});
+   try{
+      let data = await getDataPatch(payload)
+      dispatch({type:GET_PRODUCT_SUCCESS_FILTER,payload:data.data})
+   }
+   catch(err){
+      dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
+   }
+}
+
+
 let val = "";
 export const GetDataByBrands = (str) => async(dispatch)=>{
    // console.log(str)
