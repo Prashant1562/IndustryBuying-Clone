@@ -53,6 +53,16 @@
         sub_category: String,
         images: Array
 
+
+    block
+        Get = block/                                 Request = GET
+        Create = block/create                        Request = POST
+        Delete = block/delete/:id                    Request = DELETE
+
+    block Schema
+
+        email:String,
+        
 # Deploy Link 
 
     Backend Deploy Link = https://exuberant-slippers-slug.cyclic.app/  
