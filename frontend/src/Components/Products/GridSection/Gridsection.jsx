@@ -208,7 +208,7 @@ const Gridsection = () => {
               }}
               direction="column"
             >
-           <Link to={`/product/${data.id}`} height="61%" flex="2"><Image  src={data.images[0]["image_url"]} /></Link>
+           <Link to={`/product/${data.id}`} height="61%" flex="2"><Image height="61%"  src={data.images[0]["image_url"]} /></Link>
            <Flex height="15%">
             <Text  fontSize={14} textAlign="left">{data.title}</Text>
            </Flex>
