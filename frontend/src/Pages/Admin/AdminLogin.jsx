@@ -73,7 +73,7 @@ const Login = () => {
 {
 
    
-      axios.post("https://exuberant-slippers-slug.cyclic.app/admin/login",payload)
+      axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/admin/login",payload)
       .then(res=>{
         localStorage.setItem("adminToken",JSON.stringify(res.data.token))
 

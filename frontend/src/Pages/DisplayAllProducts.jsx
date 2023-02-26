@@ -86,8 +86,7 @@ const Productspage = () => {
   }, [ sortby, page]);
 
 
-  const handleQuantity=(id)=>
-{
+  const handleQuantity=(id)=>{
   let payload={
     quantity:1
   }
@@ -96,12 +95,11 @@ const Productspage = () => {
   axios.patch(`https://doubtful-wasp-cowboy-boots.cyclic.app/products/quantity/${id}`,payload,{
     headers: {
       Authorization: 'Bearer'+" "+token
-    }
+      }
    })
      .then(res=>{
       setFlag(true)
        console.log(res.data)
-       // navigate("/cart")
      })
      .catch(err=>console.log(err))
 }

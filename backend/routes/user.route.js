@@ -1,89 +1,78 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { UserModel } = require("./../model/User.model");
+const express=require("express")
+require("dotenv").config()
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { UserModel } = require("../model/user.model");
 
-const UserRouter = express.Router();
-
-//all users
-
+const userRouter=express.Router()
 
 
-UserRouter.get("/", async (req, res) => {
+userRouter.post("/register" , async(req,res)=>{
+    const {email,password,name,gender,phoneNumber}=req.body
 
-  const notes = await UserModel.find()
-  res.send(notes);
-});
+    const userEmail=await UserModel.findOne({email})
 
-//register
-
-UserRouter.post("/register", async (req, res) => {
-  const { name, email, pass, avatar, age, gender } = req.body;
-  let logindata = await UserModel.find({ email: email })
-  try {
-    if (logindata.length !== 0) {
-     return res.send({ massege: " Register Already Exist" });
+    if(userEmail){
+        res.send({"message":"This Email is already registered"})
     }
+    else{
 
-
-
-
-    bcrypt.hash(pass, 5, async (err, hash) => {
-      // Store hash in your password DB.
-      if (err) {
-        res.send({ massege: "something went wrong", error: err.message });
-      }
-
-      else {
-        const user = new UserModel({ name, email, pass: hash, avatar, age, gender });
-        await user.save();
-        res.send({ massege: "New user register" });
-      }
-    });
-
-
-
-
-  } catch (error) {
-    res.send({ massege: "something went wrong" });
-  }
-
-
-});
-
-//login
-
-
-UserRouter.post("/login", async (req, res) => {
-  const { email, pass } = req.body;
-  try {
-    const user = await UserModel.find({ email });
-    if (user.length > 0) {
-      bcrypt.compare(pass, user[0].pass, (err, result) => {
-        // result == true
-        if (result) {
-          const token = jwt.sign({ userID: user[0]._id }, "masai");
-
-          res.send({ massege: "login successful", token: token });
-        } else {
-          res.send({ massege: "something went wrong" });
+        try{
+            bcrypt.hash(password, 5, async(err, secure_password)=> {
+                if(err){
+                    console.log(err)
+                }else{
+                        const user = new UserModel({email,password:secure_password,name,gender,phoneNumber})
+                        await user.save()
+                        console.log(user)
+                            res.send({"message" :"Registered Successfully"})
+                 }
+        });
+           
         }
-      });
-    } else {
-      res.send({ massege: "wrong coredentials" });
+        catch(err){
+            console.log(err)
+            console.log({"message":"SignUp failed, please try again"})
+        }
     }
-  } catch (error) {
-    res.send({ massege: "something went wrong" });
-  }
-});
+    
 
-UserRouter.delete("/delete/:id", async (req, res) => {
-  const id = req.params.id
-  await UserModel.findByIdAndDelete({_id:id})
-  res.send({ massege: `Product ${id} has been deleted` });
+})
 
-});
 
-module.exports = {
-  UserRouter,
-};
+userRouter.post("/login" , async(req,res)=>{
+    const {email,password}=req.body
+    try{
+
+    const user=await UserModel.find({email})
+       console.log(user)
+       
+        if(user.length>0){
+            bcrypt.compare(password, user[0].password, (err, result) =>{
+               
+                if(result){
+                    const token=jwt.sign({userID:user[0]._id},process.env.key)
+                    res.send({"message" :"Login successuful","token":token})
+                }
+                else{
+                    res.send({"message" :"Wrong Credientials"})
+                }
+            });
+           
+        }
+        else{
+            res.send({"message" :"Wrong Credientials"})
+        }
+       
+        
+       
+    }
+    catch(err){
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+})
+
+
+
+module.exports={userRouter}

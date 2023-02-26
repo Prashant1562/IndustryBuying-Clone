@@ -1,8 +1,96 @@
-const express = require("express");
-const { ProductModel } = require("../model/Product.model");
+const express=require("express")
+const { ProductModel } = require("../model/Product.model")
+const productsRouter=express.Router()
 
-const ProductRouter = express.Router();
+productsRouter.get("/",async(req,res)=>{
+ 
+    const sortby=req.query.sortby;
+    const order=req.query.order;
+    const page=+(req.query.page);
+    const limit=+(req.query.limit) ;
+    const search=req.query.search;
+    const filterby=req.query.filterby;
+    const lt=+(req.query.lt);
+    const gt=+(req.query.gt);
+    const value=req.query.value
+    
+    console.log(req.query)
+    
+    if(search && page && sortby && order){
+       
+        try{
+            if(sortby=="title"){
+                if(order=="asc"){
+                    if(limit){
+                        const products=await ProductModel.find({
+    
+                            "$or":[
+                                {"title":{$regex:search,$options:"i"}},
+                                {"brand":{$regex:search,$options:"i"}},
+                                {"category":{$regex:search,$options:"i"}},
+                                
+                               
+                                
+                            ]
+                        }).skip((page -1)*limit).limit(limit).sort({"title":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    else {
+    
+                        const products=await ProductModel.find({
+    
+                            "$or":[
+                                {"title":{$regex:search,$options:"i"}},
+                                {"brand":{$regex:search,$options:"i"}},
+                                {"category":{$regex:search,$options:"i"}},
+                               
+                               
+                                
+                            ]
+                        }).skip((page -1)*limit).limit(12).sort({"title":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    
+           
+                }
+    
+            else if(order=="desc"){
+                if(limit){
+                    const products=await ProductModel.find({
+    
+                        "$or":[
+                            {"title":{$regex:search,$options:"i"}},
+                            {"brand":{$regex:search,$options:"i"}},
+                            {"category":{$regex:search,$options:"i"}},
+                           
+                            
+                        ]
+                    }).skip((page -1)*limit).limit(limit).sort({"title":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+                else {
+                    const products=await ProductModel.find({
+    
+                        "$or":[
+                            {"title":{$regex:search,$options:"i"}},
+                            {"brand":{$regex:search,$options:"i"}},
+                            {"category":{$regex:search,$options:"i"}},
+                           
+                            
+                        ]
+                    }).skip((page -1)*limit).limit(12).sort({"title":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+              
+            }
 
+<<<<<<< HEAD
+            }
+=======
 ProductRouter.get("/price/filter", async (req,res)=>{
      const query= req.query;
      let val1 = query.price[0];
@@ -23,13 +111,138 @@ ProductRouter.get("/price/filter", async (req,res)=>{
       res.send({"msg":"Something went wrong","Error":err});
     }
 })
+>>>>>>> 8b75040b08e4a3566ea608142bfaea5bce757236
 
+            else if(sortby=="price"){
+                
+                if(order=="asc"){
+                  
+                    if(limit){
+                        const products=await ProductModel.find({
+    
+                            "$or":[
+                                {"title":{$regex:search,$options:"i"}},
+                                {"brand":{$regex:search,$options:"i"}},
+                                {"category":{$regex:search,$options:"i"}},
+                                
+                               
+                                
+                            ]
+                        }).skip((page -1)*limit).limit(limit).sort({"price":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    else {
+    
+                        const products=await ProductModel.find({
+    
+                            "$or":[
+                                {"title":{$regex:search,$options:"i"}},
+                                {"brand":{$regex:search,$options:"i"}},
+                                {"category":{$regex:search,$options:"i"}},
+                               
+                                
+                            ]
+                        }).skip((page -1)*limit).limit(12).sort({"price":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    
+           
+                }
+    
+            else if(order=="desc"){
+                if(limit){
+                    const products=await ProductModel.find({
+    
+                        "$or":[
+                            {"title":{$regex:search,$options:"i"}},
+                            {"brand":{$regex:search,$options:"i"}},
+                            {"category":{$regex:search,$options:"i"}},
+                           
+                            
+                        ]
+                    }).skip((page -1)*limit).limit(limit).sort({"price":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+                else {
+                    const products=await ProductModel.find({
+    
+                        "$or":[
+                            {"title":{$regex:search,$options:"i"}},
+                            {"brand":{$regex:search,$options:"i"}},
+                            {"category":{$regex:search,$options:"i"}},
+                           
+                            
+                        ]
+                    }).skip((page -1)*limit).limit(12).sort({"price":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+              
+            }
 
-      // http://localhost:4441/products/filter?des=dse            sorting
-      // http://localhost:4441/products/filter?skip=1&limit=1     pagination
-      // http://localhost:4441/products/filter?brand=Rico Italy   filter
+            }
+            
+        
+        
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+        
+    }
+  
+    else if(search && page){
+       
+        if(limit){
+            try{
+                const products=await ProductModel.find({
 
+                    "$or":[
+                        {"title":{$regex:search,$options:"i"}},
+                        {"brand":{$regex:search,$options:"i"}},
+                        {"category":{$regex:search,$options:"i"}},
+                        
+                       
+                        
+                    ]
+                }).skip((page -1)*limit).limit(limit)
+                console.log(products)
+                res.send(products)
+            }
+            catch(err){
+                console.log(err)
+                res.send({"message":"Something went wrong"})
+            }
+            
+          
+        }
+        else{
+            try{
+                const products=await ProductModel.find({
 
+<<<<<<< HEAD
+                    "$or":[
+                        {"title":{$regex:search,$options:"i"}},
+                        {"brand":{$regex:search,$options:"i"}},
+                        {"category":{$regex:search,$options:"i"}},
+                        
+                        
+                    ]
+                }).skip((page -1)*limit).limit(12)
+                console.log(products)
+                res.send(products)
+            }
+            catch(err){
+                console.log(err)
+                res.send({"message":"Something went wrong"})
+            } 
+        }
+    }
+=======
 //get Product
 
 
@@ -99,22 +312,75 @@ ProductRouter.get("/filter", async (req, res) => {
     //You can use pagination by passing query as skip and limit------------------------->
     if (query.limit && query.skip) {
       // If you want to sort data in ascending order according to price , pass "asc" as a query-------------------------------------->
+>>>>>>> 8b75040b08e4a3566ea608142bfaea5bce757236
 
+    else if(sortby=="title" && page && order){
       
-      if (query.asc) {
-        if (query.brand && query.category) {
-          products = await ProductModel.find({ $and: [{ brand: query.brand }, { category: query.category }] }).skip(query.skip).limit(query.limit).sort({ price: 1 });
+        if(order =="asc"){
+           
+
+                if(limit){
+                    try{
+                        const products=await ProductModel.find().skip((page -1)*limit).limit(limit).sort({"title":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    catch(err){
+                        console.log(err)
+                        res.send({"message":"Something went wrong"})
+                    }
+                    
+                  
+                }
+
+                else{
+                    try{
+                        const products=await ProductModel.find().skip((page -1)*limit).limit(12).sort({"title":1})
+                        console.log(products)
+                        res.send(products)
+                    }
+                    catch(err){
+                        console.log(err)
+                        res.send({"message":"Something went wrong"})
+                    } 
+                } 
+             
+            
         }
+        else if(order =="desc"){
+           
 
-        else if (query.brand) {
-          products = await ProductModel.find({ brand: query.brand }).skip(query.skip).limit(query.limit).sort({ price: 1 });
-        }
+            if(limit){
+                try{
+                    const products=await ProductModel.find().skip((page -1)*limit).limit(limit).sort({"title":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+                catch(err){
+                    console.log(err)
+                    res.send({"message":"Something went wrong"})
+                }
+                
+              
+            }
 
+<<<<<<< HEAD
+            else{
+                try{
+                    const products=await ProductModel.find().skip((page -1)*limit).limit(12).sort({"title":-1})
+                    console.log(products)
+                    res.send(products)
+                }
+                catch(err){
+                    console.log(err)
+                    res.send({"message":"Something went wrong"})
+                } 
+            } 
+         
+        
+         }
 
-        else if (query.category) {
-          products = await ProductModel.find({ category: query.category }).skip(query.skip).limit(query.limit).sort({ price: 1 });
-        }
-
+=======
         else if (query.price) {
           products = await ProductModel.find().sort({ price: 1 });
         }
@@ -214,32 +480,348 @@ ProductRouter.get("/filter", async (req, res) => {
           products = await ProductModel.find();
         }
       }
+>>>>>>> 8b75040b08e4a3566ea608142bfaea5bce757236
     }
-    res.send(products);
-  } catch (err) {
-    res.send({ "msg": "cannot get products", "error": err.message })
-  }
+
+
+    else if(sortby=="price" && page && order){
+        
+       
+        if(order =="asc"){
+           
+
+                if(limit){
+                    try{
+                        const products=await ProductModel.find().sort({"price":1}).skip((page -1)*limit).limit(limit)
+                        // console.log(products)
+                        res.send(products)
+                    }
+                    catch(err){
+                        console.log(err)
+                        res.send({"message":"Something went wrong"})
+                    }
+                    
+                  
+                }
+
+                else{
+                    try{
+                        const products=await ProductModel.find().sort({"price":1}).skip((page -1)*limit).limit(12)
+                        console.log(products)
+                        res.send(products)
+                    }
+                    catch(err){
+                        console.log(err)
+                        res.send({"message":"Something went wrong"})
+                    } 
+                } 
+             
+            
+        }
+        else if(order =="desc"){
+           
+
+            if(limit){
+                try{
+                    const products=await ProductModel.find().sort({"price":-1}).skip((page -1)*limit).limit(limit)
+                    console.log(products)
+                    res.send(products)
+                }
+                catch(err){
+                    console.log(err)
+                    res.send({"message":"Something went wrong"})
+                }
+                
+              
+            }
+
+            else{
+                try{
+                    const products=await ProductModel.find().sort({"price":-1}).skip((page -1)*limit).limit(12)
+                    console.log(products)
+                    res.send(products)
+                }
+                catch(err){
+                    console.log(err)
+                    res.send({"message":"Something went wrong"})
+                } 
+            } 
+         
+        
+         }
+
+    }
+
+    
+
+    else if(sortby=="title" && order){
+        
+        try{
+            if(order=="asc"){
+            const products=await ProductModel.find().sort({"title":1})
+            res.send(products)
+            }
+            else if(order=="desc"){
+                const products=await ProductModel.find().sort({"title":-1})
+                res.send(products)
+            }
+           
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+
+
+    else if(sortby=="price" && order){
+        
+        try{
+            if(order=="asc"){
+            const products=await ProductModel.find().sort({"price":1})
+            res.send(products)
+            }
+            else if(order=="desc"){
+                const products=await ProductModel.find().sort({"price":-1})
+                res.send(products)
+            }
+           
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+
+
+    else if(search){
+        
+        try{
+        
+        const products=await ProductModel.find({
+
+            "$or":[
+                {"title":{$regex:search,$options:"i"}},
+                {"brand":{$regex:search,$options:"i"}},
+                {"category":{$regex:search,$options:"i"}},
+                
+                
+            ]
+        })
+        console.log(products)
+        res.send(products)
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+
+    else if(page){
+       
+        try{
+           if(limit){
+            const products=await ProductModel.find().skip((page -1)*limit).limit(limit)
+            res.send(products)
+           }
+           else{
+            const products=await ProductModel.find().skip((page -1)*1).limit(12)
+            res.send(products)
+           }
+           
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+
+    else if(filterby=="price"){
+        
+        try{
+            if(lt){
+                const products=await ProductModel.find({price:{$lte:lt}})
+                res.send(products)
+            }
+            else if(gt){
+                const products=await ProductModel.find({price:{$gte:gt}})
+                res.send(products)
+            }
+    
+           
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+    else if(filterby=="brand" && value){
+        
+        try{
+            
+                const products=await ProductModel.find({"brand":value})
+                res.send(products)
+
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+    else if(filterby=="category" && value){
+       
+        try{
+            
+                const products=await ProductModel.find({"category":value})
+                res.send(products)
+
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+    else if(filterby=="sub_category" && value){
+        
+        try{
+            
+                const products=await ProductModel.find({"sub_category":value})
+                res.send(products)
+
+        }
+        catch(err){
+            console.log(err)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+    else{
+       
+        try{
+        
+            const products=await ProductModel.find()
+            res.send(products)
+        }
+        catch(err){
+            console.log(err.message)
+            res.send({"message":"Something went wrong"})
+        }
+    }
+   
+   
+  
 })
 
 
-// below code can be used to get all products By using sorting function in user site---------------->
-ProductRouter.get("/sort", async (req, res) => {
-  let query = req.query;
+productsRouter.post("/post",async(req,res)=>{
+    const payload=req.body
+    try{
+        const new_product=new ProductModel(payload)
+        await new_product.save()
+        res.send({"message":"Added the product",new_product})
 
-  try {
-    if (query.sort == "asc") {
-      const products = await ProductModel.find.sort({ price: 1 });
-      res.send(products)
+    }catch(err){
+        console.log(err.message)
+        res.send({"message":"Something went wrong"})
     }
-    else if (query.sort == "des") {
-      const products = await ProductModel.find.sort({ price: -1 });
-      res.send(products)
-    }
-  } catch (err) {
-    res.send({ "msg": "somthing went wrong! cannot sort products", "error": err.message })
-  }
+    
 })
 
-module.exports = {
-  ProductRouter,
-};
+
+productsRouter.patch("/update/:id",async(req,res)=>{
+    const ID=req.params.id
+    const payload=req.body
+  
+    try{
+       
+       const product=await ProductModel.findByIdAndUpdate({_id:ID},payload)
+        res.send({"message":"Updated the product",product})
+        
+    }catch(err){
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+   
+})
+
+
+
+productsRouter.delete("/delete/:id",async(req,res)=>{
+    const ID=req.params.id
+   
+   
+    try{
+        await ProductModel.findByIdAndDelete({_id:ID})
+        res.send({"message":"Deleted the product"})
+
+    }catch(err){
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+    
+   
+})
+
+
+// cart
+
+productsRouter.get("/cart",async(req,res)=>{
+    console.log(req, "am")
+    try {
+        const product=await ProductModel.find({"quantity":{$gt:0}})
+        console.log(product)
+        res.send(product)
+    
+    } 
+    catch (err) {
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+})
+
+
+// USER PRODUCT ROUTE FOR QUANTITY
+
+
+productsRouter.get("/:id", async(req,res) => {
+    
+    console.log("am")
+    try {
+        const productID = req.params.id
+        const products = await ProductModel.findById({_id:productID})
+        res.send(products)
+    } 
+    
+    catch (err) {
+        console.log(err)
+            res.send({"message":"Something Went Wrong, Try After Sometime"})
+    }
+})
+
+
+productsRouter.patch("/quantity/:id",async(req,res)=>{
+    const ID=req.params.id
+    const { quantity}=req.body
+    // const quan=req.body.quantity
+
+    
+  console.log(quantity,ID)
+  
+    try{
+       
+       const product=await ProductModel.findByIdAndUpdate({_id:ID},{quantity})
+        res.send({"message":"Updated the quantity",product})
+        
+    }catch(err){
+        console.log(err)
+        res.send({"message":"Something went wrong"})
+    }
+   
+})
+
+
+
+
+module.exports={productsRouter}
+
+
+
