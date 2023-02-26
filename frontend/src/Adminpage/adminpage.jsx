@@ -10,7 +10,7 @@ import BannedUserList from "./banneduserlist"
 const AdminPage = () => {
     const [state, setState] = useState(true)
     const initRef = useRef()
-
+    const navigate = useNavigate()
     const handlTrue = () => {
 
         setState(true)
@@ -18,13 +18,20 @@ const AdminPage = () => {
     const handlFalse = () => {
         setState(false)
     }
+    const handleLogout = (onClose)=>{
+        localStorage.setItem("token",JSON.stringify(""))
+        onClose()
+    }
+    const handleClick = ()=>{
+         navigate("/")
+    }
 
     return (<Stack>
-        <Flex border="1px solid red">
+        <Flex justifyContent={"end"} className="nav">
             <div className="drawer">
                 <DrawerJs />
             </div>
-            <Button>Home Page</Button>
+            <Button onClick={handleClick}>Home Page</Button>
             <Popover closeOnBlur={false} placement='left' initialFocusRef={initRef}>
                 {({ isOpen, onClose }) => (
                     <>
@@ -36,7 +43,7 @@ const AdminPage = () => {
                                 <PopoverHeader>Are You sure ?</PopoverHeader>
                                 <PopoverCloseButton />
                                 <PopoverBody>
-                                    <Button mt={4} colorScheme='blue' onClick={onClose} ref={initRef} >
+                                    <Button mt={4} colorScheme='blue' onClick={()=>handleLogout(onClose)} ref={initRef} >
                                         Yes
                                     </Button>
                                 </PopoverBody>

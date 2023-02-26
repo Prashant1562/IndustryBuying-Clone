@@ -23,7 +23,7 @@ const BannedUserList = () => {
         </Thead>
         <Tbody>
          {
-          products && products.map(ele=><BanuserCard key={ele.id} {...ele}/>)
+        //   products && products.map(ele=><BanuserCard key={ele.id} {...ele}/>)
          }
         </Tbody>
       </Table>
