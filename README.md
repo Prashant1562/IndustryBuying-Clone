@@ -23,7 +23,7 @@
         Login = admin/login             Request = POST
         Delete = admin/delete/:id       Request = DELETE
 
-    Users Schema
+    Admin Schema
 
         name:String,
         pass:String,
@@ -43,7 +43,7 @@
         Update = products/update/:id                    Request = PATCH
         Delete = products/delete/:id                    Request = DELETE
 
-    Users Schema
+    Products Schema
 
         title: String,
         price: Number,
