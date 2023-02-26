@@ -1,8 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+
+import Singleproductpage from '../Components/SingleProductPage/singleproductpage'
+import AdminAllProducts from './Admin/AdminAllProducts'
+import AdminDashboard from './Admin/AdminDashboard'
 import AdminPage from '../Adminpage/adminpage'
-// import AdminAllProducts from './Admin/AdminAllProducts'
-// import AdminDashboard from './Admin/AdminDashboard'
 import AdminLogin from './Admin/AdminLogin'
 import AdminPrivateRoutes from './Admin/AdminPrivateRoute'
 import AdminSignup from './Admin/AdminSignup'
@@ -13,7 +15,7 @@ import HomePage from './HomePage'
 import MainProduct from './MainProduct'
 import Payment from './Payment'
 import PrivateRoutes from './PrivateRoutes'
-//import Singleproductpages from './SingleProductPages'
+import SingleProductPage from './SingleProductPageDemo'
 import UserLogin from './User/UserLogin'
 import UserSignup from './User/UserSignup'
 import Singleproductpage from '../Components/SingleProductPage/singleproductpage'
@@ -21,8 +23,6 @@ import Singleproductpage from '../Components/SingleProductPage/singleproductpage
 const AllRoutes = () => {
 
   return (
-
-   
         <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/product" element={<MainProduct/>} />
@@ -40,7 +40,6 @@ const AllRoutes = () => {
            <Route path="admin/dashboard" element={<AdminPrivateRoutes><AdminPage/></AdminPrivateRoutes>} />
         </Routes>
       
-   
   )
 }
 

@@ -19,7 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { GetProductData } from "../../Redux/MainProduct/MainProduct.action";
 import "./singleproductpage.css";
-import { GetDataForPatch } from "../../Redux/FilterSection/Filter.action";
+import { GetDataForPatch, GetDataForPost } from "../../Redux/FilterSection/Filter.action";
+// import { GetDataForPatch } from "../../Redux/FilterSection/Filter.action";
 
 const Loader = () => {
   return <Box>Loading...</Box>;
@@ -86,7 +87,7 @@ const Singleproductpage = () => {
 
   const handleonClick = (val) => {
     setCount((value) => value + val);
-    dispatch(GetDataForPatch({ id, price: val }));
+    dispatch(GetDataForPatch({ id, price: count*Data.data.price }));
   };
 
   const handleChangeImg = (Img) => {
@@ -677,10 +678,10 @@ const Singleproductpage = () => {
                   toast({
                     status: "success",
                     title: "Congrats",
-                    description: "Item Added successfully",
+                    description: "Item Added in cart successfully",
                     position: "top",
                     isClosable: true,
-                  });dispatch()}
+                  });dispatch(GetDataForPost(Data.data))}
                 }
               >
                 ADD TO CART

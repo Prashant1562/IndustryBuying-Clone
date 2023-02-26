@@ -33,8 +33,7 @@ let id;
 const Leftside = () => {
   const dispatch = useDispatch();
   const { loader, Data, min, max } = useSelector(
-    (store) => store.ProductManager
-  );
+    (store) => store.ProductManager);
   const [defaultmin, setDefaultmin] = useState(100);
   const [defaultmax, setDefaultmax] = useState(1000);
   const [discount, setDiscount] = useState(DiscountInFilter());

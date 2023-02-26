@@ -3,6 +3,8 @@ import thunk from "redux-thunk";
 import {FilterReducer} from "./FilterSection/Filter.reducer";
 import { reducer as AppReducer } from "./AppReducer/reducer";
 import { reducer as AuthReducer } from "./AuthReducer/reducer";
+import { FilterReducer } from "./FilterSection/Filter.reducer";
+import { ProductReducer } from "./MainProduct/MainProduct.reducer";
 import {ProductReducer} from "./MainProduct/MainProduct.reducer"
 import { getdatareducer } from "./Products/getdata.reducer";
 import { deletedatareducer } from "./Products/deletedatareducer";
@@ -12,6 +14,8 @@ import { banuserreducer } from "./Users/banusersreducer";
 import {getbanuserreducer} from './Users/getbanuserreducer'
 import {removebanreducer} from './Users/removebanuserreducer'
 import {getuserreducer} from './Users/getusersreducer'
+
+
 const rootReducer = combineReducers({AppReducer, AuthReducer,ProductManager:ProductReducer,FilterManger:FilterReducer,getdatareducer,deletedatareducer,updatedatareducer,adddatareducer,banuserreducer,getbanuserreducer,removebanreducer,getuserreducer});
 
 const composeEnhancers = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;

@@ -1,4 +1,4 @@
-import { getByBrand,getByPrice,getByPrice_Discount,getByRangePrice,getData, getDataPatch } from "./Filter.API"
+import { getByBrand,getByPrice,getByPrice_Discount,getByRangePrice,getData, getDataPatch, getDataPost } from "./Filter.API"
 import { GET_PRODUCT_ERROR, GET_PRODUCT_FILTER_AVAILABILITY, GET_PRODUCT_FILTER_BRANDS, GET_PRODUCT_FILTER_DISCOUNT, GET_PRODUCT_FILTER_OFFERS, GET_PRODUCT_FILTER_RANGE_PRICE, GET_PRODUCT_FILTER_SORT, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS_FILTER } from "./Filter.types";
 
 
@@ -27,6 +27,18 @@ export const GetDataForPatch = (payload) => async(dispatch)=>{
    }
 }
 
+export const GetDataForPost = (payload) => async(dispatch)=>{
+   dispatch({type:GET_PRODUCT_LOADING});
+   try{
+      let data = await getDataPost(payload)
+      dispatch({type:GET_PRODUCT_SUCCESS_FILTER,payload:data.data})
+   }
+   catch(err){
+      dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
+   } 
+}
+
+
 
 let val = "";
 export const GetDataByBrands = (str) => async(dispatch)=>{
@@ -47,7 +59,6 @@ export const GetDataByPriceRange = (str,str1) => async(dispatch)=>{
      dispatch({type:GET_PRODUCT_LOADING});
      try{
         let data = await getByRangePrice(str,str1);
-        console.log(data.data,"helskdjflksjdlfkj")
         dispatch({type:GET_PRODUCT_FILTER_RANGE_PRICE,payload:data.data})
      }
      catch(err){

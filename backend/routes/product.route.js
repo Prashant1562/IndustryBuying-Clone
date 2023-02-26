@@ -1,3 +1,19 @@
+const express = require("express");
+const { ProductModel } = require("../model/Product.model");
+
+const ProductRouter = express.Router();
+
+ProductRouter.get("/price/filter", async (req,res)=>{
+     const query= req.query;
+    //  console.log("Query:",query)
+     let val1 = query.price[0] || 200
+     let val2 = query.price[1] || 1000
+    //  console.log(val1,val2,"hello")
+    try{
+        if(val1>val2){
+          let data = await ProductModel.find({$and:[{price:{$gte:val2}},{price:{$lte:val1}}]});
+          res.send(data);
+
 const express=require("express")
 const { ProductModel } = require("../model/Product.model")
 const productsRouter=express.Router()
@@ -164,6 +180,7 @@ productsRouter.get("/",async(req,res)=>{
             
         
         
+
         }
         catch(err){
             console.log(err)
