@@ -1,29 +1,42 @@
-
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import HomePage from './HomePage'
-import UserLogin from './Login'
-import Signup from './Signup'
-import MainProduct from "../Components/Products/MainProduct"
-import Singleproductpage from "../Components/SingleProductPage/singleproductpage"
+import AdminAllProducts from './Admin/AdminAllProducts'
+import AdminDashboard from './Admin/AdminDashboard'
+import AdminLogin from './Admin/AdminLogin'
+import AdminPrivateRoutes from './Admin/AdminPrivateRoute'
 import AdminSignup from './Admin/AdminSignup'
-import Login from './Admin/AdminLogin'
-
-
-
+import CartPage from './CartPage'
+import CheckoutPage from './CheckoutPage'
+import DisplayAllProducts from './DisplayAllProducts'
+import HomePage from './HomePage'
+import MainProduct from './MainProduct'
+import Payment from './Payment'
+import PrivateRoutes from './PrivateRoutes'
+import SingleProductPage from './SingleProductPage'
+import UserLogin from './User/UserLogin'
+import UserSignup from './User/UserSignup'
 
 const AllRoutes = () => {
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path='/mainproducts' element={<MainProduct/>}/>
-      <Route path="/product/:id" element={<Singleproductpage/>} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<UserLogin />} />
-      <Route path='/admin/signup' element={<AdminSignup/>}/>
-      <Route path='/admin/login' element={<Login/>}/>
-    </Routes>
-  );
-};
+   
+        <Routes>
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/allproducts" element={<DisplayAllProducts/>} />
+            <Route path="/product/:id" element={<SingleProductPage/>} />
+            <Route path="/cart" element={<PrivateRoutes><CartPage/></PrivateRoutes>} />
+            <Route path="/cart/checkout" element={<PrivateRoutes><CheckoutPage/></PrivateRoutes>} />
+            <Route path="/payment" element={<PrivateRoutes><Payment/></PrivateRoutes>} />
+            <Route path="/login" element={<UserLogin/>} />
+            <Route path="/signup" element={<UserSignup/>} />
+            <Route path="/admin/login" element={<AdminLogin/>} />
+            <Route path="/admin/signup" element={<AdminSignup/>} />
+            <Route path="/admin/dashboard" element={<AdminPrivateRoutes><AdminDashboard/></AdminPrivateRoutes>} />
+            
+        </Routes>
+      
+  )
+  
+}
 
 export default AllRoutes;

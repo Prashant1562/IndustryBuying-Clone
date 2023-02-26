@@ -2,7 +2,6 @@
 import {
   Flex,
   Box,
-  Image,
   FormControl,
   FormLabel,
   Input,
@@ -23,10 +22,6 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 // import { Navigate } from "react-router-dom";
 import {Link, useNavigate} from "react-router-dom"
-import "../../style/signup.css";
-import logo from "../../assets/image/tooler logo 1.png"
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 
 export default function AdminSignup() {
   const [name, setName] = useState("");
@@ -34,9 +29,8 @@ export default function AdminSignup() {
   const [password, setPassword] = useState("");
   const [phoneNumber, setContact] = useState("");
   const [GSTIN ,setGSTIN ]=useState("")
-  const [storeName,setstoreName]=useState("")
+ 
   const navigate = useNavigate();
-  
 
   const [showPassword, setShowPassword] = useState(false);
   // let user = [];
@@ -48,7 +42,6 @@ export default function AdminSignup() {
       email,
       password,
       phoneNumber:Number(phoneNumber),
-      storeName,
       GSTIN,
     };
     if(!payload.name){
@@ -116,19 +109,6 @@ export default function AdminSignup() {
       });
       return
     }
-
-    else if(!payload.storeName){
-
-      toast({
-        position:"top",
-        title: "Please fill your Unique Store Name",
-        // description: "Your Store Name is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
   
     console.log(payload);
     // console.log(typeof(payload.phoneNumber))
@@ -138,7 +118,7 @@ export default function AdminSignup() {
       .then((res) =>{
         toast({
           position:"top",
-          title: `${res.data.message}`,
+          title: "Welcome",
           description: "We've created your account for you.",
           status: "success",
           duration: 3000,
@@ -160,24 +140,21 @@ export default function AdminSignup() {
       align={"center"}
       justify={"center"}
       // bg={useColorModeValue("gray.50", "gray.800")}
-      bgGradient="radial(gray.400, gray.700,)"
+      bgGradient="radial(gray.100, purple.100, blue.200)"
      
     >
       <Stack spacing={2} mx={"auto"} maxW={"lg"} py={12} px={6} width="40%">
         <Stack align={"center"}>
-        <Link to="/">
-              <Image borderRadius="50%" width={40} src={logo}></Image>
-        </Link>
           <Heading fontSize={"2xl"} textAlign={"center"}>
             Admin Sign up
           </Heading>
-          <Text fontSize={"lg"} color={"gray.100"}>
+          <Text fontSize={"lg"} color={"gray.600"}>
             Be a seller with our site
           </Text>
         </Stack>
-        <Box  className="signup_container"
+        <Box
           rounded={"md"}
-          bg={useColorModeValue("grey.400", "gray.100")}
+          bg={useColorModeValue("grey.300", "gray.700")}
           boxShadow={"lg"}
           p={8}
         >
@@ -241,20 +218,14 @@ export default function AdminSignup() {
                   <Input fontSize={14} type="text" placeholder="GSTIN Number" value={GSTIN } onChange={(e)=> setGSTIN (e.target.value)}  />
                 </FormControl>
               </Box>
-              <Box>
-                <FormControl id="contact" isRequired>
-                  <FormLabel>Store Name</FormLabel>
-                  <Input mb="15px" fontSize={14}  type="text" placeholder="Store Name" value={storeName} onChange={(e)=> setstoreName(e.target.value)}  />
-                </FormControl>
-              </Box>
   
               <Button
                 onClick={handleSubmit}
                 size="md"
-                bg={"orange"}
+                bg={"blue.400"}
                 color={"white"}
                 _hover={{
-                  bg: "gray.400",
+                  bg: "blue.500",
                 }}
               >
                 Sign up
@@ -262,45 +233,9 @@ export default function AdminSignup() {
 
             <Stack pt={3}>
               <Text align={"center"} fontSize={14} >
-                Already a user? <Link style={{color:"skyblue",fontSize:20}} to="/admin/login">Login</Link>
+                Already a user? <Link style={{color:"blue"}} to="/admin/login">Login</Link>
               </Text>
             </Stack>
-            <Box
-            mt={"20px"}
-            display="flex"
-            flexDirection={{
-              base: "column",
-              sm: "column",
-              md: "row",
-              lg: "row",
-            }}
-            gap={"10px"}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb", color: "black" }}
-              leftIcon={<FcGoogle fontSize={"20px"} />}
-              textColor={"black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with Google
-            </Button>
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb" }}
-              leftIcon={<FaGithub fontSize={"20px"} />}
-              textColor={"#black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with GitHub
-            </Button>
-          </Box>
           </Stack>
         </Box>
       </Stack>

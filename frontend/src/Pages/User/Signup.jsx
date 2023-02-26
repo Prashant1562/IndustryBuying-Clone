@@ -87,8 +87,7 @@ const Signup = () => {
         duration: 2000,
         isClosable: false,
       });
-    }
-    
+    }    
   };
   return (
     <Box

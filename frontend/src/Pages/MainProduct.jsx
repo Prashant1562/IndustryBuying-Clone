@@ -6,6 +6,7 @@ import TopSection from "../Components/Products/TopSection/TopSection";
 
 const MainProduct = () => {
   
+  
   return (
     <Flex direction="column">
       <Box>
