@@ -8,7 +8,7 @@ import Singleproductpage from "../Components/SingleProductPage/singleproductpage
 import AdminSignup from './Admin/AdminSignup'
 import Login from './Admin/AdminLogin'
 import MainProduct from './MainProduct'
-
+import AdminPage from '../Adminpage/adminpage'
 
 
 
@@ -23,6 +23,7 @@ const AllRoutes = () => {
       <Route path="/login" element={<UserLogin />} />
       <Route path='/admin/signup' element={<AdminSignup/>}/>
       <Route path='/admin/login' element={<Login/>}/>
+      <Route path="/adminpage" element={<AdminPage/>}/>
     </Routes>
   )
 };

@@ -10,7 +10,7 @@ const BannedUserList = () => {
     useEffect(()=>{
         dispatch(getbanuseraction())
     },[])
-    const products = useSelector(store=>store.getbanuserreducer)
+    const products = useSelector(store=>store.getbanuserreducer.products)
    console.log(products)
     return (
       <TableContainer>
@@ -23,7 +23,7 @@ const BannedUserList = () => {
         </Thead>
         <Tbody>
          {
-        //   products && products.map(ele=><BanuserCard key={ele.id} {...ele}/>)
+          products && products.map(ele=><BanuserCard key={ele.id} {...ele}/>)
          }
         </Tbody>
       </Table>
