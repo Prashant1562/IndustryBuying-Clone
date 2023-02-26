@@ -29,7 +29,7 @@ const AdminPage = () => {
     return (<Stack>
         <Flex justifyContent={"end"} className="nav">
             <div className="drawer">
-                <DrawerJs />
+                <DrawerJs handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
             </div>
             <Button onClick={handleClick}>Home Page</Button>
             <Popover closeOnBlur={false} placement='left' initialFocusRef={initRef}>
