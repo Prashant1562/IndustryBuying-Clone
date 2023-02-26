@@ -16,9 +16,11 @@ import SingleProductPage from './SingleProductPage'
 import UserLogin from './User/UserLogin'
 import UserSignup from './User/UserSignup'
 
+
 const AllRoutes = () => {
 
   return (
+
    
         <Routes>
             <Route path="/" element={<HomePage/>} />

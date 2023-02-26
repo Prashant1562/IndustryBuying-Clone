@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const adddataaction = (token,value)=>(dispatch)=>{
      dispatch({type:ADDDATAREQUEST})
-     return axios.post(`https://exuberant-slippers-slug.cyclic.app/products`,{
+     return axios.post(`https://exuberant-slippers-slug.cyclic.app/products/create`,{
           headers:{
                "Content-type":"application/json",
                "Authorization":token

@@ -5,10 +5,8 @@ const { UserRouter } = require("./routes/user.route")
 const { ProductRouter } = require("./routes/product.route")
 const { AdminUserRouter } = require("./routes/Adminuser.route")
 const { UsreAuthMiddleware } = require("./middlewares/authentication.middleware")
+const { BlockRouter } = require("./routes/Block.route")
 require("dotenv").config()
-
-
-
 
 const app=express()
 
@@ -24,6 +22,7 @@ app.get("/", (req, res) => {
 app.use("/users", UserRouter);
 app.use("/products" , ProductRouter);
 app.use("/admin" , AdminUserRouter );
+app.use("/block" , BlockRouter );
 
 
 
