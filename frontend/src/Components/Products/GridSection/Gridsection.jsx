@@ -17,6 +17,7 @@ import {
   Grid,
   Image,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,6 +44,7 @@ const Gridsection = () => {
   const [popularity, setPopularity] = useState([]);
   // const [prodData,setProdData] = useState([]);
   const [flag, setFlag] = useState(true);
+  const toast = useToast();
 
   useEffect(() => {
     dispatch(GetDataFilter());
@@ -55,6 +57,7 @@ const Gridsection = () => {
   };
   const handlePopularityFilter = (str) => {
     dispatch(GetDataBySort(str));
+    setFlag(false)
   };
 
   return (
@@ -200,7 +203,7 @@ const Gridsection = () => {
         {prodData &&
           prodData?.map((data, i) => (
             <Box
-              key={i}
+              key={data._id}
               height="100%"
               boxSizing="border-box"
               padding="1rem"
@@ -211,7 +214,7 @@ const Gridsection = () => {
               }}
               direction="column"
             >
-           <Link to={`/product/${data.id}`} height="61%"  flex="2"><Image height="61%" width="100%"  src={data.images[0]["image_url"]} /></Link>
+           <Link to={`/product/${data._id}`} height="61%"  flex="2"><Image height="61%" width="100%"  src={data.images[0]} /></Link>
            <Flex height="15%">
             <Text  fontSize={14} textAlign="left">{data.title}</Text>
            </Flex>
@@ -238,6 +241,13 @@ const Gridsection = () => {
               border="0.5px solid #F54702"
               borderRadius="0.1rem"
               variant="outline"
+              onClick={()=>toast({
+                status: 'success',
+                title: "Congrats",
+                description:"Item Added successfully",
+                position: "top",
+                isClosable: true,
+              })}
             >
               ADD TO CART
             </Button>

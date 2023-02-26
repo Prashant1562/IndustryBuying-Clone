@@ -11,6 +11,7 @@ import {
   InputRightElement,
   Stack,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import { RxTriangleRight } from 'react-icons/rx';
 import React, { useEffect, useRef, useState } from "react";
@@ -27,7 +28,8 @@ const Loader = () => {
 const Singleproductpage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-//   console.log(id);
+  const toast = useToast()
+  console.log(id);
   // const [data, setData] = useState([]);
   // const [loader, setLoader] = useState(false);
   const [count, setCount] = useState(1);
@@ -97,6 +99,7 @@ const Singleproductpage = () => {
   }
   return (
     <>
+    {Data.data && console.log(Data.data.images[0])}
         { Data.data &&
             <Flex gap="1rem" justifyContent={{base:"center",sm:"center",md:"space-between"}}
             alignItems={{base:"center",sm:"center",md:"center"}}
@@ -120,7 +123,7 @@ const Singleproductpage = () => {
             <ChevronRightIcon fontSize={16} />
           </Box>
           <Link to="">
-            <Text as="b"> { Data.data[0].category }</Text>
+            <Text as="b"> { Data.data.category }</Text>
           </Link>
         </Flex>
 
@@ -131,12 +134,12 @@ const Singleproductpage = () => {
           <Flex flex="1" direction="column">
             <Image
               height="40%"
-              src={ img?img:Data.data[0]["images"][0].image_url }
+              src={ img?img:Data.data["images"][0] }
             />
             <Flex gap="1rem">
-              {Data.data && Data.data[0].images.map((item,i)=>
+              {Data.data.images && Data.data.images.map((item,i)=>
                 <Box key={i}>
-                <Image  onClick={()=>handleChangeImg(item.image_url)} boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" width="30px" height="30px" src={`${item.image_url}`}/>
+                <Image  onClick={()=>handleChangeImg(item)} boxShadow="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" width="30px" height="30px" src={`${item}`}/>
                 </Box>
               )}
             </Flex>
@@ -145,7 +148,7 @@ const Singleproductpage = () => {
 
             <Box borderBottom="1px solid rgba(193, 192, 192,0.5)" mb="1rem" pb="1rem">
               <Heading mb={18} as="h1" textAlign="left" fontSize={18}>
-              { Data.data[0].title}
+              { Data.data.title}
               </Heading>
               <HStack>
                 <Text fontSize={14} color="#A1A1A1">
@@ -164,7 +167,7 @@ const Singleproductpage = () => {
               </Heading>
               <ul>
                 <li>
-                  <Flex gap="2rem" direction={{base:"column",sm:"row",md:"row"}} style={{ gap: "1rem" }}>
+                  <Flex gap="2rem" direction={{base:"column",sm:"row",md:"row"}} >
                     <Text
                       textAlign="left"
                       fontSize={14}
@@ -179,7 +182,7 @@ const Singleproductpage = () => {
                       color="#8C8A8A"
                       flex="3"
                     >
-                     {Data.data[0].brand}
+                     {Data.data.brand}
                     </Text>
                   </Flex>
                 </li>
@@ -239,7 +242,7 @@ const Singleproductpage = () => {
                       color="#8C8A8A"
                       flex="3"
                     >
-                     {Data.data[0].sub_category}
+                     {Data.data.sub_category}
                     </Text>
                   </Flex>
                 </li>
@@ -259,7 +262,7 @@ const Singleproductpage = () => {
                       color="#8C8A8A"
                       flex="3"
                     >
-                     {Data.data[0].title}
+                     {Data.data.title}
                     </Text>
                   </Flex>
                 </li>
@@ -305,7 +308,7 @@ const Singleproductpage = () => {
                     textAlign: "left",
                   }}
                 >
-                  More {Data.data[0].brand} Grain Processing Machine
+                  More {Data.data.brand} Grain Processing Machine
                 </Link>
                 <Link
                   to=""
@@ -397,16 +400,16 @@ const Singleproductpage = () => {
               <Image
                 height="100%"
                 width="50%"
-                src={ Data.data[0]["images"][0].image_url}
+                src={ img?img:Data.data["images"][0]}
               />
             </Box>
             <Box flex="5">
               <Heading as="h1" fontSize={{base:"11px",sm:"13px",md:"18px"}} color="#444444" textAlign="left">
-                {Data.data[0].title}
+                {Data.data.title}
               </Heading>
               <Flex gap="0.7rem" fontSize={{base:"9px",sm:"11px",md:"14px"}} textAlign="left">
                 <Text color="#A1A1A1">by</Text>
-                <Text color="#046699">{Data.data[0].brand}</Text>
+                <Text color="#046699">{Data.data.brand}</Text>
               </Flex>
             </Box>
             <Box flex="2" pl="2rem">
@@ -462,7 +465,7 @@ const Singleproductpage = () => {
         >
           <Flex justifyContent="left" alignItems="center" gap="0.3rem" direction={{base:"column",sm:"column",md:"row"}}>
             <Heading as="h2" fontSize={{base:"16px",sm:"22px",md:"30px"}} color="#FA832A">
-              ₹ {Data.data && count * Data.data[0].price}
+              ₹ {Data.data && count * Data.data.price}
             </Heading>
             <Text mt="0.7rem" fontSize={{base:"10px",sm:"12px",md:"14px"}}>
 
@@ -471,7 +474,7 @@ const Singleproductpage = () => {
           </Flex>
           <Flex justifyContent="left" alignItems="center" gap="0.3rem" fontSize={{base:"16px",sm:"22px",md:"30px"}} direction={{base:"column",sm:"column",md:"row"}}>
             <Heading fontSize={16}>
-              ₹ {Data.data && count * Data.data[0].price}
+              ₹ {Data.data && count * Data.data.price}
             </Heading>
             <Text fontSize={{base:"10px",sm:"12px",md:"14px"}}>(GST extra)</Text>
           </Flex>
@@ -514,6 +517,13 @@ const Singleproductpage = () => {
             _hover={{backgroundColor:"#4C993E"}}
             bgColor="#4C993E"
             fontSize={13}
+            onClick={()=>toast({
+                status: 'success',
+                title: "Congrats",
+                description:"Item Added successfully",
+                position: "top",
+                isClosable: true,
+              })}
           >
             ADD TO CART
           </Button>

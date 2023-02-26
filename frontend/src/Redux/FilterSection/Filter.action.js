@@ -31,11 +31,10 @@ export const GetDataForPatch = (payload) => async(dispatch)=>{
 let val = "";
 export const GetDataByBrands = (str) => async(dispatch)=>{
    // console.log(str)
-   val = val + `brand=${str}&`
    dispatch({type:GET_PRODUCT_LOADING});
    try{
-      let data = await getByBrand(val)
-      console.log(data)
+      let data = await getByBrand(str)
+      // console.log(data)
       dispatch({type:GET_PRODUCT_FILTER_BRANDS,payload:data.data})
    }
    catch(err){

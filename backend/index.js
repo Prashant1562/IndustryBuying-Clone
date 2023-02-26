@@ -7,9 +7,6 @@ const { AdminUserRouter } = require("./routes/Adminuser.route")
 const { UsreAuthMiddleware } = require("./middlewares/authentication.middleware")
 require("dotenv").config()
 
-
-
-
 const app=express()
 
 app.use(cors())

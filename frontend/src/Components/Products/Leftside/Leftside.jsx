@@ -64,7 +64,7 @@ const Leftside = () => {
     }
     id = setTimeout(() => {
       dispatch(GetDataByPriceRange(mn, mx));
-    }, 3000);
+    }, 2000);
   };
 
   const handleminValue = (e) => {
