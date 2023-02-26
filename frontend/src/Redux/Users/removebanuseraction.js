@@ -1,11 +1,12 @@
 import { REMOVEBANFAILURE,REMOVEBANREQUEST,REMOVEBANSUCCESS } from "./removebanuseractiontype"
 import axios from "axios"
-export const removebanuseraction = (token) => (dispatch)=>{
+export const removebanuseraction = (id) => (dispatch)=>{
+        const admintoken = JSON.parse(localStorage.getItem("adminToken"))
        dispatch({type:REMOVEBANREQUEST})
-       return axios.get("https://exuberant-slippers-slug.cyclic.app/block",{
+       return axios.delete(`https://exuberant-slippers-slug.cyclic.app/block/delete/${id}`,{
               headers:{
                      "Content-type":"application/json",
-                     "Authorization":token
+                     "Authorization":admintoken
               }
        })
        .then(res=>dispatch({type:REMOVEBANSUCCESS,payload:res.data}))

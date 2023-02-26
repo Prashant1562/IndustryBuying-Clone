@@ -21,11 +21,11 @@ const navigate = useNavigate()
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (<Tr  color="orange" backgroundColor={'teal'} >
-    <Td width={["10%","50%","80%","100%"]} textAlign="center"><Image src={images[0]}/></Td>
-    <Td width={["10%","50%","80%","100%"]} textAlign="center">{brand}</Td>
-    <Td width={["10%","50%","80%","100%"]} textAlign="center">{category}</Td>
-    <Td width={["10%","50%","80%","100%"]} textAlign="center">{price}</Td>
-    <Td width={["10%","50%","80%","100%"]} textAlign="center"> <Button onClick={onOpen}>Edit</Button>
+    <Td width={["10%","10%","8%","10%"]} textAlign="center"><Image src={images[0]}/></Td>
+    <Td width={["10%","10%","8%","10%"]} textAlign="center">{brand}</Td>
+    <Td width={["10%","10%","8%","10%"]} textAlign="center">{category}</Td>
+    <Td width={["10%","10%","8%","10%"]} textAlign="center">{price}</Td>
+    <Td width={["10%","10%","8%","10%"]} textAlign="center"> <Button onClick={onOpen}>Edit</Button>
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />
                     <ModalContent>

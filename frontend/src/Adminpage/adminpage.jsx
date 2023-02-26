@@ -30,7 +30,7 @@ const AdminPage = () => {
     return (<Stack>
         <Flex justifyContent={"end"} className="nav">
             <div className="drawer">
-                <DrawerJs />
+                <DrawerJs handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
             </div>
             <Button onClick={handleClick}>Home Page</Button>
             <Popover closeOnBlur={false} placement='left' initialFocusRef={initRef}>
@@ -59,10 +59,10 @@ const AdminPage = () => {
               <Sidebar handlFalse={handlFalse} handlTrue={handlTrue} state={state}/>
             </div>
         
-            <Stack display={state ? "block" : "none"} className="stack" height="100vh" >
+            <Stack display={state ? "block" : "none"} className="stack" height="600px" >
                 <ProductPage />
             </Stack>
-            <Stack display={state ? "none" : "block"} className="stack"  height="100vh">
+            <Stack display={state ? "none" : "block"} className="stack"  height="600px">
                 <Tabs>
                     <TabList >
                         <Tab fontSize={["80%", "80%", "80%", "80%", "80%"]} className='tab'>Users List</Tab>
