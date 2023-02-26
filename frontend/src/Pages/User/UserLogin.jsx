@@ -1,50 +1,47 @@
-import React from 'react';
 import {
-  Box,
-  Image,
-  Flex,
-  Heading,
-  Input,
   Button,
+  Checkbox,
+  Box,
+  Flex,
   FormControl,
   FormLabel,
-  Switch,
-  useColorMode,
+  Heading,
+  Input,
+  Stack,
+  Image,
   useColorModeValue,
+  useColorMode,
+  Switch,
   useToast,
+  Container,
   Text,
 } from '@chakra-ui/react';
 import axios from 'axios';
-import { Link, Navigate, useNavigate} from "react-router-dom"
-import "../../style/admin.css";
+import { useState } from 'react';
+import {Link, useNavigate} from "react-router-dom"
+import Navbar from '../../Components/Navbar';
+import Footer from '../../Components/Footer';
+import "../../style/login.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import logo from '../../assets/image/tooler logo 1.png';
-
-const Login = () => {
-
-  const navigate = useNavigate()
-  // const token = JSON.parse(localStorage.getItem("token")) || "";
-  // const GSTIN = JSON.parse(localStorage.getItem("GSTIN")) || ""
-
-  const toast = useToast()
+export default function UserLogin() {
+  const navigate=useNavigate()
+  const toast=useToast()
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.400', 'gray.700');
-  const [email, setEmail] = React.useState("");
-  const [pass, setPassword] = React.useState("");
-  const [value, setValue] = React.useState(false)
-
-
-
-
+ 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleSubmit = () => {
-
     const payload = {
+      
       email,
-      pass,
+      password,
+      
     };
 
-    if (!payload.email) {
+    if(!payload.email){
 
       toast({
         position:"top",
@@ -54,9 +51,9 @@ const Login = () => {
         duration: 3000,
         isClosable: true,
       });
-     
+      return
     }
-    else if (!payload.pass) {
+    else if(!payload.password){
 
       toast({
         position:"top",
@@ -66,31 +63,29 @@ const Login = () => {
         duration: 3000,
         isClosable: true,
       });
-    
+      return
     }
-
+    
     console.log(payload);
-{
 
-   
-      axios.post("https://exuberant-slippers-slug.cyclic.app/admin/login",payload)
+    {
+
+     axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/login",payload)
       .then(res=>{
-        localStorage.setItem("adminToken",JSON.stringify(res.data.token))
-
-        localStorage.setItem("GSTIN", JSON.stringify(res.data.GSTIN))
-        console.log(res.data,"token in login");
+        localStorage.setItem("token",JSON.stringify(res.data.token))
+        console.log(res.data);
         if(res.data.token){
           toast({
             position:"top",
             title: "Your are successfully logged in",
-            description: "Taking you to Admin Dashboard",
+            description: "Taking you to homepage",
             status: "success",
             duration: 3000,
             isClosable: true,
-          });
-
-          setTimeout(() => {
-            navigate("/admin/dashboard")
+          })
+          
+          setTimeout (() => {
+            navigate('/')
           },3000)
         }
         else{
@@ -106,12 +101,16 @@ const Login = () => {
         }
       })
       .catch(err=>console.log(err));
+      
     }
-
-
   };
   return (
-    <Flex h="100vh" alignItems="center" justifyContent="center">
+
+    <>
+   <Navbar/>
+
+    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} margin='auto'>
+        <Flex h="100vh" alignItems="center" justifyContent="center" w="30%" marginLeft='300px'>
       <Flex className='login_container'
         flexDirection="column"
         bg={formBackground}
@@ -119,31 +118,32 @@ const Login = () => {
         borderRadius={8}
         boxShadow="lg"
       >
-        <Heading mb={6}>Admin Log In</Heading>
+         <Heading fontSize={"2xl"} textAlign={"center"}>
+            Welcome
+          </Heading>
+          <Text color={"white"}>TO THE WORLD OF INDUSTRY TOOLS</Text>
         <Input
-          placeholder="Enter your email"
+          placeholder="Email"
           type="email"
-          variant="filled"
+          // variant="filled"
           mb={3}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
-          placeholder="**********"
+          placeholder="Password"
           type="password"
           variant="filled"
           mb={6}
-          value={pass}
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button colorScheme="orange" mb={8} onClick={handleSubmit} >
+        <Button colorScheme="orange" mb={8} fontSize={20}  onClick={handleSubmit}>
           Log In
         </Button>
-
-
         <Flex gap={"8px"} mb="12px">
           <Text>Signup Here</Text>
-          <Text color={"skyblue"}><Link to={"/admin/signup"}>Signup</Link></Text>
+          <Text color={"skyblue"}><Link to={"/signup"}>SignUp</Link></Text>
         </Flex>
         <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="dark_mode" mb="0">
@@ -187,17 +187,20 @@ const Login = () => {
               Sign Up with GitHub
             </Button>
           </Box>
+        </Flex>
       </Flex>
-      {/* <Flex flex={1}>
+      <Flex flex={1}>
         <Image h="40vh" v='40vh' marginLeft='50px' marginTop='25%'
           alt={'Login Image'}
           objectFit={'cover'}
           src={logo}
         />
-      </Flex> */}
-    </Flex>
-    
-  );
-};
+      </Flex>
+      
+    </Stack>
 
-export default Login;
+    <Footer/>
+
+    </>
+  );
+}

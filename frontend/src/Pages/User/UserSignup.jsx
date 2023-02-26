@@ -2,7 +2,6 @@
 import {
   Flex,
   Box,
-  Image,
   FormControl,
   FormLabel,
   Input,
@@ -16,40 +15,38 @@ import {
   useColorModeValue,
   Select,
   useToast,
-  
+  Image,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
-// import { Navigate } from "react-router-dom";
 import {Link, useNavigate} from "react-router-dom"
+import Footer from "../../Components/Footer";
 import "../../style/signup.css";
 import logo from "../../assets/image/tooler logo 1.png"
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
-export default function AdminSignup() {
+export default function UserSignup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
   const [phoneNumber, setContact] = useState("");
-  const [GSTIN ,setGSTIN ]=useState("")
-  const [storeName,setstoreName]=useState("")
-  const navigate = useNavigate();
-  
+  let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   // let user = [];
   const toast=useToast()
  
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     const payload = {
       name,
       email,
       password,
-      phoneNumber:Number(phoneNumber),
-      storeName,
-      GSTIN,
+      gender,
+      phoneNumber:Number(phoneNumber)
     };
     if(!payload.name){
 
@@ -61,7 +58,7 @@ export default function AdminSignup() {
         duration: 3000,
         isClosable: true,
       });
-      return 
+      return
     }
     else if(!payload.email){
 
@@ -75,66 +72,24 @@ export default function AdminSignup() {
       });
       return
     }
-
     else if(!payload.password){
 
       toast({
         position:"top",
         title: "Please fill your Password",
-        description: "Your email is missing",
+        description: "Your password is missing",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
       return
     }
-
-
-    else if(!payload.phoneNumber){
-
-      toast({
-        position:"top",
-        title: "Please fill your Contact Details",
-        // description: "Your email is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
-
-
-    else if(!payload.GSTIN){
-
-      toast({
-        position:"top",
-        title: "Please fill your GST Number",
-        // description: "Your GST Number is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
-
-    else if(!payload.storeName){
-
-      toast({
-        position:"top",
-        title: "Please fill your Unique Store Name",
-        // description: "Your Store Name is missing",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      return
-    }
-  
+    
     console.log(payload);
     // console.log(typeof(payload.phoneNumber))
     {
-
-       axios.post("https://exuberant-slippers-slug.cyclic.app/admin/register",payload)
+    console.log(payload)
+    axios.post("https://doubtful-wasp-cowboy-boots.cyclic.app/register",payload)
       .then((res) =>{
         toast({
           position:"top",
@@ -146,7 +101,7 @@ export default function AdminSignup() {
         });
 
         setTimeout (() => {
-          navigate("/admin/login")
+          navigate("/login")
         },3000)
       }
        )
@@ -155,31 +110,34 @@ export default function AdminSignup() {
   };
 
   return (
+    <>
     <Flex
-      minH={"20vh"}
+      minH={"100vh"}
       align={"center"}
       justify={"center"}
-      // bg={useColorModeValue("gray.50", "gray.800")}
-      bgGradient="radial(gray.400, gray.700,)"
+      bgGradient="radial(gray.400, gray.100,)"
+      
+      
      
     >
-      <Stack spacing={2} mx={"auto"} maxW={"lg"} py={12} px={6} width="40%">
-        <Stack align={"center"}>
+      <Stack spacing={2} mx={"auto"} maxW={"md"} py={12} px={6} width="40%" >
+        <Stack align={"center"}  >
         <Link to="/">
               <Image borderRadius="50%" width={40} src={logo}></Image>
         </Link>
           <Heading fontSize={"2xl"} textAlign={"center"}>
-            Admin Sign up
+            Sign up Form
           </Heading>
-          <Text fontSize={"lg"} color={"gray.100"}>
-            Be a seller with our site
+          <Text fontSize={"lg"} color={"gray"}>
+            Get access to our latest products
           </Text>
         </Stack>
-        <Box  className="signup_container"
+        <Box
+          className="signup_container"
           rounded={"md"}
-          bg={useColorModeValue("grey.400", "gray.100")}
+          bg={useColorModeValue("grey.400", "grey.100")}
           boxShadow={"lg"}
-          p={8}
+          p={4}
         >
           <Stack spacing={1}>
             <HStack>
@@ -187,10 +145,11 @@ export default function AdminSignup() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>Name</FormLabel>
                   <Input
-                    fontSize={14} 
-                    width={200}
+                        size="md"
+                        fontSize={15}
+                        width={373}
                     type="text"
-                    placeholder="Enter your Name"
+                    placeholder="Enter First Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -200,7 +159,8 @@ export default function AdminSignup() {
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
-                fontSize={14} 
+                size="md"
+                fontSize={15}
                 type="email"
                 placeholder="Enter your Email"
                 value={email}
@@ -211,7 +171,8 @@ export default function AdminSignup() {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
-                  fontSize={14} 
+                      size="md"
+                      fontSize={15}
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your Password"
                   value={password}
@@ -232,39 +193,34 @@ export default function AdminSignup() {
             <Box>
                 <FormControl id="contact" isRequired>
                   <FormLabel>Contact</FormLabel>
-                  <Input fontSize={14}   type="number" placeholder="Enter your Contact" value={phoneNumber} onChange={(e)=> setContact((e.target.value))}  />
+                  <Input size="md" fontSize={15}  type="number" placeholder="Enter your Contact" value={phoneNumber} onChange={(e)=> setContact((e.target.value))}  />
                 </FormControl>
               </Box>
-              <Box>
-                <FormControl id="contact" isRequired>
-                  <FormLabel>GSTIN </FormLabel>
-                  <Input fontSize={14} type="text" placeholder="GSTIN Number" value={GSTIN } onChange={(e)=> setGSTIN (e.target.value)}  />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="contact" isRequired>
-                  <FormLabel>Store Name</FormLabel>
-                  <Input mb="15px" fontSize={14}  type="text" placeholder="Store Name" value={storeName} onChange={(e)=> setstoreName(e.target.value)}  />
-                </FormControl>
-              </Box>
-  
-              <Button
-                onClick={handleSubmit}
-                size="md"
-                bg={"orange"}
-                color={"white"}
-                _hover={{
-                  bg: "gray.400",
-                }}
-              >
-                Sign up
-              </Button>
 
-            <Stack pt={3}>
-              <Text align={"center"} fontSize={14} >
-                Already a user? <Link style={{color:"skyblue",fontSize:20}} to="/admin/login">Login</Link>
+              <FormControl isRequired >
+              <FormLabel>Gender</FormLabel>
+            <Select
+              mb="15px"
+             fontSize={15}
+              placeholder="Select Gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Prefer not to say</option>
+            </Select>
+
+            </FormControl>
+
+            <Button onClick={handleSubmit} size="md" bg={"orange"} colorScheme="gray" _hover={{bg: "gray.400"}} type="submit">Sign up</Button>
+
+            <Stack pt={1}>
+              <Text align={"center"} fontSize={14}>
+                Already a user? <Link style={{color:"red",fontSize:20}} to="/login">Login</Link>
               </Text>
             </Stack>
+            
             <Box
             mt={"20px"}
             display="flex"
@@ -302,8 +258,13 @@ export default function AdminSignup() {
             </Button>
           </Box>
           </Stack>
+          
         </Box>
       </Stack>
+      
     </Flex>
+
+    <Footer/>
+    </>
   );
 }

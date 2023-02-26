@@ -69,21 +69,21 @@ const Navbar = () => {
           <PopoverBody color={"black"} >
             <Box>
               <Box my="10px" display={"flex"} justifyContent="center" >
-              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/signup`)}} >Sign Up as a User</Link>
+              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/signup`)}} >User SignUp</Link>
               </Box>
               <hr/>
               <Box my="10px" display={"flex"} justifyContent="center" >
-              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/login`)}} >Log In as a User</Link>
+              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/login`)}} >User LogIn</Link>
               
               </Box>
               <hr/>
               <Box my="10px" display={"flex"} justifyContent="center" >
-              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/admin/signup`)}} >Sign Up as an Admin</Link>
+              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/admin/signup`)}} >Admin SignUp</Link>
               
               </Box>
               <hr/>
               <Box my="10px" display={"flex"} justifyContent="center" >
-              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/admin/login`)}} >Log In as an Admin</Link>
+              <Link style={{ textDecoration: 'none' }} onClick={()=>{navigate(`/admin/login`)}} >Admin LogIn</Link>
               
               </Box>
               

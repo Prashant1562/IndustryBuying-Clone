@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Footer from '../Components/Footer';
 import Navbar from '../Components/Navbar';
-
-
+import Simple from '../context/simple';
+import '../styles/styles.css';
 
 const HomePage = () => {
-  const API = "http://localhost:8080/products"
+  const API = "https://doubtful-wasp-cowboy-boots.cyclic.app/products"
   
   const [products,setProducts]=useState([])
   const [isVisible,setIsVisible] = useState(false);
@@ -46,12 +46,17 @@ useEffect(()=>{
   return (
     <>
     <Navbar />
-
+    <Box className="App">
+      <Box>
+      <Simple />
+      </Box>
+    </Box>
     <Box bg="gray.100"
      pb="100px" zIndex={999} 
      pt="90px" 
      display={"flex"} >
     {!isVisible && (
+    
       <Box bg="white" display={["none","none","flex"]} py="40px" position={"fixed"} w="20%" >
       <UnorderedList listStyleType="none"  spacing={5} >
       <Box>

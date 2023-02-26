@@ -9,10 +9,7 @@ function App() {
   
   return (
     <div className="App">
-      {/* <AdminPage/> */}
-      <Navbar/>
     <AllRoutes/>
-    <Footer/>
     </div>
   );
 }

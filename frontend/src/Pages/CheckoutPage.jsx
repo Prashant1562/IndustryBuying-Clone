@@ -1,3 +1,4 @@
+// suvam pages------------->
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
@@ -59,7 +60,7 @@ function CheckoutPage() {
   const Get_All_Cart_Data = async () => {
     // console.log("data")
     let res = await axios.get(
-      `http://localhost:8080/products/products/cart`
+      `https://doubtful-wasp-cowboy-boots.cyclic.app/products/cart`
     ).then((res)=>{
    set_Cart_Data(res.data)
       console.log(res);
@@ -417,9 +418,6 @@ const CheckForm1 = ({ setStep, setprogress, Cart_Data }) => {
               key={item._id}
               item={item}
               dd={true}
-              // handleDecrease={handleDecrease}
-              // handleIncrease={handleIncrease}
-              // handleRemove={handleRemove}
             />
             <Divider />
           </div>
@@ -466,6 +464,7 @@ const CheckForm2 = ({ setprogress, setStep }) => {
         duration: 2000,
         isClosable: true,
       });
+         <Navigate to="/payment"/>
     } else {
       toast({
         title: "Order...",
@@ -475,6 +474,7 @@ const CheckForm2 = ({ setprogress, setStep }) => {
         duration: 2000,
         isClosable: true,
       });
+      
     }
   };
   return (

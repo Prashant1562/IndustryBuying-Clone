@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Heading, Input, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, PopoverCloseButton, PopoverHeader, PopoverArrow, Portal, Popover, PopoverContent, PopoverTrigger, PopoverBody, } from "@chakra-ui/react"
+
+import { Box, Button, Flex, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, } from "@chakra-ui/react"
 import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from "react"
 import ProductPage from "./porductpage"
