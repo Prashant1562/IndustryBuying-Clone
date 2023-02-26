@@ -3,6 +3,7 @@ import { GET_PRODUCT_ERROR, GET_PRODUCT_LOADING, GET_PRODUCT_SUCCESS } from "./M
 
 
 const MinAndMax = (Array=[]) => {
+  // console.log(Array.length,"this is array")
    let min = Infinity;
    let max = -Infinity;
    for (let i = 0; i < Array.length; i++) {
@@ -49,9 +50,11 @@ export const GetProductData = (id) => async(dispatch)=>{
      dispatch({type:GET_PRODUCT_SUCCESS,payload:data});
     }
     else{
-      data = await getDataByAPI(id);
+      data = await getDataByAPI();
+      // console.log(data.data,"Mainproduct data")
       let [min,max] = MinAndMax(data.data);
       let data1 = BrandNames(data.data);
+      // console.log(min,max,data1)
       dispatch({type:GET_PRODUCT_SUCCESS,payload:data1,min:min,max:max});
     }
    }

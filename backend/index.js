@@ -8,9 +8,6 @@ const { UsreAuthMiddleware } = require("./middlewares/authentication.middleware"
 const { BlockRouter } = require("./routes/Block.route")
 require("dotenv").config()
 
-
-
-
 const app=express()
 
 app.use(cors())
