@@ -2,7 +2,6 @@
 import {
   Flex,
   Box,
-  Image,
   FormControl,
   FormLabel,
   Input,
@@ -23,10 +22,6 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 // import { Navigate } from "react-router-dom";
 import {Link, useNavigate} from "react-router-dom"
-import "../../style/signup.css";
-import logo from "../../assets/image/tooler logo 1.png"
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 
 export default function AdminSignup() {
   const [name, setName] = useState("");
@@ -36,7 +31,6 @@ export default function AdminSignup() {
   const [GSTIN ,setGSTIN ]=useState("")
   const [storeName,setstoreName]=useState("")
   const navigate = useNavigate();
-  
 
   const [showPassword, setShowPassword] = useState(false);
   // let user = [];
@@ -165,9 +159,6 @@ export default function AdminSignup() {
     >
       <Stack spacing={2} mx={"auto"} maxW={"lg"} py={12} px={6} width="40%">
         <Stack align={"center"}>
-        <Link to="/">
-              <Image borderRadius="50%" width={40} src={logo}></Image>
-        </Link>
           <Heading fontSize={"2xl"} textAlign={"center"}>
             Admin Sign up
           </Heading>
@@ -175,7 +166,7 @@ export default function AdminSignup() {
             Be a seller with our site
           </Text>
         </Stack>
-        <Box  className="signup_container"
+        <Box
           rounded={"md"}
           bg={useColorModeValue("grey.400", "gray.100")}
           boxShadow={"lg"}
@@ -265,42 +256,6 @@ export default function AdminSignup() {
                 Already a user? <Link style={{color:"skyblue",fontSize:20}} to="/admin/login">Login</Link>
               </Text>
             </Stack>
-            <Box
-            mt={"20px"}
-            display="flex"
-            flexDirection={{
-              base: "column",
-              sm: "column",
-              md: "row",
-              lg: "row",
-            }}
-            gap={"10px"}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb", color: "black" }}
-              leftIcon={<FcGoogle fontSize={"20px"} />}
-              textColor={"black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with Google
-            </Button>
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb" }}
-              leftIcon={<FaGithub fontSize={"20px"} />}
-              textColor={"#black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with GitHub
-            </Button>
-          </Box>
           </Stack>
         </Box>
       </Stack>

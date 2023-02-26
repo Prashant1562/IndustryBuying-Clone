@@ -1,5 +1,8 @@
 
-import { Box, Button, Flex, Heading, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, } from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Portal, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, 
+
+
+} from "@chakra-ui/react"
 import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from "react"
 import ProductPage from "./porductpage"
@@ -8,6 +11,7 @@ import "./admin.css"
 import DrawerJs from "./drawer"
 import Sidebar from "./sidebar"
 import BannedUserList from "./banneduserlist"
+import { Popover } from "antd"
 const AdminPage = () => {
     const [state, setState] = useState(true)
     const initRef = useRef()

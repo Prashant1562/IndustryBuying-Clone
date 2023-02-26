@@ -15,17 +15,13 @@ import {
   useColorModeValue,
   Select,
   useToast,
-  Image,
+  
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom"
 import Footer from "../../Components/Footer";
-import "../../style/signup.css";
-import logo from "../../assets/image/tooler logo 1.png"
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 
 export default function UserSignup() {
   const [name, setName] = useState("");
@@ -122,9 +118,6 @@ export default function UserSignup() {
     >
       <Stack spacing={2} mx={"auto"} maxW={"md"} py={12} px={6} width="40%" >
         <Stack align={"center"}  >
-        <Link to="/">
-              <Image borderRadius="50%" width={40} src={logo}></Image>
-        </Link>
           <Heading fontSize={"2xl"} textAlign={"center"}>
             Sign up Form
           </Heading>
@@ -133,7 +126,7 @@ export default function UserSignup() {
           </Text>
         </Stack>
         <Box
-          className="signup_container"
+         
           rounded={"md"}
           bg={useColorModeValue("grey.400", "grey.100")}
           boxShadow={"lg"}
@@ -220,48 +213,9 @@ export default function UserSignup() {
                 Already a user? <Link style={{color:"red",fontSize:20}} to="/login">Login</Link>
               </Text>
             </Stack>
-            
-            <Box
-            mt={"20px"}
-            display="flex"
-            flexDirection={{
-              base: "column",
-              sm: "column",
-              md: "row",
-              lg: "row",
-            }}
-            gap={"10px"}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb", color: "black" }}
-              leftIcon={<FcGoogle fontSize={"20px"} />}
-              textColor={"black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with Google
-            </Button>
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb" }}
-              leftIcon={<FaGithub fontSize={"20px"} />}
-              textColor={"#black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="50%"
-            >
-              Sign Up with GitHub
-            </Button>
-          </Box>
           </Stack>
-          
         </Box>
       </Stack>
-      
     </Flex>
 
     <Footer/>

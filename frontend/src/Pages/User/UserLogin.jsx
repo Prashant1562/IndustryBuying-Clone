@@ -1,7 +1,6 @@
 import {
   Button,
   Checkbox,
-  Box,
   Flex,
   FormControl,
   FormLabel,
@@ -18,13 +17,10 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { useState } from 'react';
+import image from '../User/logos.jpg'
 import {Link, useNavigate} from "react-router-dom"
 import Navbar from '../../Components/Navbar';
 import Footer from '../../Components/Footer';
-import "../../style/login.css";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-import logo from '../../assets/image/tooler logo 1.png';
 export default function UserLogin() {
   const navigate=useNavigate()
   const toast=useToast()
@@ -109,19 +105,17 @@ export default function UserLogin() {
     <>
    <Navbar/>
 
-    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} margin='auto'>
-        <Flex h="100vh" alignItems="center" justifyContent="center" w="30%" marginLeft='300px'>
-      <Flex className='login_container'
+    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+   
+        <Flex h="100vh" alignItems="center" justifyContent="center" w="60%">
+      <Flex
         flexDirection="column"
         bg={formBackground}
         p={12}
         borderRadius={8}
         boxShadow="lg"
       >
-         <Heading fontSize={"2xl"} textAlign={"center"}>
-            Welcome
-          </Heading>
-          <Text color={"white"}>TO THE WORLD OF INDUSTRY TOOLS</Text>
+        <Heading mb={6}>User Log In</Heading>
         <Input
           placeholder="Email"
           type="email"
@@ -143,7 +137,7 @@ export default function UserLogin() {
         </Button>
         <Flex gap={"8px"} mb="12px">
           <Text>Signup Here</Text>
-          <Text color={"skyblue"}><Link to={"/signup"}>SignUp</Link></Text>
+          <Text color={"red"}><Link to={"/signup"}>SignUp</Link></Text>
         </Flex>
         <FormControl display="flex" alignItems="center">
           <FormLabel htmlFor="dark_mode" mb="0">
@@ -156,47 +150,15 @@ export default function UserLogin() {
             onChange={toggleColorMode}
           />
         </FormControl>
-        <Box
-            mt={"20px"}
-            display="flex"
-            flexDirection={"column"}
-            justifyContent="center"
-            alignItems={"center"}
-            gap={"10px"}
-          >
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb", color: "black" }}
-              leftIcon={<FcGoogle fontSize={"20px"} />}
-              textColor={"black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="80%"
-            >
-              Sign Up with Google
-            </Button>
-            <Button
-              bg="white"
-              border={"1px solid lightgrey"}
-              _hover={{ bg: "#e2e6eb" }}
-              leftIcon={<FaGithub fontSize={"20px"} />}
-              textColor={"#black"}
-              fontSize={{ base: "12px", sm: "12px", md: "14px", lg: "14px" }}
-              w="80%"
-            >
-              Sign Up with GitHub
-            </Button>
-          </Box>
-        </Flex>
       </Flex>
+    </Flex>
       <Flex flex={1}>
-        <Image h="40vh" v='40vh' marginLeft='50px' marginTop='25%'
+        <Image h="90vh"
           alt={'Login Image'}
           objectFit={'cover'}
-          src={logo}
+          src={image}
         />
       </Flex>
-      
     </Stack>
 
     <Footer/>
