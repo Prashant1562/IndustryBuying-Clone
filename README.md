@@ -86,24 +86,24 @@ Cart Page-:
 
 This is our cart page where user can increase or decrease the quantity of the product according to their needs and can proceed further to checkout page before payment.
 
-![cart]()
+![cart](https://user-images.githubusercontent.com/76995063/213941227-a2503fa7-4d78-488b-a8e6-4af42c098e7c.png)
 
 Address Page-:
 
 Before Checking out user have to fill in the details about his address where he/she wants the product to get delivered. Here we have primarily focused upon the form validation part, if any field is kept empty the user will get to about the mandatory fields.
 
-![address]()
+![address](https://user-images.githubusercontent.com/76995063/213941311-fa910801-cd1b-402e-8bce-c74536e3def3.png)
 
 Checkout Page-:
 
 Once the user have filled all the details of his/her address they will be redirected to the checkout page so they can verify once more before placing the order so they don't make any mistakes. 
 
-![checkout]()
+![checkout](https://user-images.githubusercontent.com/76995063/213941457-61b8b143-a67e-4c17-8f88-600054c03222.png)
 
 Payment Page-:
 
 After checkout Page User will be redirected to the payment page where they have to put 16 digits of pin, 3 digits of cvv and expiry date too otherwise order won't be placed.
-![payment]()
+![payment](https://user-images.githubusercontent.com/76995063/213941636-34c98f21-ede1-4b5b-bf31-41906f4bc7c9.png)
 
 Order Confirmation-:
 
