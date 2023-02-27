@@ -51,7 +51,7 @@ HOMEPAGE-:
 Here is the homepage which is entirely responsive and is made by using Chakra UI the products over here are listed through the api which is made by using node JS, express, mongoDB. 
 The data is fetched from the cloud database by mongoAtlas. 
 Each product open up to a single product page also using an api.
-![homepage]()
+![homepage](https://user-images.githubusercontent.com/76995063/213940407-29245dc1-3e9f-4d65-b9be-9cbf56947a89.png)
 
 
 
