@@ -113,7 +113,7 @@ Once all the details are filled user will get the confirmation of placed order.
 
 Admin Page-:
 
-<img src="../assets/image/admin.png" />
+<img src="./assets/image/admin.png" />
 Just like user admin will also register and login first to go to the dashboard, but they have to give GST number also, so others can't access the admin dashboard.
 Here in admin dashboard we can view all the data present in the database, we can add more data to the database, we can update the price to any specifc product and we can also delete any specific product if we want.
 
