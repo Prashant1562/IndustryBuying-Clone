@@ -15,10 +15,8 @@ import HomePage from './HomePage'
 import MainProduct from './MainProduct'
 import Payment from './Payment'
 import PrivateRoutes from './PrivateRoutes'
-import SingleProductPage from './SingleProductPageDemo'
 import UserLogin from './User/UserLogin'
 import UserSignup from './User/UserSignup'
-import Singleproductpage from '../Components/SingleProductPage/singleproductpage'
 
 const AllRoutes = () => {
 

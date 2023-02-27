@@ -52,6 +52,7 @@ export const FilterReducer = (state=initialData,{type,payload}) => {
               }
            }
            case GET_PRODUCT_FILTER_SORT : {
+            // console.log(payload)
             return{
                 ...state,
                 loading:false,

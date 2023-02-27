@@ -102,15 +102,22 @@ export const GetDataByAvailability = (str) => async(dispatch)=>{
     }
 }
 
-export const GetDataBySort = (str) => async(dispatch)=>{
-   // console.log(str,"Helloe")
-    dispatch({type:GET_PRODUCT_LOADING});
-    try{
-       let data = await getByPrice_Discount(str);
-       console.log(data);
-       dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data.data})
-    }
-    catch(err){
-       dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
-    }
+// export const GetDataBySort = (str,array) => async(dispatch)=>{
+//    // console.log(str,"Helloe")
+//     dispatch({type:GET_PRODUCT_LOADING});
+//     try{
+//        let data = await getByPrice_Discount(str,array);
+//        console.log(data);
+//        dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data.data})
+//     }
+//     catch(err){
+//        dispatch({type:GET_PRODUCT_ERROR,payload:err.message});
+//     }
+// }
+
+export const GetDataBySort = (str,array) => (dispatch)=>{
+       let data = getByPrice_Discount(str,array);
+      //  console.log(data,"filter.action.js");
+       dispatch({type:GET_PRODUCT_FILTER_SORT,payload:data})
+       
 }
