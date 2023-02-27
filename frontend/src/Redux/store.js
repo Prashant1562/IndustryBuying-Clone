@@ -3,9 +3,7 @@ import thunk from "redux-thunk";
 import {FilterReducer} from "./FilterSection/Filter.reducer";
 import { reducer as AppReducer } from "./AppReducer/reducer";
 import { reducer as AuthReducer } from "./AuthReducer/reducer";
-import { FilterReducer } from "./FilterSection/Filter.reducer";
 import { ProductReducer } from "./MainProduct/MainProduct.reducer";
-import {ProductReducer} from "./MainProduct/MainProduct.reducer"
 import { getdatareducer } from "./Products/getdata.reducer";
 import { deletedatareducer } from "./Products/deletedatareducer";
 import { updatedatareducer } from "./Products/updatedata.reducer";

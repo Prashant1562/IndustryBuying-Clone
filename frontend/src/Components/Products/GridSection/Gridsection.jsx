@@ -57,7 +57,7 @@ const Gridsection = () => {
     setFlag(!flag);
   };
   const handlePopularityFilter = (str) => {
-    dispatch(GetDataBySort(str));
+    dispatch(GetDataBySort(str,prodData));
     setFlag((val)=>!val)
   };
 
@@ -110,7 +110,7 @@ const Gridsection = () => {
             Grain Processing Machine
           </Heading>
           <Text fontSize={13}>
-            (1- {prodData.length} products of {prodData.length})
+           { prodData &&  `(1- ${prodData.length} products of ${prodData.length})`}
           </Text>
         </Flex>
         <Flex gap="1rem" flexWrap="wrap">

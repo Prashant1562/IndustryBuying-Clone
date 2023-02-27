@@ -138,35 +138,62 @@ export const getBySort = async(str)=>{
     return data
 }
 
-export const getByPrice_Discount = async(str)=>{
+// export const getByPrice_Discount = async(str, array)=>{
+//     let data ;
+//     if(str.includes("Price")){
+//         if(str.includes("Low to High"))
+//         {
+//             console.log(array,"Hello i am array")
+//             // data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&asc=asc&price=price`);
+          
+//             data = await array.sort((a,b)=>{if(a.price>b.price)return 1;if(a.price<b.price)return -1;return 0})
+//         }
+//         else{
+//             // data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&dsc=dsc&price=price`);
+//             data = array.sort((a,b)=>{if(a.price>b.price) return -1; if(a.price<b.price) return 1; return 0})
+//         }
+//     }
+//     else if(str.includes("Discount")){
+//         if(str==="Discount - Low to High")
+//         {
+//             data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&asc=asc&discount=discount`);
+//             //  console.log(data)
+//         }
+//         else{
+//             data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&dsc=dsc&discount=discount`);
+//         }
+//     }
+//     else if(str==="Popularity"){
+       
+//             data= await axios.get(`http://localhost:4441/products`);
+//     }
+//     else{
+//         console.log("Hellldldldldldl",str)
+//             data= await axios.get(`http://localhost:4441/products`);
+//     }
+//     return data
+// }
+
+
+export const getByPrice_Discount = (str, array)=>{
     let data ;
     if(str.includes("Price")){
         if(str.includes("Low to High"))
         {
-            data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&asc=asc&price=price`);
-            //  console.log(data.data)
+            data = array.sort((a,b)=>{if(a.price>b.price)return 1;if(a.price<b.price)return -1;return 0})
         }
         else{
-            data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&dsc=dsc&price=price`);
+            data = array.sort((a,b)=>{if(a.price>b.price)return -1;if(a.price<b.price) return 1;return 0})
         }
     }
     else if(str.includes("Discount")){
         if(str==="Discount - Low to High")
         {
-            data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&asc=asc&discount=discount`);
-            //  console.log(data)
+            data = array.sort((a,b)=>{if(a.category>b.category)return 1;if(a.category<b.category) return -1;return 0})
         }
         else{
-            data= await axios.get(`http://localhost:4441/products/filter?limit=10&skip=1&dsc=dsc&discount=discount`);
+            data = array.sort((a,b)=>{if(a.category>b.category)return -1;if(a.category<b.category) return 1;return 0})
         }
-    }
-    else if(str==="Popularity"){
-       
-            data= await axios.get(`http://localhost:4441/products`);
-    }
-    else{
-        console.log("Hellldldldldldl",str)
-            data= await axios.get(`http://localhost:4441/products`);
     }
     return data
 }
