@@ -14,7 +14,7 @@ E-commerce service in New Delhi for Purchase of products by organizations for th
  
  
  
-Working Feautres-:
+# Working Feautres-:
 - Fully responsive HomePage for all three different screen sizes.
 - All Products Page, Where data is fetched, sorted, filtered and searched using Cloud based database using MongoAtlas.
 - Single Product Page for each product using dynamic id.
@@ -25,7 +25,7 @@ Working Feautres-:
 
 
 
-Tech Stack-:
+# Tech Stack-:
 - React
 - Redux
 - Chakra UI
@@ -37,7 +37,7 @@ Tech Stack-:
 
 
 
-Team Members-:
+# Team Members-:
 - Prashant Rao Gunjal
 - Uddeshy Jaiswal
 - Shakil Pendhari
@@ -46,7 +46,7 @@ Team Members-:
 
 
 
-HOMEPAGE-:
+# HOMEPAGE-:
 Here is the homepage which is entirely responsive and is made by using Chakra UI the products over here are listed through the api which is made by using node JS, express, mongoDB. 
 The data is fetched from the cloud database by mongoAtlas. 
 Each product open up to a single product page also using an api.
@@ -54,44 +54,46 @@ Each product open up to a single product page also using an api.
 
 
 
-Product Page-:
+# Product Page-:
 This page shows user all the products which are available in the database and user can sort them according to their price from low to high or vice versa. User can search for a specific item by using the search bar, the search funtionality is achieved using backend api.
 User can choose the product for a specific brand by clicking on the brand listed on the sidebar also. User can click on any product and he/she will be redirected on single product page.
-![ProductPage](https://user-images.githubusercontent.com/107555598/221857241-fb9bd8e2-054e-4f4b-8c12-92ba6c192b46.png)
+![ProductPage](https://user-images.githubusercontent.com/107555598/221860483-96a8f9c1-5ea3-4d75-8a0a-6b62e700aae6.png)
 
 
-Single Product Page-:
+
+# Single Product Page-:
 This is single product page where user can see more details about the product and compare the product according to their needs. All the data of single product is fetched using api from a cloud based database.
-![SingleProductPage](https://user-images.githubusercontent.com/107555598/221857432-ee293742-7894-464e-9350-257691609898.png)
+![SingleProductPage](https://user-images.githubusercontent.com/107555598/221860623-aa0f26c2-e7c7-4aad-899a-4829fab85213.png)
 
 
-SignUp Page-:
+
+# SignUp Page-:
 Here user can signup if he/she is not already registered with us already, so that in future they can just login and proceed with their order of purchasing.
-![SignUpPage](https://user-images.githubusercontent.com/107555598/221857680-0f6b4776-a8fc-43a6-bfce-d83218f3025c.png)
+![SignUpPage](https://user-images.githubusercontent.com/107555598/221860665-0286e7a2-d4a8-4776-a12f-f7eda4d638ef.png)
 
 
-Login Page-:
+# Login Page-:
 Here user can login to proceed before purchasing the product, so that in future they can track their order details and track order too. If user is not registered already he/she will be redirected to signUp page to signup first.
-![LoginPage)](https://user-images.githubusercontent.com/107555598/221858224-d7730932-1bd5-488d-be50-0fc4d517614f.png)
+![LoginPage](https://user-images.githubusercontent.com/107555598/221860908-7bb0e48f-ced8-44b6-9741-0f73f6f82f1a.png)
 
 
 
-Cart Page-:
+# Cart Page-:
 This is our cart page where user can increase or decrease the quantity of the product according to their needs and can proceed further to checkout page before payment.
 ![cart](https://user-images.githubusercontent.com/76995063/213941227-a2503fa7-4d78-488b-a8e6-4af42c098e7c.png)
 
 
-Address Page-:
+# Address Page-:
 Before Checking out user have to fill in the details about his address where he/she wants the product to get delivered. Here we have primarily focused upon the form validation part, if any field is kept empty the user will get to about the mandatory fields.
 ![address](https://user-images.githubusercontent.com/76995063/213941311-fa910801-cd1b-402e-8bce-c74536e3def3.png)
 
 
-Checkout Page-:
+# Checkout Page-:
 Once the user have filled all the details of his/her address they will be redirected to the checkout page so they can verify once more before placing the order so they don't make any mistakes. 
 ![checkout](https://user-images.githubusercontent.com/76995063/213941457-61b8b143-a67e-4c17-8f88-600054c03222.png)
 
 
-Payment Page-:
+# Payment Page-:
 After checkout Page User will be redirected to the payment page where they have to put 16 digits of pin, 3 digits of cvv and expiry date too otherwise order won't be placed.
 ![payment](https://user-images.githubusercontent.com/76995063/213941636-34c98f21-ede1-4b5b-bf31-41906f4bc7c9.png)
 
@@ -101,7 +103,7 @@ Once all the details are filled user will get the confirmation of placed order.
 
 ![checkout3](https://user-images.githubusercontent.com/76995063/213941672-fcf28516-1ab0-4b33-b29e-cf593e67b550.png)
 
-Admin Page-:
+# Admin Page-:
 ![admindash](https://ibb.co/52PZrZV)
 
 Just like user admin will also register and login first to go to the dashboard, but they have to give GST number also, so others can't access the admin dashboard.
