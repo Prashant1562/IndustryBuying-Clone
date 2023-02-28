@@ -99,6 +99,12 @@ Once all the details are filled user will get the confirmation of placed order.
 
 ## Admin Section
 
+
+# Admin Page-:
+Just like user admin will also register and login first to go to the dashboard, but they have to give GST number also, so others can't access the admin dashboard.
+Here in admin dashboard we can view all the data present in the database, we can add more data to the database, we can update the price to any specifc product and we can also delete any specific product if we want.
+![AdminPage](https://user-images.githubusercontent.com/107555598/221863363-3632af70-5358-46a0-ab95-121d425ad574.png)
+
 # Admin SignUp Page-:
 ![AdminSignup](https://user-images.githubusercontent.com/107555598/221863311-17e31b89-9bff-4915-905b-8d8f811d0bf1.png)
 
@@ -107,14 +113,8 @@ Once all the details are filled user will get the confirmation of placed order.
 ![AdminLoginPage](https://user-images.githubusercontent.com/107555598/221863351-ce73f3e1-50ed-49e2-bf49-3d22b2c00e55.png)
 
 
-# Admin Page-:
-![AdminPage](https://user-images.githubusercontent.com/107555598/221863363-3632af70-5358-46a0-ab95-121d425ad574.png)
 
-# Admin Page-:
-![admindash](https://ibb.co/52PZrZV)
 
-Just like user admin will also register and login first to go to the dashboard, but they have to give GST number also, so others can't access the admin dashboard.
-Here in admin dashboard we can view all the data present in the database, we can add more data to the database, we can update the price to any specifc product and we can also delete any specific product if we want.
 
 
 
