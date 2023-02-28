@@ -53,20 +53,6 @@ Each product open up to a single product page also using an api.
 ![homepage](https://user-images.githubusercontent.com/76995063/213940407-29245dc1-3e9f-4d65-b9be-9cbf56947a89.png)
 
 
-
-# Product Page-:
-This page shows user all the products which are available in the database and user can sort them according to their price from low to high or vice versa. User can search for a specific item by using the search bar, the search funtionality is achieved using backend api.
-User can choose the product for a specific brand by clicking on the brand listed on the sidebar also. User can click on any product and he/she will be redirected on single product page.
-![ProductPage](https://user-images.githubusercontent.com/107555598/221860483-96a8f9c1-5ea3-4d75-8a0a-6b62e700aae6.png)
-
-
-
-# Single Product Page-:
-This is single product page where user can see more details about the product and compare the product according to their needs. All the data of single product is fetched using api from a cloud based database.
-![SingleProductPage](https://user-images.githubusercontent.com/107555598/221860623-aa0f26c2-e7c7-4aad-899a-4829fab85213.png)
-
-
-
 # SignUp Page-:
 Here user can signup if he/she is not already registered with us already, so that in future they can just login and proceed with their order of purchasing.
 ![SignUpPage](https://user-images.githubusercontent.com/107555598/221860665-0286e7a2-d4a8-4776-a12f-f7eda4d638ef.png)
@@ -77,29 +63,23 @@ Here user can login to proceed before purchasing the product, so that in future 
 ![LoginPage](https://user-images.githubusercontent.com/107555598/221860908-7bb0e48f-ced8-44b6-9741-0f73f6f82f1a.png)
 
 
-
-# Cart Page-:
-This is our cart page where user can increase or decrease the quantity of the product according to their needs and can proceed further to checkout page before payment.
-![cart](https://user-images.githubusercontent.com/76995063/213941227-a2503fa7-4d78-488b-a8e6-4af42c098e7c.png)
-
-
-# Admin SignUp Page-:
-![AdminSignup](https://user-images.githubusercontent.com/107555598/221863311-17e31b89-9bff-4915-905b-8d8f811d0bf1.png)
-
-
-# Admin Login Page-:
-![AdminLoginPage](https://user-images.githubusercontent.com/107555598/221863351-ce73f3e1-50ed-49e2-bf49-3d22b2c00e55.png)
-
-
-# Admin Page-:
-![AdminPage](https://user-images.githubusercontent.com/107555598/221863363-3632af70-5358-46a0-ab95-121d425ad574.png)
-
-
-
 # Address Page-:
 Before Checking out user have to fill in the details about his address where he/she wants the product to get delivered. Here we have primarily focused upon the form validation part, if any field is kept empty the user will get to about the mandatory fields.
 ![address](https://user-images.githubusercontent.com/76995063/213941311-fa910801-cd1b-402e-8bce-c74536e3def3.png)
 
+# Product Page-:
+This page shows user all the products which are available in the database and user can sort them according to their price from low to high or vice versa. User can search for a specific item by using the search bar, the search funtionality is achieved using backend api.
+User can choose the product for a specific brand by clicking on the brand listed on the sidebar also. User can click on any product and he/she will be redirected on single product page.
+![ProductPage](https://user-images.githubusercontent.com/107555598/221860483-96a8f9c1-5ea3-4d75-8a0a-6b62e700aae6.png)
+
+
+# Single Product Page-:
+This is single product page where user can see more details about the product and compare the product according to their needs. All the data of single product is fetched using api from a cloud based database.
+![SingleProductPage](https://user-images.githubusercontent.com/107555598/221860623-aa0f26c2-e7c7-4aad-899a-4829fab85213.png)
+
+# Cart Page-:
+This is our cart page where user can increase or decrease the quantity of the product according to their needs and can proceed further to checkout page before payment.
+![cart](https://user-images.githubusercontent.com/76995063/213941227-a2503fa7-4d78-488b-a8e6-4af42c098e7c.png)
 
 # Checkout Page-:
 Once the user have filled all the details of his/her address they will be redirected to the checkout page so they can verify once more before placing the order so they don't make any mistakes. 
@@ -115,6 +95,20 @@ Order Confirmation-:
 Once all the details are filled user will get the confirmation of placed order.
 
 ![checkout3](https://user-images.githubusercontent.com/76995063/213941672-fcf28516-1ab0-4b33-b29e-cf593e67b550.png)
+
+
+## Admin Section
+
+# Admin SignUp Page-:
+![AdminSignup](https://user-images.githubusercontent.com/107555598/221863311-17e31b89-9bff-4915-905b-8d8f811d0bf1.png)
+
+
+# Admin Login Page-:
+![AdminLoginPage](https://user-images.githubusercontent.com/107555598/221863351-ce73f3e1-50ed-49e2-bf49-3d22b2c00e55.png)
+
+
+# Admin Page-:
+![AdminPage](https://user-images.githubusercontent.com/107555598/221863363-3632af70-5358-46a0-ab95-121d425ad574.png)
 
 # Admin Page-:
 ![admindash](https://ibb.co/52PZrZV)
